@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 SEEN_FILE = DATA_DIR / "seen.json"
 RESULTS_FILE = DATA_DIR / "results.json"
+NEW_ITEMS_FILE = DATA_DIR / "new_items.json"
+ENRICHED_ITEMS_FILE = DATA_DIR / "enriched_items.json"
 
 SITES = [
     {
@@ -137,6 +139,19 @@ def save_results(results):
         json.dumps(results, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
+
+def save_new_items(items):
+    NEW_ITEMS_FILE.write_text(
+        json.dumps(items, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+
+def save_enriched_items(items):
+    ENRICHED_ITEMS_FILE.write_text(
+        json.dumps(items, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+
 
 
 def normalize_text(value):
@@ -615,6 +630,7 @@ def main():
     save_seen(seen)
     save_results(all_items)     
     send_email(new_items)
+    save_new_items(new_items)
     print(f"전체 감지 항목 수: {len(all_items)}")
     print(f"신규 항목 수: {len(new_items)}")
 
