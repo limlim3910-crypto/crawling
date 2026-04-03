@@ -7,7 +7,7 @@
     "department": "연구개발과",
     "published": "2026-03-31",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T07:45:27.642866+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.097346+00:00"
   },
   {
     "id": "59917e08cd6ccda243e3641e86f2abd2fef9e8949913b8862469d3e1f5871b33",
@@ -17,7 +17,7 @@
     "department": "농축산유통과",
     "published": "2026-04-03",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T07:45:27.642906+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.097391+00:00"
   },
   {
     "id": "7c9fa005de9078fc094f564bbef1a0036df70f39bfe67b636a23730043004fbe",
@@ -27,67 +27,7 @@
     "department": "홍보담당관",
     "published": "2026-04-02",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T07:45:27.642911+00:00"
-  },
-  {
-    "id": "e168ef158850017f77036ec17c3d3b26f474210ffeb2c2ef26404659d052750f",
-    "site_name": "울산시",
-    "title": "위원회 개최결과",
-    "link": "https://www.ulsan.go.kr/u/rep/contents.ulsan?mId=001003003002000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.732849+00:00"
-  },
-  {
-    "id": "90f4e5c4ee1ebe6334af59d4a97c88834feee77a476dfd5f0c4c23a197d14e03",
-    "site_name": "울산시",
-    "title": "외국인/다문화지원",
-    "link": "https://www.ulsan.go.kr/u/welfare/contents.ulsan?mId=001010008000000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.732987+00:00"
-  },
-  {
-    "id": "91ab0d3fe56f163996822012a10245ea05907e3c2bbef499a6939bdaa6832ee5",
-    "site_name": "울산시",
-    "title": "문화 / 관광",
-    "link": "https://www.ulsan.go.kr/u/culture/main.ulsan",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733002+00:00"
-  },
-  {
-    "id": "4200fe247cf85daf205a3f2840ada005295b75933bfccebdf6fdb3d5443d2c9c",
-    "site_name": "울산시",
-    "title": "문화예술",
-    "link": "https://www.ulsan.go.kr/u/culture/contents.ulsan?mId=001003001001000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733007+00:00"
-  },
-  {
-    "id": "7e20ede0cc60b9530082ddfd8654c55d029a4c96472a7dd3fc256f2b285dbd93",
-    "site_name": "울산시",
-    "title": "울산문화24",
-    "link": "https://www.ulsanculture.kr/",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733013+00:00"
-  },
-  {
-    "id": "fea5af138a31cedc1d15b24ad9910883479e3bcdd8a3be25db37cab501a02865",
-    "site_name": "울산시",
-    "title": "문화예술회관",
-    "link": "https://ucac.ulsan.go.kr/",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733140+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.097397+00:00"
   },
   {
     "id": "38d83b20664f994e7d54e18c852695c0eecc9a36a157f2afa260620c4670094e",
@@ -97,7 +37,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733154+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183253+00:00"
   },
   {
     "id": "112e607087bd2c8b874f7bcea60112c7a27f5ff3cca45f0f5ca4b8a37501c0ed",
@@ -107,7 +47,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733160+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183275+00:00"
   },
   {
     "id": "2acf938db0637935a7daee6ae832329f81c4d9f42c9c45007d4e2ccb37760310",
@@ -117,7 +57,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733166+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183283+00:00"
   },
   {
     "id": "25d77a0fb0df256a850bb30e96f938d951d963ccf940c34c7863e1d54b188f62",
@@ -127,7 +67,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733173+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183291+00:00"
   },
   {
     "id": "bde63e23913e12f248a5b9cd2e7d7ab5349f5f2d850d0d161ee12ed427e00f1a",
@@ -137,7 +77,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733180+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183298+00:00"
   },
   {
     "id": "f32f34b710d51ada7c29900bc28d46bfab34008de53d512e66fe21b8ad13bfaf",
@@ -147,7 +87,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733184+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183302+00:00"
   },
   {
     "id": "16dc1058a8417b6fb86f210b00e103d28827d3d5f4268e66bae8643e272b4d44",
@@ -157,7 +97,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733189+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183307+00:00"
   },
   {
     "id": "5bfd6a2a343a0320937f6fa55b5a4be62f8118ebe61c97dd203c8c7cf6f58aa6",
@@ -167,7 +107,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733196+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183314+00:00"
   },
   {
     "id": "a6dc672aaf34cc6c9941b03849cbeb52ebc711400401993d6c752ebea5cad15b",
@@ -177,106 +117,6 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733210+00:00"
-  },
-  {
-    "id": "34a3f6bdcf6c5ef672fb853c4b697a8c0f46411a12ee45acd6881eb86727f75d",
-    "site_name": "울산시",
-    "title": "울산 구·군별 2026 벚꽃축제 일정 모아보기",
-    "link": "https://blog.naver.com/ulsan_nuri/224238219699?fromRss=true&trackingCode=rss",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733258+00:00"
-  },
-  {
-    "id": "dff3e73eecb841959141d36887afa0873e1f0f85a872977e3b6babddf8359471",
-    "site_name": "울산시",
-    "title": "문화/관광",
-    "link": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733302+00:00"
-  },
-  {
-    "id": "ac82ece07d5415ddb2332ddaf24453ced12e3e5b7d84dc895db85a4a1b5cda4b",
-    "site_name": "울산시",
-    "title": "월별문화행사",
-    "link": "https://www.ulsan.go.kr/u/culture/transfer/MonthEvntCulture/list.ulsan?mId=001003001001000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733305+00:00"
-  },
-  {
-    "id": "e5ebcdf86a70147966a73a982cb7c7bc281919162e26530053b37550f21e4eb4",
-    "site_name": "울산시",
-    "title": "문화시설현황",
-    "link": "https://www.ulsan.go.kr/u/culture/contents.ulsan?mId=001003008002000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733313+00:00"
-  },
-  {
-    "id": "7a115275bed7745e582e7858b25d419ee41fda9d637122c227e7106d018e4d7a",
-    "site_name": "울산시",
-    "title": "시민과 함께하는 문화행사",
-    "link": "https://www.ulsan.go.kr/u/culture/contents.ulsan?mId=001003002001000000",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733317+00:00"
-  },
-  {
-    "id": "31986eec1df4ee25f29bba93abde30aa5dc35882a4eb8a40369c8be92e8c895e",
-    "site_name": "울산시",
-    "title": "문화관광체육국",
-    "link": "https://www.ulsan.go.kr/u/rep/transfer/staff/list2.ulsan?mId=001005007001006000&parentoucode=6310443&oucode=",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733398+00:00"
-  },
-  {
-    "id": "335cbe5e51983c9ac9e4e0ee3282ffa0931380b022145800db408bd4471cbbdc",
-    "site_name": "울산시",
-    "title": "울산안전체험관",
-    "link": "https://fire.ulsan.go.kr/safety/",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733419+00:00"
-  },
-  {
-    "id": "25fea796987678602aeeb41b158e783b3d8102e3cd73dc8cf6857bfb0d56005b",
-    "site_name": "울산시",
-    "title": "문화예술회관",
-    "link": "https://ucac.ulsan.go.kr",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733426+00:00"
-  },
-  {
-    "id": "e35dd7893ffefa48e45aed16ecedaffbe6b7f0a71be6299214818cbb9fbf57a2",
-    "site_name": "울산시",
-    "title": "울산역사문화대전",
-    "link": "http://ulsan.grandculture.net/",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733459+00:00"
-  },
-  {
-    "id": "ef41bc5557ccdb45146e65822867fa01cdcfa778811169420c08ad63c5102706",
-    "site_name": "울산시",
-    "title": "울산문화관광재단",
-    "link": "https://www.uctf.or.kr/?lang=ko",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T07:45:27.733561+00:00"
+    "collected_at_utc": "2026-04-03T08:04:58.183325+00:00"
   }
 ]
