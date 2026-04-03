@@ -1,0 +1,3 @@
+https://www.yna.co.kr/rss/local/busan.xml
+https://www.yna.co.kr/rss/local/ulsan.xml
+https://www.yna.co.kr/rss/local/gyeongnam.xml
