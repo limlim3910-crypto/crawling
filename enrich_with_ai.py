@@ -81,7 +81,7 @@ def enrich_one_item(item):
 
 
 def main():
-    items = load_new_items()
+    items = load_new_items()[:10]
 
     if not items:
         print("신규 항목 없음 -> AI 요약 생략")
