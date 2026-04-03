@@ -145,7 +145,7 @@ def matches_keywords(text):
 
 
 def fetch_page(site):
-    html_file = os.getenv("HTML_FILE", "").strip()
+    html_file = site.get("html_file", "").strip()
 
     if html_file:
         print(f"[{site['site_name']}] 로컬 HTML 파일 사용: {html_file}")
