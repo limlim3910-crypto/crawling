@@ -267,6 +267,14 @@ def parse_rows_ulsan_main(soup, site):
 
         link = urljoin(site["target_url"], href)
 
+        allow_patterns = [
+            "/bbs/view.ulsan",
+            "/testPblanc/view.ulsan",
+        ]
+
+        if not any(pattern in link for pattern in allow_patterns):
+            continue
+
         rows.append({
             "title": title,
             "link": link,
