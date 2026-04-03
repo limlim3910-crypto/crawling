@@ -426,6 +426,78 @@ def build_gyeongnam_festa_items(link_candidates, site):
 
     return list(unique.values())
 
+def fetch_gyeongnam_festival_api(site):
+    api_url = urljoin(site["target_url"], "/api/callFestivalList.do")
+
+    params = {
+        "sigunguCode": "",
+    }
+
+    response = requests.get(api_url, headers=HEADERS, params=params, timeout=30)
+    response.raise_for_status()
+
+    try:
+        data = response.json()
+    except Exception:
+        print(f"[{site['site_name']}] API 응답이 JSON이 아님")
+        return []
+
+    if isinstance(data, list):
+        return data
+
+    if isinstance(data, dict):
+        # 혹시 resultData 같은 키 아래 들어있을 가능성도 대비
+        for key in ["resultData", "data", "list"]:
+            if key in data and isinstance(data[key], list):
+                return data[key]
+
+    print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
+    return []
+
+def build_gyeongnam_festival_items_from_api(festival_list, site):
+    items = []
+
+    for festival in festival_list:
+        site_name = normalize_text(festival.get("siteName", ""))
+        link_url = normalize_text(festival.get("linkUrl", ""))
+        sub_path = normalize_text(festival.get("subPath", ""))
+        start_date = normalize_text(festival.get("festivalStartDate", ""))
+        end_date = normalize_text(festival.get("festivalEndDate", ""))
+
+        title = site_name
+        if not title:
+            continue
+
+        if link_url:
+            link = link_url
+        elif sub_path:
+            link = urljoin(site["target_url"], "/" + sub_path.lstrip("/"))
+        else:
+            link = site["target_url"]
+
+        published = ""
+        if start_date or end_date:
+            published = f"{start_date} ~ {end_date}".strip(" ~")
+
+        item_id = make_item_id(title, link)
+
+        items.append({
+            "id": item_id,
+            "site_name": site["site_name"],
+            "title": title,
+            "link": link,
+            "department": site["site_name"],
+            "published": published,
+            "source": site["target_url"],
+            "collected_at_utc": datetime.now(timezone.utc).isoformat()
+        })
+
+    unique = {}
+    for item in items:
+        unique[item["id"]] = item
+
+    return list(unique.values())
+
 def collect_entries():
     collected = []
 
@@ -446,7 +518,9 @@ def collect_entries():
             rows = parse_rows_ulsan_main(soup, site)
 
         elif parser_type == "gyeongnam_festa":
-            rows = parse_rows_gyeongnam_festa(soup, site)
+            festival_list = fetch_gyeongnam_festival_api(site)
+            print(f"[{site['site_name']}] API 축제 건수: {len(festival_list)}")
+            rows = build_gyeongnam_festival_items_from_api(festival_list, site)
             
         else:
             print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
