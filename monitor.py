@@ -458,17 +458,36 @@ def fetch_gyeongnam_festival_api(site):
         print(f"[{site['site_name']}] API dict keys: {list(data.keys())[:20]}")
 
         for key in ["resultData", "data", "list", "items", "result", "body"]:
-            if key in data and isinstance(data[key], list):
-                print(f"[{site['site_name']}] 리스트 키 발견: {key}")
-                return data[key]
+            if key not in data:
+                continue
 
-            if key in data and isinstance(data[key], dict):
-                nested = data[key]
-                print(f"[{site['site_name']}] 중첩 dict 키 발견: {key} -> {list(nested.keys())[:20]}")
+            value = data[key]
+
+            if isinstance(value, list):
+                print(f"[{site['site_name']}] 리스트 키 발견: {key}")
+                return value
+
+            if isinstance(value, str):
+                try:
+                    parsed_value = json.loads(value)
+                    if isinstance(parsed_value, list):
+                        print(f"[{site['site_name']}] 문자열 JSON 리스트 키 발견: {key}")
+                        return parsed_value
+                    if isinstance(parsed_value, dict):
+                        print(f"[{site['site_name']}] 문자열 JSON dict 키 발견: {key} -> {list(parsed_value.keys())[:20]}")
+                        for nested_key in ["resultData", "data", "list", "items"]:
+                            if nested_key in parsed_value and isinstance(parsed_value[nested_key], list):
+                                print(f"[{site['site_name']}] 문자열 JSON 중첩 리스트 키 발견: {key}.{nested_key}")
+                                return parsed_value[nested_key]
+                except Exception:
+                    pass
+
+            if isinstance(value, dict):
+                print(f"[{site['site_name']}] 중첩 dict 키 발견: {key} -> {list(value.keys())[:20]}")
                 for nested_key in ["resultData", "data", "list", "items"]:
-                    if nested_key in nested and isinstance(nested[nested_key], list):
+                    if nested_key in value and isinstance(value[nested_key], list):
                         print(f"[{site['site_name']}] 중첩 리스트 키 발견: {key}.{nested_key}")
-                        return nested[nested_key]
+                        return value[nested_key]
 
     print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
     return []
