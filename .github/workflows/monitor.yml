@@ -66,6 +66,22 @@ jobs:
           grep -in "thumbnail" gyeongnam_festa.html | head -50 || true
           grep -in "poster" gyeongnam_festa.html | head -50 || true
           grep -in "img" gyeongnam_festa.html | head -50 || true
+
+      - name: 경남 JS 확인
+        run: |
+          curl -L --http1.1 --retry 3 --retry-delay 5 \
+            -A "Mozilla/5.0" \
+            "https://festa.gyeongnam.go.kr/gn_festival/js/festival_main.js" \
+            -o festival_main.js
+
+          echo "===== festival_main.js 주요 검색 ====="
+          grep -in "ajax" festival_main.js | head -50 || true
+          grep -in "fetch" festival_main.js | head -50 || true
+          grep -in "festival" festival_main.js | head -50 || true
+          grep -in "list" festival_main.js | head -50 || true
+          grep -in "url" festival_main.js | head -50 || true
+          grep -in ".do" festival_main.js | head -50 || true
+
           
       - name: 모니터링 실행
         env:
