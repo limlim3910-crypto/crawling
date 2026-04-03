@@ -54,6 +54,18 @@ jobs:
           grep -i "card" gyeongnam_festa.html | head
           grep -i "festival" gyeongnam_festa.html | head
           grep -i "행사" gyeongnam_festa.html | head     
+
+      - name: 경남 카드 구조 확인
+        run: |
+          echo "===== 경남 card/list 관련 검색 ====="
+          grep -in "축제 검색결과" gyeongnam_festa.html | head -20 || true
+          grep -in "236건" gyeongnam_festa.html | head -20 || true
+          grep -in "card" gyeongnam_festa.html | head -50 || true
+          grep -in "list" gyeongnam_festa.html | head -50 || true
+          grep -in "festival" gyeongnam_festa.html | head -50 || true
+          grep -in "thumbnail" gyeongnam_festa.html | head -50 || true
+          grep -in "poster" gyeongnam_festa.html | head -50 || true
+          grep -in "img" gyeongnam_festa.html | head -50 || true
           
       - name: 모니터링 실행
         env:
