@@ -38,6 +38,11 @@ jobs:
             -A "Mozilla/5.0" \
             "https://www.ulsan.go.kr/u/rep/main.ulsan" \
             -o ulsan_main.html
+
+          curl -L --http1.1 --retry 3 --retry-delay 5 \
+            -A "Mozilla/5.0" \
+            "https://festa.gyeongnam.go.kr/" \
+            -o gyeongnam_festa.html
       
       - name: 모니터링 실행
         env:
