@@ -239,6 +239,34 @@ def parse_rows_fallback(soup, site):
 
     return list(unique.values())
 
+def parse_rows_ulsan_main(soup, site):
+    rows = []
+
+    for link_tag in soup.find_all("a", href=True):
+        title = normalize_text(link_tag.get_text(" ", strip=True))
+        href = link_tag.get("href", "").strip()
+
+        if not title or len(title) < 4:
+            continue
+
+        if not href:
+            continue
+
+        link = urljoin(site["target_url"], href)
+
+        rows.append({
+            "title": title,
+            "link": link,
+            "department": site["site_name"],
+            "published": "",
+        })
+
+    unique = {}
+    for item in rows:
+        unique[(item["title"], item["link"])] = item
+
+    return list(unique.values())
+    
 
 def collect_entries():
     collected = []
@@ -248,10 +276,20 @@ def collect_entries():
         html = fetch_page(site)
         soup = BeautifulSoup(html, "lxml")
 
-        rows = parse_rows_from_table(soup, site)
-        if not rows:
-            print(f"[{site['site_name']}] 기본 table 파싱 실패, fallback 파싱 시도")
-            rows = parse_rows_fallback(soup, site)
+        parser_type = site.get("parser_type", "")
+
+        if parser_type == "busan_table":
+            rows = parse_rows_from_table(soup, site)
+            if not rows:
+                print(f"[{site['site_name']}] 기본 table 파싱 실패, fallback 파싱 시도")
+                rows = parse_rows_fallback(soup, site)
+
+        elif parser_type == "ulsan_main":
+            rows = parse_rows_ulsan_main(soup, site)
+
+        else:
+            print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
+            rows = []
 
         print(f"[{site['site_name']}] 수집된 행 수(필터 전): {len(rows)}")
 
