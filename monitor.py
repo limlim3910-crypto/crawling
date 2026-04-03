@@ -89,14 +89,31 @@ def ensure_files():
 
 def load_seen():
     try:
-        return set(json.loads(SEEN_FILE.read_text(encoding="utf-8")))
+        data = json.loads(SEEN_FILE.read_text(encoding="utf-8"))
+
+        if isinstance(data, dict):
+            normalized = {}
+            for site_name, ids in data.items():
+                if isinstance(ids, list):
+                    normalized[site_name] = set(ids)
+                else:
+                    normalized[site_name] = set()
+            return normalized
+
+        return {}
+
     except Exception:
-        return set()
+        return {}
 
 
-def save_seen(seen_set):
+def save_seen(seen_dict):
+    serializable = {}
+
+    for site_name, ids in seen_dict.items():
+        serializable[site_name] = sorted(list(ids))
+
     SEEN_FILE.write_text(
-        json.dumps(sorted(list(seen_set)), ensure_ascii=False, indent=2),
+        json.dumps(serializable, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
 
@@ -269,10 +286,20 @@ def main():
     seen = load_seen()
     all_items = collect_entries()
 
-    new_items = [item for item in all_items if item["id"] not in seen]
+    new_items = []
+
+    for item in all_items:
+        site_name = item["site_name"]
+
+        if site_name not in seen:
+            seen[site_name] = set()
+
+        if item["id"] not in seen[site_name]:
+            new_items.append(item)
 
     for item in new_items:
-        seen.add(item["id"])
+        site_name = item["site_name"]
+        seen[site_name].add(item["id"])
 
     save_seen(seen)
     save_results(all_items)     
