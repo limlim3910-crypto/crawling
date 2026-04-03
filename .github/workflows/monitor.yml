@@ -83,12 +83,12 @@ jobs:
           grep -in ".do" festival_main.js | head -50 || true
 
           
-      - name: 모니터링 실행
-        env:
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: python monitor.py
+#      - name: 모니터링 실행
+#        env:
+#          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+#          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+#         MAIL_TO: ${{ secrets.MAIL_TO }}
+#        run: python monitor.py
         
       - name: AI 요약 실행
         env:
