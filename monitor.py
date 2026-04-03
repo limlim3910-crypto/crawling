@@ -96,8 +96,16 @@ def parse_published(entry):
 def collect_entries(feed_urls):
     collected = []
 
+    print(f"피드 URL 개수: {len(feed_urls)}")
+
     for url in feed_urls:
+        print(f"피드 읽는 중: {url}")
         parsed = feedparser.parse(url)
+
+        print(f"상태: {getattr(parsed, 'status', 'unknown')}")
+        print(f"entries 개수: {len(parsed.entries)}")
+        if getattr(parsed, "bozo", 0):
+            print(f"bozo 예외: {parsed.bozo_exception}")
 
         for entry in parsed.entries:
             title = normalize_text(entry.get("title", ""))
@@ -107,8 +115,9 @@ def collect_entries(feed_urls):
 
             merged_text = f"{title} {summary}"
 
-            #if not matches_keywords(merged_text):
-            #    continue
+            # 현재는 RSS 자체 확인 단계라 필터 제거 상태 유지
+            # if not matches_keywords(merged_text):
+            #     continue
 
             item_id = make_item_id(title, link)
 
