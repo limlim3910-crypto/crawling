@@ -44,6 +44,17 @@ jobs:
             "https://festa.gyeongnam.go.kr/" \
             -o gyeongnam_festa.html
       
+      - name: 경남 HTML 확인
+        run: |
+          echo "===== 경남 HTML 파일 크기 ====="
+          wc -c gyeongnam_festa.html
+
+          echo "===== 경남 HTML 일부 검색 ====="
+          grep -i "축제 검색결과" gyeongnam_festa.html | head
+          grep -i "card" gyeongnam_festa.html | head
+          grep -i "festival" gyeongnam_festa.html | head
+          grep -i "행사" gyeongnam_festa.html | head     
+          
       - name: 모니터링 실행
         env:
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
