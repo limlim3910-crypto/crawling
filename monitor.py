@@ -107,8 +107,8 @@ def collect_entries(feed_urls):
 
             merged_text = f"{title} {summary}"
 
-            if not matches_keywords(merged_text):
-                continue
+            #if not matches_keywords(merged_text):
+            #    continue
 
             item_id = make_item_id(title, link)
 
