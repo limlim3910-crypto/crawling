@@ -5,8 +5,10 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 print("### BUSAN HTML VERSION ###")
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -77,9 +79,25 @@ def matches_keywords(text):
 
 
 def fetch_page():
-    response = requests.get(TARGET_URL, headers=HEADERS, timeout=30)
-    response.raise_for_status()
-    return response.text
+    try:
+        response = requests.get(
+            TARGET_URL,
+            headers=HEADERS,
+            timeout=30
+        )
+        response.raise_for_status()
+        return response.text
+
+    except requests.exceptions.SSLError:
+        print("SSL 에러 발생 -> verify=False 로 재시도")
+        response = requests.get(
+            TARGET_URL,
+            headers=HEADERS,
+            timeout=30,
+            verify=False
+        )
+        response.raise_for_status()
+        return response.text
 
 
 def parse_rows_from_table(soup):
