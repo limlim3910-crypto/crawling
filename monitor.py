@@ -436,20 +436,39 @@ def fetch_gyeongnam_festival_api(site):
     response = requests.get(api_url, headers=HEADERS, params=params, timeout=30)
     response.raise_for_status()
 
+    print(f"[{site['site_name']}] API 상태코드: {response.status_code}")
+    print(f"[{site['site_name']}] API Content-Type: {response.headers.get('Content-Type', '')}")
+
+    text_preview = response.text[:1000].replace("\n", " ")
+    print(f"[{site['site_name']}] API 응답 미리보기: {text_preview}")
+
     try:
         data = response.json()
-    except Exception:
-        print(f"[{site['site_name']}] API 응답이 JSON이 아님")
+    except Exception as e:
+        print(f"[{site['site_name']}] API JSON 파싱 실패: {e}")
         return []
 
+    print(f"[{site['site_name']}] API 응답 타입: {type(data).__name__}")
+
     if isinstance(data, list):
+        print(f"[{site['site_name']}] API list 응답 감지")
         return data
 
     if isinstance(data, dict):
-        # 혹시 resultData 같은 키 아래 들어있을 가능성도 대비
-        for key in ["resultData", "data", "list"]:
+        print(f"[{site['site_name']}] API dict keys: {list(data.keys())[:20]}")
+
+        for key in ["resultData", "data", "list", "items", "result", "body"]:
             if key in data and isinstance(data[key], list):
+                print(f"[{site['site_name']}] 리스트 키 발견: {key}")
                 return data[key]
+
+            if key in data and isinstance(data[key], dict):
+                nested = data[key]
+                print(f"[{site['site_name']}] 중첩 dict 키 발견: {key} -> {list(nested.keys())[:20]}")
+                for nested_key in ["resultData", "data", "list", "items"]:
+                    if nested_key in nested and isinstance(nested[nested_key], list):
+                        print(f"[{site['site_name']}] 중첩 리스트 키 발견: {key}.{nested_key}")
+                        return nested[nested_key]
 
     print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
     return []
