@@ -7,7 +7,7 @@
     "department": "연구개발과",
     "published": "2026-03-31",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T08:57:12.337435+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.218784+00:00"
   },
   {
     "id": "59917e08cd6ccda243e3641e86f2abd2fef9e8949913b8862469d3e1f5871b33",
@@ -17,7 +17,7 @@
     "department": "농축산유통과",
     "published": "2026-04-03",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T08:57:12.337474+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.218827+00:00"
   },
   {
     "id": "7c9fa005de9078fc094f564bbef1a0036df70f39bfe67b636a23730043004fbe",
@@ -27,7 +27,17 @@
     "department": "홍보담당관",
     "published": "2026-04-02",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-03T08:57:12.337481+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.218833+00:00"
+  },
+  {
+    "id": "31b9d775038792c43ef3285d97b0878d81e83d4b5adf01271c25ee1597415b1a",
+    "site_name": "울산시",
+    "title": "새글 2026년 성장단계별 수출패키지 지원사업 참여기업 모집",
+    "link": "https://www.ulsan.go.kr/u/rep/bbs/view.ulsan?bbsId=BBS_0000000000000003&mId=001004001001000000&dataId=180236",
+    "department": "울산시",
+    "published": "",
+    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
+    "collected_at_utc": "2026-04-03T09:04:13.321648+00:00"
   },
   {
     "id": "38d83b20664f994e7d54e18c852695c0eecc9a36a157f2afa260620c4670094e",
@@ -37,7 +47,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440682+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321664+00:00"
   },
   {
     "id": "112e607087bd2c8b874f7bcea60112c7a27f5ff3cca45f0f5ca4b8a37501c0ed",
@@ -47,7 +57,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440700+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321671+00:00"
   },
   {
     "id": "2acf938db0637935a7daee6ae832329f81c4d9f42c9c45007d4e2ccb37760310",
@@ -57,17 +67,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440708+00:00"
-  },
-  {
-    "id": "25d77a0fb0df256a850bb30e96f938d951d963ccf940c34c7863e1d54b188f62",
-    "site_name": "울산시",
-    "title": "여성인력개발센터 「미니 일자리 박람회」 개최",
-    "link": "https://www.ulsan.go.kr/u/rep/bbs/view.ulsan?bbsId=BBS_0000000000000003&mId=001004001001000000&dataId=180070",
-    "department": "울산시",
-    "published": "",
-    "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440717+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321679+00:00"
   },
   {
     "id": "bde63e23913e12f248a5b9cd2e7d7ab5349f5f2d850d0d161ee12ed427e00f1a",
@@ -77,7 +77,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440723+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321687+00:00"
   },
   {
     "id": "f32f34b710d51ada7c29900bc28d46bfab34008de53d512e66fe21b8ad13bfaf",
@@ -87,7 +87,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440728+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321691+00:00"
   },
   {
     "id": "16dc1058a8417b6fb86f210b00e103d28827d3d5f4268e66bae8643e272b4d44",
@@ -97,7 +97,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440732+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321696+00:00"
   },
   {
     "id": "5bfd6a2a343a0320937f6fa55b5a4be62f8118ebe61c97dd203c8c7cf6f58aa6",
@@ -107,7 +107,7 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440739+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321703+00:00"
   },
   {
     "id": "a6dc672aaf34cc6c9941b03849cbeb52ebc711400401993d6c752ebea5cad15b",
@@ -117,6 +117,1986 @@
     "department": "울산시",
     "published": "",
     "source": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-    "collected_at_utc": "2026-04-03T08:57:12.440750+00:00"
+    "collected_at_utc": "2026-04-03T09:04:13.321714+00:00"
+  },
+  {
+    "id": "ae8aa62375996bf93084db8f7210acdcce1872e3408439e20f07bcaa6206eb02",
+    "site_name": "경상남도",
+    "title": "진해군악의장페스티벌",
+    "link": "http://www.jgfestival.or.kr/sub/info2.php",
+    "department": "경상남도",
+    "published": "2024-03-29 ~ 2024-03-31",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442823+00:00"
+  },
+  {
+    "id": "4de1e65456a9c3c4b00e0f1c1bff918601acca25c960273d6d3d94adea48b7e6",
+    "site_name": "경상남도",
+    "title": "마산가고파국화축제",
+    "link": "https://www.changwon.go.kr/cwportal/depart/11063/14383/14384.web",
+    "department": "경상남도",
+    "published": "2024-10-26 ~ 2024-11-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442828+00:00"
+  },
+  {
+    "id": "f28b9d2486bb747a7d34269514c8689da7f2ec326989c634902d03e4d4cc723f",
+    "site_name": "경상남도",
+    "title": "K-POP월드페스티벌",
+    "link": "https://festa.gyeongnam.go.kr/kpopfesta",
+    "department": "경상남도",
+    "published": "2023-10-27 ~ 2023-10-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442832+00:00"
+  },
+  {
+    "id": "9f70f5a80ccd1665a57e4ba4448eefd29fee42f71c38ab9d4f0767961207043e",
+    "site_name": "경상남도",
+    "title": "천주산 진달래축제",
+    "link": "https://festa.gyeongnam.go.kr/cjjindallae",
+    "department": "경상남도",
+    "published": "2023-04-08 ~ 2023-04-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442838+00:00"
+  },
+  {
+    "id": "c44aaea6e93b0af6b2eacad176cae08dc97b2bbfcbe70f858ea4be057d8631d5",
+    "site_name": "경상남도",
+    "title": "진동불꽃낙화축제",
+    "link": "http://mideodeok.kr/",
+    "department": "경상남도",
+    "published": "2025-05-03 ~ 2025-05-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442842+00:00"
+  },
+  {
+    "id": "cc0efa973f702b6a50889b46969880a912bbb9aac4b7af09ea4f8a03ac830393",
+    "site_name": "경상남도",
+    "title": "창원음식문화축제",
+    "link": "https://festa.gyeongnam.go.kr/cwfood",
+    "department": "경상남도",
+    "published": "2023-11-18 ~ 2023-11-18",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442847+00:00"
+  },
+  {
+    "id": "c8a19c40c2340b1b9ad480267cbfda91df9a23bb5c290d4c69b826da6c081dda",
+    "site_name": "경상남도",
+    "title": "마산아구데이축제",
+    "link": "https://festa.gyeongnam.go.kr/msagooday",
+    "department": "경상남도",
+    "published": "2023-05-12 ~ 2023-05-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442850+00:00"
+  },
+  {
+    "id": "0e5cc6108d6b75117c1c7a9f3704eaf0acb74731fe27a49247faeab44925b433",
+    "site_name": "경상남도",
+    "title": "기업사랑 시민축제",
+    "link": "https://festa.gyeongnam.go.kr/giuplove",
+    "department": "경상남도",
+    "published": "2024-04-23 ~ 2024-04-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442854+00:00"
+  },
+  {
+    "id": "342ae556a07bb4e04bccb221f7e2116b420d25807a71f483ece9d54ba32d9846",
+    "site_name": "경상남도",
+    "title": "마산어시장 축제",
+    "link": "https://festa.gyeongnam.go.kr/msfish",
+    "department": "경상남도",
+    "published": "2024-08-22 ~ 2024-08-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442859+00:00"
+  },
+  {
+    "id": "3d3b47045f137024b56b8f775a59df750c44891b635136cd49d06694394ab1fb",
+    "site_name": "경상남도",
+    "title": "대야문화제",
+    "link": "https://festa.gyeongnam.go.kr/daeya",
+    "department": "경상남도",
+    "published": "2024-09-27 ~ 2024-09-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442863+00:00"
+  },
+  {
+    "id": "52f9a26d6a9737812e115b96710a6383ac9aab973cd18d039e5e4c0ff48076d7",
+    "site_name": "경상남도",
+    "title": "거제맹종대나무축제",
+    "link": "https://festa.gyeongnam.go.kr/gjmaengjongjuk",
+    "department": "경상남도",
+    "published": "2024-04-20 ~ 2024-04-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442866+00:00"
+  },
+  {
+    "id": "4f587c407f324debb67771cb7dd48c74ed35ced100822c313cee6b1db58b4ccc",
+    "site_name": "경상남도",
+    "title": "거제 옥포대첩 축제",
+    "link": "https://www.geojeart.or.kr/festival/festival_1.asp",
+    "department": "경상남도",
+    "published": "2025-06-13 ~ 2025-06-15",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442871+00:00"
+  },
+  {
+    "id": "f2bc42141a8450287fa9f79f331011bad3e7eb7d43184d78949c66ed0a0debcd",
+    "site_name": "경상남도",
+    "title": "통영한산대첩축제",
+    "link": "http://www.hansanf.org",
+    "department": "경상남도",
+    "published": "2025-08-08 ~ 2025-08-14",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442874+00:00"
+  },
+  {
+    "id": "58755e6e2fa2fad16f068633daea897f3dd49ab8719f15ce1d2001c26446b17a",
+    "site_name": "경상남도",
+    "title": "창녕낙동강유채축제",
+    "link": "https://festa.gyeongnam.go.kr/cnndflower",
+    "department": "경상남도",
+    "published": "2025-04-18 ~ 2025-04-20",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442878+00:00"
+  },
+  {
+    "id": "03a70664baf7f4a2c1a6d6ed3ef79d2fa3d2f49aa729f2f89376f75cacc5a62a",
+    "site_name": "경상남도",
+    "title": "지리산산청곶감축제",
+    "link": "http://www.gotgam.center/",
+    "department": "경상남도",
+    "published": "2025-01-02 ~ 2025-01-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442881+00:00"
+  },
+  {
+    "id": "08fea24b0c1914866750dbdfa9d7a6c80eff41f438e8725570b0f4980279ab04",
+    "site_name": "경상남도",
+    "title": "남부면수국축제",
+    "link": "https://festa.gyeongnam.go.kr/gjnambuflower",
+    "department": "경상남도",
+    "published": "2025-06-28 ~ 2025-06-29",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442884+00:00"
+  },
+  {
+    "id": "09c0c65a4db71bcd68a65000ad688c5dc46ca4c17df8aca330f1e445a018c467",
+    "site_name": "경상남도",
+    "title": "광도빛길 수국축제",
+    "link": "https://festa.gyeongnam.go.kr/tysuguk",
+    "department": "경상남도",
+    "published": "2025-06-21 ~ 2025-06-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442887+00:00"
+  },
+  {
+    "id": "35c26dcbd2a8f1be99bf1cc8d7670f4214ac72588ccb5db1c95f48149c41aa8e",
+    "site_name": "경상남도",
+    "title": "통영 산양 섬 노을 문화축제",
+    "link": "https://festa.gyeongnam.go.kr/tysanyangisland",
+    "department": "경상남도",
+    "published": "2025-11-01 ~ 2025-11-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442892+00:00"
+  },
+  {
+    "id": "c0573c37585ca8e35c9f74eccb3668a9510115cedb505cbe86b792da4bf38d46",
+    "site_name": "경상남도",
+    "title": "한산도 바다체험축제",
+    "link": "https://festa.gyeongnam.go.kr/tyhansansea",
+    "department": "경상남도",
+    "published": "2024-06-08 ~ 2024-06-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442897+00:00"
+  },
+  {
+    "id": "daf24980b505605272ccc7a03ff197057cd32992e29c52e2fd2630a6a4d65236",
+    "site_name": "경상남도",
+    "title": "부곡온천축제",
+    "link": "https://festa.gyeongnam.go.kr/bgspa",
+    "department": "경상남도",
+    "published": "2024-03-29 ~ 2024-03-31",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442900+00:00"
+  },
+  {
+    "id": "eff2eaeac6c53153f0929177095ac0e785f3d409f2c720fb2ea57dd49495fdac",
+    "site_name": "경상남도",
+    "title": "3.1민속문화제",
+    "link": "https://festa.gyeongnam.go.kr/folkcul",
+    "department": "경상남도",
+    "published": "2024-02-29 ~ 2024-03-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442904+00:00"
+  },
+  {
+    "id": "42b7466b79ab121ad77c0dd266afff5a83c270f6df747d0424a7c1e6357b1294",
+    "site_name": "경상남도",
+    "title": "비사벌문화제",
+    "link": "https://festa.gyeongnam.go.kr/bisabeol",
+    "department": "경상남도",
+    "published": "2023-10-13 ~ 2023-10-15",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442909+00:00"
+  },
+  {
+    "id": "3f774b56c4f770fe560e999189b3cf3057ef27830d2e3f10daa2696291b5a93a",
+    "site_name": "경상남도",
+    "title": "봉숫골 꽃나들이 축제",
+    "link": "https://festa.gyeongnam.go.kr/tybongsukflower",
+    "department": "경상남도",
+    "published": "2025-04-05 ~ 2025-04-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442914+00:00"
+  },
+  {
+    "id": "46f158fd22be4373636c77665e9bda3841220298037a3dd37d3822e61b66e6f2",
+    "site_name": "경상남도",
+    "title": "거제섬꽃축제",
+    "link": "https://www.geoje.go.kr/flower/index.geoje",
+    "department": "경상남도",
+    "published": "2024-10-26 ~ 2024-11-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442917+00:00"
+  },
+  {
+    "id": "a05604755bc6d1c645820d820806254db12a6faf4c5ab4ceadfc909729b5bcc1",
+    "site_name": "경상남도",
+    "title": "욕지 섬문화축제",
+    "link": "https://festa.gyeongnam.go.kr/tyyukjiisland",
+    "department": "경상남도",
+    "published": "2025-11-08 ~ 2025-11-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442920+00:00"
+  },
+  {
+    "id": "32a504d94da9e847fb3353b5198d06f66d6b4b89086e00988795586f31005a5e",
+    "site_name": "경상남도",
+    "title": "중앙동 벅수축제",
+    "link": "https://festa.gyeongnam.go.kr/tybuksu",
+    "department": "경상남도",
+    "published": "2025-11-22 ~ 2025-11-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442925+00:00"
+  },
+  {
+    "id": "2b737fa0d06da86e1653df4b84340c00c2eeaaad48d73adacf3e8dbd067edd81",
+    "site_name": "경상남도",
+    "title": "산청 생초국제조각공원 꽃잔디축제",
+    "link": "https://festa.gyeongnam.go.kr/scflower",
+    "department": "경상남도",
+    "published": "2024-04-11 ~ 2024-04-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442928+00:00"
+  },
+  {
+    "id": "7033e0f2f2e0f19d87a6b735ef45fecf13235274a2a281fad809fb496e412eb8",
+    "site_name": "경상남도",
+    "title": "사량도 옥녀봉 전국 등반축제",
+    "link": "https://festa.gyeongnam.go.kr/tyloveisland",
+    "department": "경상남도",
+    "published": "2025-04-04 ~ 2025-04-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442931+00:00"
+  },
+  {
+    "id": "c36abd0452fc8ef9d2d7cbe50377a457619d6cf20101ac4a32dc9c15ff94303d",
+    "site_name": "경상남도",
+    "title": "거제대구수산물축제",
+    "link": "https://festa.gyeongnam.go.kr/gjseafood",
+    "department": "경상남도",
+    "published": "2024-12-21 ~ 2024-12-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442935+00:00"
+  },
+  {
+    "id": "15b7f88beeb9a91a70d8c18d82a2c0013ef4f939c6340b0d3084621dc9bbdcbf",
+    "site_name": "경상남도",
+    "title": "최태성의 당항포대첩축제 역사특강",
+    "link": "https://www.gngsctf.or.kr/board/view.goseong?boardId=BBS_0000025&menuCd=DOM_000000307001000000&command=update&dataSid=4053&startPage=1&commentPage=1&keyword=",
+    "department": "경상남도",
+    "published": "2026-04-25 ~ 2026-04-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442960+00:00"
+  },
+  {
+    "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
+    "site_name": "경상남도",
+    "title": "천령문화제",
+    "link": "https://festa.gyeongnam.go.kr/hycl",
+    "department": "경상남도",
+    "published": "2025-05-08 ~ 2025-05-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442972+00:00"
+  },
+  {
+    "id": "9d4c9ef72d880db4105aa23ed39b4910e644c1e20524da7aa0fceec27aaaa274",
+    "site_name": "경상남도",
+    "title": "함양고종시 곶감축제",
+    "link": "https://www.hygn.go.kr/01485/01499.web",
+    "department": "경상남도",
+    "published": "2026-01-16 ~ 2026-01-18",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442976+00:00"
+  },
+  {
+    "id": "7138d096ebcdb37b3c5fc28833216dc938b87591721d4aa2d832c4f9f60db481",
+    "site_name": "경상남도",
+    "title": "사천시농업한마당축제",
+    "link": "https://festa.gyeongnam.go.kr/scfarmhan",
+    "department": "경상남도",
+    "published": "2025-10-31 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442980+00:00"
+  },
+  {
+    "id": "396647e22972e77de053693abc63ccd532d14138a729c822a16f5b4d121d571d",
+    "site_name": "경상남도",
+    "title": "함양산삼축제",
+    "link": "https://www.sansamfestival.or.kr/",
+    "department": "경상남도",
+    "published": "2025-09-18 ~ 2025-09-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442983+00:00"
+  },
+  {
+    "id": "c3f5d0ab5c04c4c9181c699381b7a670359c6aa0896716afc75201e1599d7587",
+    "site_name": "경상남도",
+    "title": "고성 가리비 수산물 축제",
+    "link": "https://festa.gyeongnam.go.kr/gsseafood",
+    "department": "경상남도",
+    "published": "2023-10-20 ~ 2023-10-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442986+00:00"
+  },
+  {
+    "id": "8037222e412b75cdc3b60efc9f5de317f9058c3a1a404c4a3e0c83a25eb7fcac",
+    "site_name": "경상남도",
+    "title": "사천읍성 축제",
+    "link": "https://festa.gyeongnam.go.kr/scubsung",
+    "department": "경상남도",
+    "published": "2025-09-26 ~ 2025-09-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442990+00:00"
+  },
+  {
+    "id": "404fd1e50cc8cced981e97fb6890d4e0d10f161731f8baa78d0e12c9eb10406f",
+    "site_name": "경상남도",
+    "title": "양산삽량문화축전",
+    "link": "https://yangsanfes.com/sub/sabryang/outline.asp",
+    "department": "경상남도",
+    "published": "2024-10-04 ~ 2024-10-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442994+00:00"
+  },
+  {
+    "id": "c8939ab30889f7f55115f6f5f4a32ff4024bd8cda4bc36217db41a8d323f32a6",
+    "site_name": "경상남도",
+    "title": "선진리성 벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/sccherryblossom",
+    "department": "경상남도",
+    "published": "2026-04-03 ~ 2026-04-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.442997+00:00"
+  },
+  {
+    "id": "064bf1c9aa83f1cb17be1c027ab4bba4c0d873651d2a6d86fc9e845542ce563b",
+    "site_name": "경상남도",
+    "title": "양산차문화축제",
+    "link": "https://festa.gyeongnam.go.kr/ysteacul",
+    "department": "경상남도",
+    "published": "2024-09-07 ~ 2024-09-07",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443001+00:00"
+  },
+  {
+    "id": "98887b78ca2aac821c8d48e583330aaa16e17c501aa0f90bfb948aff7e29c328",
+    "site_name": "경상남도",
+    "title": "2023 동화 어촌 갯벌 체험 축제",
+    "link": "https://festa.gyeongnam.go.kr/gsdonghwa",
+    "department": "경상남도",
+    "published": "2023-11-11 ~ 2023-11-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443004+00:00"
+  },
+  {
+    "id": "caf0901c6d37b9baa58772b10372ac31658e5aff93a349e97f885c371e4d58d4",
+    "site_name": "경상남도",
+    "title": "곤양비봉내 축제",
+    "link": "https://festa.gyeongnam.go.kr/scgonyang",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443009+00:00"
+  },
+  {
+    "id": "8766a7085474796dc962439c1f864016c54e27d2c45980a635fc96fef083c292",
+    "site_name": "경상남도",
+    "title": "엄홍길대장과 함께하는 거류산 등산 축제",
+    "link": "https://festa.gyeongnam.go.kr/gsmoufes",
+    "department": "경상남도",
+    "published": "2023-10-28 ~ 2023-10-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443016+00:00"
+  },
+  {
+    "id": "82c6997a3dc5d73bf946895106b78d347065986113bccac021cef35bdab782f3",
+    "site_name": "경상남도",
+    "title": "거창산양삼축제",
+    "link": "https://festa.gyeongnam.go.kr/wsg",
+    "department": "경상남도",
+    "published": "2024-05-15 ~ 2024-05-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443021+00:00"
+  },
+  {
+    "id": "7e28352220f862599eaf73f333c03003e6653e706f898c99358191264ee4e5da",
+    "site_name": "경상남도",
+    "title": "원동매화축제",
+    "link": "https://festa.gyeongnam.go.kr/ysflowerfes",
+    "department": "경상남도",
+    "published": "2025-03-01 ~ 2025-03-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443024+00:00"
+  },
+  {
+    "id": "667f5844d81305bdff4faec2667c257775c39793d435e738ac87bb2b507d0d91",
+    "site_name": "경상남도",
+    "title": "사천비토섬별주부전축제",
+    "link": "https://festa.gyeongnam.go.kr/scbito",
+    "department": "경상남도",
+    "published": "2026-03-27 ~ 2026-03-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443029+00:00"
+  },
+  {
+    "id": "5a09ced42a33f5010c3184800736138e9a5d4e823966bcc783777e9be7cbc7d8",
+    "site_name": "경상남도",
+    "title": "소가야 차문화 축제",
+    "link": "https://ggscc.or.kr/?page_id=97&uid=91&mod=document",
+    "department": "경상남도",
+    "published": "2025-05-17 ~ 2025-05-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443033+00:00"
+  },
+  {
+    "id": "0e3dc504fb85ee9e9dd875af79a8320a212c9a5ad5a02c601dc3d035f0eb6fba",
+    "site_name": "경상남도",
+    "title": "오두산 숲멍 축제",
+    "link": "http://www.iodoo.kr/",
+    "department": "경상남도",
+    "published": "2025-05-24 ~ 2025-05-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443036+00:00"
+  },
+  {
+    "id": "04c903e222544ad898ca94d8c5783ea7c648bc310612f6781ac8f3387abfe166",
+    "site_name": "경상남도",
+    "title": "만화방초 수국축제",
+    "link": "https://blog.naver.com/man-hwa/223876106017",
+    "department": "경상남도",
+    "published": "2025-06-14 ~ 2025-07-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443041+00:00"
+  },
+  {
+    "id": "7d080abfa089ef8d1e9eb5112472e17bdc9472ce46d030dbabe20b0e2cbc5b1f",
+    "site_name": "경상남도",
+    "title": "김해국제의생명과학축제",
+    "link": "https://www.gibf.co.kr/",
+    "department": "경상남도",
+    "published": "2024-09-27 ~ 2024-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443044+00:00"
+  },
+  {
+    "id": "d14dc91de0a8633af31f1b6817cd1a352e8f0c82c47c2602cd8efbce485ba2b1",
+    "site_name": "경상남도",
+    "title": "경남고성옥수수쫀달고축제",
+    "link": "https://blog.naver.com/dinogoseong/223905558787",
+    "department": "경상남도",
+    "published": "2025-07-05 ~ 2025-07-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443047+00:00"
+  },
+  {
+    "id": "620cf1d51ef1de67d2dcffbd29992fb7335e69f8a95d6c37dd5b55f6a7510a34",
+    "site_name": "경상남도",
+    "title": "상리 반딧불이 연꽃축제",
+    "link": "https://blog.naver.com/dinogoseong/223889331138",
+    "department": "경상남도",
+    "published": "2025-06-13 ~ 2025-06-14",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443052+00:00"
+  },
+  {
+    "id": "532d9708bf97665286e615b0234cdbda9d9d5e6d95f10d1e1682967201e41e06",
+    "site_name": "경상남도",
+    "title": "김해꽃축제",
+    "link": "https://hellofm.imweb.me/",
+    "department": "경상남도",
+    "published": "2024-10-03 ~ 2024-10-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443057+00:00"
+  },
+  {
+    "id": "253efd150a7669705feb26bc1cf6e18790566842dfe2f48da84609194a261a9c",
+    "site_name": "경상남도",
+    "title": "남산공원 꽃무릇 축제",
+    "link": "https://blog.naver.com/dinogoseong/224019670510",
+    "department": "경상남도",
+    "published": "2025-09-27 ~ 2025-09-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443066+00:00"
+  },
+  {
+    "id": "ee7d8b5bf4c34e94c9aabc1c02e46285f92cd47737d9ebe6c248e3c7d0e5dffa",
+    "site_name": "경상남도",
+    "title": "당동만 별빛달빛 푸드트럭 음악축제",
+    "link": "https://blog.naver.com/dinogoseong/223889177184",
+    "department": "경상남도",
+    "published": "2025-06-13 ~ 2025-06-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443069+00:00"
+  },
+  {
+    "id": "cf13e99e152d89c38e375303c4f340905ff3d3000f70bf8c33e647e2727fb08e",
+    "site_name": "경상남도",
+    "title": "원동미나리축제",
+    "link": "https://festa.gyeongnam.go.kr/ysminari",
+    "department": "경상남도",
+    "published": "2025-02-22 ~ 2025-03-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443072+00:00"
+  },
+  {
+    "id": "e5aded2d020366ea0ed5ac29f7f0555898239904a73c81f89b4141ab82c7319f",
+    "site_name": "경상남도",
+    "title": "배내골사과축제",
+    "link": "https://festa.gyeongnam.go.kr/ysbaenaegolapple",
+    "department": "경상남도",
+    "published": "2024-11-02 ~ 2024-11-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443076+00:00"
+  },
+  {
+    "id": "9e17e062e8cee4216555fac011b7296d59c90367e15e5732a23b7307176364b1",
+    "site_name": "경상남도",
+    "title": "양산봄꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/ysspringflower",
+    "department": "경상남도",
+    "published": "2023-05-27 ~ 2023-06-11",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443079+00:00"
+  },
+  {
+    "id": "6797be575cc580e4e4574332bbc5d90f4e381c414bfc310ac0e3073519140d09",
+    "site_name": "경상남도",
+    "title": "양산국화축제",
+    "link": "https://festa.gyeongnam.go.kr/ysgughwaflower",
+    "department": "경상남도",
+    "published": "2024-10-25 ~ 2024-11-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443082+00:00"
+  },
+  {
+    "id": "f16a74303239fe517eb6ca4da60f3b6871a43a935e0fa8abffb096d509c77c12",
+    "site_name": "경상남도",
+    "title": "청소년과 함께하는 2023년 세대공감 어울림 축제",
+    "link": "https://festa.gyeongnam.go.kr/uryouthtogether",
+    "department": "경상남도",
+    "published": "2023-10-09 ~ 2023-10-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443086+00:00"
+  },
+  {
+    "id": "dc60cd47da8a966874bac57e38890362685903895bfc2eec4685ff5c7d431903",
+    "site_name": "경상남도",
+    "title": "의령 리치리치 페스티벌",
+    "link": "https://uiryeong.go.kr/festival/index.uiryeong",
+    "department": "경상남도",
+    "published": "2025-10-09 ~ 2025-10-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443089+00:00"
+  },
+  {
+    "id": "4a62113c8a73c3f5ac297230373e7db864df98df341e7ccee627dc19f9d74cac",
+    "site_name": "경상남도",
+    "title": "의령 신번문화축제",
+    "link": "https://festa.gyeongnam.go.kr/ursinbun",
+    "department": "경상남도",
+    "published": "2024-09-06 ~ 2024-09-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443093+00:00"
+  },
+  {
+    "id": "e537cdf5d131ab17461b7ad7325739432ec1fb09cc186f4cbb808c239bbf5ea2",
+    "site_name": "경상남도",
+    "title": "빛으로 만나는 문화축제",
+    "link": "https://festa.gyeongnam.go.kr/gslight",
+    "department": "경상남도",
+    "published": "2023-11-29 ~ 2024-01-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443098+00:00"
+  },
+  {
+    "id": "75be553aef13843a4a8965b87c745de1a271d09cd020e93c7a964b2182c73008",
+    "site_name": "경상남도",
+    "title": "의령 홍의장군축제",
+    "link": "http://www.xn--om3bn6q1oa5c.kr/kr/#1",
+    "department": "경상남도",
+    "published": "2024-04-18 ~ 2024-04-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443101+00:00"
+  },
+  {
+    "id": "a3aa7b120b51dbcf09e88030b4aab494e7da8476d29337962fa74c14947a4c39",
+    "site_name": "경상남도",
+    "title": "고성 독수리 생태 축제",
+    "link": "https://blog.naver.com/dinogoseong/224094492926",
+    "department": "경상남도",
+    "published": "2025-12-06 ~ 2025-12-07",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443104+00:00"
+  },
+  {
+    "id": "f698683d252c775870dfcc49f388254eb6fdd1d989a97a2b1641fcc8eebc87a8",
+    "site_name": "경상남도",
+    "title": "황매산억새축제",
+    "link": "https://www.hc.go.kr/hwangmaesan.web",
+    "department": "경상남도",
+    "published": "2024-10-05 ~ 2024-10-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443108+00:00"
+  },
+  {
+    "id": "0745f9535f33ae4fb620b9bb796d8ec72b16f01d123b26dad12b2c4f15045eb0",
+    "site_name": "경상남도",
+    "title": "의령가례밭미나리축제",
+    "link": "https://festa.gyeongnam.go.kr/urfieldminari",
+    "department": "경상남도",
+    "published": "2024-03-15 ~ 2024-03-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443112+00:00"
+  },
+  {
+    "id": "790a81c5ab5271b16f568f360e54e0a9712f62634b8f87303fedcd304915358e",
+    "site_name": "경상남도",
+    "title": "의령토요애수박축제",
+    "link": "https://festa.gyeongnam.go.kr/urwatermeleon",
+    "department": "경상남도",
+    "published": "2023-04-20 ~ 2023-04-23",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443115+00:00"
+  },
+  {
+    "id": "2035a525194807a806c6d251e747d20f45d6de2114154618aaf6043fdaf40535",
+    "site_name": "경상남도",
+    "title": "토요애의령농특산물축제",
+    "link": "https://festa.gyeongnam.go.kr/urfarm",
+    "department": "경상남도",
+    "published": "2023-10-06 ~ 2023-10-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443118+00:00"
+  },
+  {
+    "id": "3ce47fb23acfb7418f64716f808a44641446e21ce3ed89e34809b6f86c8c5520",
+    "site_name": "경상남도",
+    "title": "강주해바라기축제",
+    "link": "https://festa.gyeongnam.go.kr/hasunflower",
+    "department": "경상남도",
+    "published": "2023-07-05 ~ 2023-07-16",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443123+00:00"
+  },
+  {
+    "id": "411df4c78e127675c44679f22ed4f2aa883939f78dcce31ca1448a585f12be2d",
+    "site_name": "경상남도",
+    "title": "합천바캉스축제",
+    "link": "http://www.hcvacance.kr/",
+    "department": "경상남도",
+    "published": "2024-08-02 ~ 2024-08-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443126+00:00"
+  },
+  {
+    "id": "7a07f0dac43c0f15f94ef61b844472b0d21a1dacb51dd631b4ffd899f0563a34",
+    "site_name": "경상남도",
+    "title": "합천황토한우축제",
+    "link": "https://www.hc.go.kr/06573/06623/09042.web?amode=view&idx=1361",
+    "department": "경상남도",
+    "published": "2024-10-11 ~ 2024-10-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443129+00:00"
+  },
+  {
+    "id": "6e03d2be085110c20354e5c1be705fe577e4ef5d44ac8c1dae2033df742bb636",
+    "site_name": "경상남도",
+    "title": "제5회 대한민국 함안 수박축제",
+    "link": "https://festa.gyeongnam.go.kr/hawatermelon",
+    "department": "경상남도",
+    "published": "2024-04-26 ~ 2024-04-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443132+00:00"
+  },
+  {
+    "id": "568c28620ef4a8cfb27b9364f8d9586cd9810c9aa849b6cc08f353cf82694999",
+    "site_name": "경상남도",
+    "title": "아라가야문화제",
+    "link": "http://www.araje.or.kr/",
+    "department": "경상남도",
+    "published": "2024-10-11 ~ 2024-10-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443138+00:00"
+  },
+  {
+    "id": "ad8acc92219e56c88f7e6012231ed65f04fb5783eab7efb89db216045744f07f",
+    "site_name": "경상남도",
+    "title": "남해 마늘한우 축제",
+    "link": "https://festa.gyeongnam.go.kr/gchw",
+    "department": "경상남도",
+    "published": "2025-06-12 ~ 2025-06-15",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443142+00:00"
+  },
+  {
+    "id": "c1ded38ec117bce05ea9db5070094d5d19c6c5d454c445bab225e43b83651bfb",
+    "site_name": "경상남도",
+    "title": "독일마을맥주축제",
+    "link": "https://nhgvbf.com/",
+    "department": "경상남도",
+    "published": "2024-10-02 ~ 2024-10-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443145+00:00"
+  },
+  {
+    "id": "097ae134fd6c122a1e3ca7251d8b92aab2e1bd3c7ca5cbb4361bc968b87339c8",
+    "site_name": "경상남도",
+    "title": "칠서 생태공원 청보리·작약축제",
+    "link": "https://festa.gyeongnam.go.kr/hasangtae",
+    "department": "경상남도",
+    "published": "2024-05-10 ~ 2024-05-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443148+00:00"
+  },
+  {
+    "id": "778b94d467cb05dd20ee4d34c01a0379ece5b9d5c88eed6bc11d10fb63c97840",
+    "site_name": "경상남도",
+    "title": "함안곶감축제",
+    "link": "https://festa.gyeongnam.go.kr/hapersimmon",
+    "department": "경상남도",
+    "published": "2025-01-10 ~ 2025-01-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443151+00:00"
+  },
+  {
+    "id": "3d9cedc6962c4ad9162bfebc6fbf36a92a2e18b9d3612017a929b0c16bec04c8",
+    "site_name": "경상남도",
+    "title": "함안문화유산야행",
+    "link": "https://haman-yahaeng.com/",
+    "department": "경상남도",
+    "published": "2024-08-30 ~ 2024-09-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443156+00:00"
+  },
+  {
+    "id": "24b4b96abeca0f8963729d71fa228f7a9b17ff20a9f22fb262312140acb16833",
+    "site_name": "경상남도",
+    "title": "대장경기록문화축제",
+    "link": "https://www.hc.go.kr/06573/06623/08250.web",
+    "department": "경상남도",
+    "published": "2024-10-23 ~ 2024-10-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443159+00:00"
+  },
+  {
+    "id": "99ee860faef157b7a13079d44acfdf749562dc871b46bd33521b973c02e3319e",
+    "site_name": "경상남도",
+    "title": "창선고사리축제",
+    "link": "https://www.namhae.go.kr/tour/00009/00954.web?amode=view&idx=334&category=F0300",
+    "department": "경상남도",
+    "published": "2025-03-29 ~ 2025-03-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443162+00:00"
+  },
+  {
+    "id": "b1ea06f516602a7c98e6c2d1a7f86362cc4685b9ab5b0ab3120de21a0a4b2e60",
+    "site_name": "경상남도",
+    "title": "다랭이마을 해맞이 행사",
+    "link": "https://festa.gyeongnam.go.kr/nhdrsun",
+    "department": "경상남도",
+    "published": "2022-12-31 ~ 2023-01-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443167+00:00"
+  },
+  {
+    "id": "c324c08420286095011d63a685fe93570784c3e89118c0eef0a1e751906e5567",
+    "site_name": "경상남도",
+    "title": "상주 해넘이&해맞이 축제",
+    "link": "https://www.namhae.go.kr/socialm/board/View.do?pageCd=SM010101000&gcode=1131&idx=250948",
+    "department": "경상남도",
+    "published": "2024-12-31 ~ 2025-01-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443170+00:00"
+  },
+  {
+    "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
+    "site_name": "경상남도",
+    "title": "하동야생차문화축제",
+    "link": "https://festa.gyeongnam.go.kr/hdwtea",
+    "department": "경상남도",
+    "published": "2025-05-02 ~ 2025-05-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443175+00:00"
+  },
+  {
+    "id": "2edd32d19da97c32757e946e80e80380bf3d8b8f97148929822ebcd8124c7814",
+    "site_name": "경상남도",
+    "title": "밀양아리랑대축제",
+    "link": "https://festa.gyeongnam.go.kr/myarirang",
+    "department": "경상남도",
+    "published": "2025-05-22 ~ 2025-05-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443178+00:00"
+  },
+  {
+    "id": "dad8959d6d5027e2dc92c6f72783c37bbb4faf2bdcdbba6e7481a8e0c7e51368",
+    "site_name": "경상남도",
+    "title": "김해진영단감축제",
+    "link": "https://www.gimhae.go.kr/dangam/",
+    "department": "경상남도",
+    "published": "2024-11-01 ~ 2024-11-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443183+00:00"
+  },
+  {
+    "id": "5d4ba0316af000d159d6509418c1756c263e44df20eaaf848aa3271d6e066015",
+    "site_name": "경상남도",
+    "title": "가야문화축제",
+    "link": "https://www.gcfkorea.com/",
+    "department": "경상남도",
+    "published": "2025-04-10 ~ 2025-04-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443186+00:00"
+  },
+  {
+    "id": "146b81fdb7d61f01ee1a2737f7863e04611e7b4de46db5406bdd2b372d7bae2f",
+    "site_name": "경상남도",
+    "title": "세계크리스마스 문화축제",
+    "link": "https://festa.gyeongnam.go.kr/ghchristmas",
+    "department": "경상남도",
+    "published": "2024-12-07 ~ 2024-12-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443189+00:00"
+  },
+  {
+    "id": "dad388c8ae04e3304cc76f93f332bff34459dbbd15faed46a0ff5c7520f32f5e",
+    "site_name": "경상남도",
+    "title": "밀양 문화유산 야행",
+    "link": "https://www.miryangnight.com/",
+    "department": "경상남도",
+    "published": "2024-04-19 ~ 2024-04-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443193+00:00"
+  },
+  {
+    "id": "39bcebaacf9bf7ecb8aa77576242b061f64fc189470aaf0c0c2cf408a83cbda3",
+    "site_name": "경상남도",
+    "title": "밀양공연예술축제",
+    "link": "https://www.theatervillage.co.kr/#home",
+    "department": "경상남도",
+    "published": "2024-07-24 ~ 2024-08-04",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443197+00:00"
+  },
+  {
+    "id": "01bd3f28ddcd665742ad3bed27f059e04739fc910ab5f64c6242ea0291aac933",
+    "site_name": "경상남도",
+    "title": "가곡동 벚꽃길 축제",
+    "link": "https://festa.gyeongnam.go.kr/ggblo",
+    "department": "경상남도",
+    "published": "2023-04-01 ~ 2023-04-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443201+00:00"
+  },
+  {
+    "id": "33464ae7fe418cae359b75d1449d7015b95324e133a4cc02edefe7450a872c65",
+    "site_name": "경상남도",
+    "title": "밀양 무안맛나향 고추 축제",
+    "link": "https://festa.gyeongnam.go.kr/mypapper",
+    "department": "경상남도",
+    "published": "2024-04-27 ~ 2024-04-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443207+00:00"
+  },
+  {
+    "id": "6a724d639278181ae5e4d4d58e1305f00ee24773b470c982dc312b783aff1eda",
+    "site_name": "경상남도",
+    "title": "삼문동 코스모스 축제",
+    "link": "https://festa.gyeongnam.go.kr/mycosmos",
+    "department": "경상남도",
+    "published": "2023-10-28 ~ 2023-10-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443210+00:00"
+  },
+  {
+    "id": "c38359fcc29bf53a1ada9b8921399a5714b7c7835d911f04e0600eeaa9398db5",
+    "site_name": "경상남도",
+    "title": "2025년 밀양대추·얼음골사과대축제",
+    "link": "https://festa.gyeongnam.go.kr/mydaecu",
+    "department": "경상남도",
+    "published": "2025-11-08 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443213+00:00"
+  },
+  {
+    "id": "b5bf5c7757ae7c7f89ec4340be7331b0b19f77f91b76ab1e75d501455969d8f9",
+    "site_name": "경상남도",
+    "title": "상동면 장미축제",
+    "link": "https://festa.gyeongnam.go.kr/sangdongrose",
+    "department": "경상남도",
+    "published": "2023-05-20 ~ 2023-05-20",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443216+00:00"
+  },
+  {
+    "id": "f9a72cd4df4d809f86a9fc9edbb6d3a9c144b74daf8b8cec58da426e62147138",
+    "site_name": "경상남도",
+    "title": "하동 북천 꽃양귀비축제",
+    "link": "https://festa.gyeongnam.go.kr/hdpp",
+    "department": "경상남도",
+    "published": "2025-05-16 ~ 2025-05-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443221+00:00"
+  },
+  {
+    "id": "3c41f05031a1d20ca767e566a27377cca387ffc1bf660cf8d3a474cb2cc15751",
+    "site_name": "경상남도",
+    "title": "하동북천 코스모스 메밀꽃 축제",
+    "link": "https://www.hadong.go.kr/02641/02652/02814.web",
+    "department": "경상남도",
+    "published": "2024-09-13 ~ 2024-09-29",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443225+00:00"
+  },
+  {
+    "id": "a6ff88a0f9409dd5de96c5f97a231089cbebe86b6531dfebd95bf4fe217d105a",
+    "site_name": "경상남도",
+    "title": "화개장터 벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/hdcbflower",
+    "department": "경상남도",
+    "published": "2025-03-28 ~ 2025-03-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443228+00:00"
+  },
+  {
+    "id": "281a9bb812d2d59912dc89e5481164e35eaaa38c8532ff50632ff1b3701ab357",
+    "site_name": "경상남도",
+    "title": "하동섬진강문화재첩축제",
+    "link": "https://festa.gyeongnam.go.kr/hdsjfes",
+    "department": "경상남도",
+    "published": "2024-06-14 ~ 2024-06-16",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443231+00:00"
+  },
+  {
+    "id": "7bf908e13ba00fbb955c199aa367d403e17c8b10e90123ab2b30d2022086d363",
+    "site_name": "경상남도",
+    "title": "하동 술상 맛 전어 축제",
+    "link": "https://festa.gyeongnam.go.kr/hdshadfes",
+    "department": "경상남도",
+    "published": "2023-08-11 ~ 2023-08-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443234+00:00"
+  },
+  {
+    "id": "2798111b296df2d7757e296917e35fb919cefada30da3e82c64b68c2b2bdb688",
+    "site_name": "경상남도",
+    "title": "진주남강유등축제",
+    "link": "https://yudeung.com/",
+    "department": "경상남도",
+    "published": "2025-10-04 ~ 2025-10-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443238+00:00"
+  },
+  {
+    "id": "613d4563885b30833ec551ec50d062c1fcca822276d7435537853722ffa29f7c",
+    "site_name": "경상남도",
+    "title": "코리아드라마페스티벌",
+    "link": "http://kdfo.org/",
+    "department": "경상남도",
+    "published": "2025-10-10 ~ 2025-10-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443244+00:00"
+  },
+  {
+    "id": "38c55a7a96d705699df901e21f67980b9f6114a093b07fb25f8e36b109b7af73",
+    "site_name": "경상남도",
+    "title": "문화다양성축제 MAMF(맘프)",
+    "link": "https://www.mamf.co.kr/",
+    "department": "경상남도",
+    "published": "2024-10-11 ~ 2024-10-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443248+00:00"
+  },
+  {
+    "id": "3635b77188361bd41376bd869774e26dbacecc4352076832e05ef385707552a1",
+    "site_name": "경상남도",
+    "title": "창원단감축제",
+    "link": "https://festa.gyeongnam.go.kr/cwdangam",
+    "department": "경상남도",
+    "published": "2025-10-25 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443251+00:00"
+  },
+  {
+    "id": "156721200f7156d10f5008db008dba9e65b9267aa08209ddaaeb55fec0240ba9",
+    "site_name": "경상남도",
+    "title": "사천와룡문화제",
+    "link": "https://www.sccf.or.kr/sub/waryong.php",
+    "department": "경상남도",
+    "published": "2025-05-01 ~ 2025-05-04",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443259+00:00"
+  },
+  {
+    "id": "b3b2be38eead59d10302c408e0abbae14ebf04e85ee458078e16bf96a9f4f668",
+    "site_name": "경상남도",
+    "title": "사천시 삼천포항수산물축제",
+    "link": "https://festa.gyeongnam.go.kr/scsff",
+    "department": "경상남도",
+    "published": "2025-11-07 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443263+00:00"
+  },
+  {
+    "id": "9ead175aecaea25bf6e23fc0588ed6ef86fdb86ed45b01d3345e192fb4dd5b40",
+    "site_name": "경상남도",
+    "title": "사천시 삼천포항 자연산 전어축제",
+    "link": "http://www.3004palpo.co.kr",
+    "department": "경상남도",
+    "published": "2025-08-14 ~ 2025-08-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443266+00:00"
+  },
+  {
+    "id": "df585095d0f28e869bf202a0afd55e525bcf1e07584c820e924d3bb4a904805d",
+    "site_name": "경상남도",
+    "title": "거제둔덕포도축제",
+    "link": "https://festa.gyeongnam.go.kr/gjgrape",
+    "department": "경상남도",
+    "published": "2024-08-31 ~ 2024-09-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443271+00:00"
+  },
+  {
+    "id": "9661a939850d9be52114a75b65411bc986073e4053db44061ed59a07412d0e1f",
+    "site_name": "경상남도",
+    "title": "보물섬 미조항 멸치축제",
+    "link": "https://festa.gyeongnam.go.kr/anchovy",
+    "department": "경상남도",
+    "published": "2024-05-11 ~ 2024-05-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443275+00:00"
+  },
+  {
+    "id": "d41419e88116d186772573a8ed4b850afd5cc57d9ffffcff493a68ff889e2c8f",
+    "site_name": "경상남도",
+    "title": "거창한마당대축제",
+    "link": "http://xn--v69az7jn8fi3p60eb8beyw.kr/index.php",
+    "department": "경상남도",
+    "published": "2024-09-26 ~ 2024-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443278+00:00"
+  },
+  {
+    "id": "a279f9018f9afb2e709393c309cb6bec3c3d09e607e8910008ef401f1a07b5c5",
+    "site_name": "경상남도",
+    "title": "물금벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/yscb",
+    "department": "경상남도",
+    "published": "2025-03-29 ~ 2025-03-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443283+00:00"
+  },
+  {
+    "id": "55b511f1dd1c8d7a05142855826e40d5451873b25cd0da1b0c13bb76815a7f6e",
+    "site_name": "경상남도",
+    "title": "MY아리나드림페스티벌",
+    "link": "https://festa.gyeongnam.go.kr/family",
+    "department": "경상남도",
+    "published": "2025-03-08 ~ 2025-03-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443288+00:00"
+  },
+  {
+    "id": "484867a6a75df032a44cb98d5f1e1975247e8685cb6f80a128a88700dfa1f37b",
+    "site_name": "경상남도",
+    "title": "함양 백운산 벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/hybus",
+    "department": "경상남도",
+    "published": "2026-04-04 ~ 2026-04-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443291+00:00"
+  },
+  {
+    "id": "55c34717c2e4b21e356e0a8b44d320f9b124be24d0ab0528afe3072bf0f40fc7",
+    "site_name": "경상남도",
+    "title": "서상 어울림 대축제",
+    "link": "https://festa.gyeongnam.go.kr/hyjoin",
+    "department": "경상남도",
+    "published": "2025-04-12 ~ 2025-04-13",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443297+00:00"
+  },
+  {
+    "id": "a4e0c376f3c9cfc977b1c214bc854995e4b7b4c49b63db0caf98cae4d3f6246e",
+    "site_name": "경상남도",
+    "title": "분청도자기축제",
+    "link": "http://festival.buncheong.co.kr/main.web",
+    "department": "경상남도",
+    "published": "2024-11-05 ~ 2024-11-10",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443300+00:00"
+  },
+  {
+    "id": "01e33656445e824e7e7a574dcae515828c68eacdfca2be65ac1e593df33dc82f",
+    "site_name": "경상남도",
+    "title": "제5회 거창아리미아꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/gnfestival",
+    "department": "경상남도",
+    "published": "2024-05-14 ~ 2024-05-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443305+00:00"
+  },
+  {
+    "id": "4bfe007a39d6108123c3739f533568027b60fb5d6f3f845b9943fcfc8e825f9e",
+    "site_name": "경상남도",
+    "title": "2024 경남 청년 인플루언서 페스티벌",
+    "link": "https://onlinepage.co.kr/2024gyif/?utm_source=gn_home&utm_medium=display&utm_campaign=2024gyif",
+    "department": "경상남도",
+    "published": "2024-08-09 ~ 2024-08-11",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443314+00:00"
+  },
+  {
+    "id": "872b5cccd76ac119606ceee536986678c283ad93ba6cbab673219011b1700b22",
+    "site_name": "경상남도",
+    "title": "2024 밀양 얼음골 냉랭한 축제",
+    "link": "https://blog.naver.com/miryangsi/223531034301",
+    "department": "경상남도",
+    "published": "2024-08-17 ~ 2024-08-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443318+00:00"
+  },
+  {
+    "id": "557fb2e90b2d90ea09b7183f186435f7d772bc57b955d99b3b100663523e0359",
+    "site_name": "경상남도",
+    "title": "하동 왕의녹차 참숭어 소비촉진 대축제",
+    "link": "https://blog.naver.com/hadongblog/223636847786",
+    "department": "경상남도",
+    "published": "2024-11-08 ~ 2024-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443326+00:00"
+  },
+  {
+    "id": "51df6b44d0eaef06fd251bd6e3ed3ce464f0d6b928443fcf698066be1cb9c704",
+    "site_name": "경상남도",
+    "title": "진주국제농식품박람회",
+    "link": "https://www.jinju.go.kr/agrex/kor/",
+    "department": "경상남도",
+    "published": "2024-11-06 ~ 2024-11-10",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443331+00:00"
+  },
+  {
+    "id": "a6f64697a723dea59acadc0dab579b369096a17063f84eba8ae8f9ae63a3e421",
+    "site_name": "경상남도",
+    "title": "함안군평생학습축제",
+    "link": "https://blog.naver.com/arahaman/223647864751",
+    "department": "경상남도",
+    "published": "2024-11-16 ~ 2024-11-16",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443336+00:00"
+  },
+  {
+    "id": "1135f468842e457056ffe63f0e793413754ed9de0b81487e810e54bc5f31cf01",
+    "site_name": "경상남도",
+    "title": "진주국제재즈페스티벌",
+    "link": "http://jinjujazz.com/",
+    "department": "경상남도",
+    "published": "2024-11-27 ~ 2024-11-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443339+00:00"
+  },
+  {
+    "id": "7aa420c3270c2a867afdecb3f31d087990f1763a812034bc2ff19df7d9a9fc65",
+    "site_name": "경상남도",
+    "title": "경남민속예술축제",
+    "link": "https://blog.naver.com/arahaman/223656004157",
+    "department": "경상남도",
+    "published": "2024-11-19 ~ 2024-11-20",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443342+00:00"
+  },
+  {
+    "id": "6d145c257ca9c671360925003361e8b6361760d602179898cd9cb6b416617691",
+    "site_name": "경상남도",
+    "title": "눈내리는창동거리축제",
+    "link": "https://blog.naver.com/cwopenspace/223652447449",
+    "department": "경상남도",
+    "published": "2024-11-08 ~ 2024-12-29",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443345+00:00"
+  },
+  {
+    "id": "af90660d24a21610b34b6deb10f6b9877898ed997da98e59b1ff466dd9dafcfe",
+    "site_name": "경상남도",
+    "title": "거창크리스마스트리문화축제",
+    "link": "https://www.gcctf.co.kr/index.php",
+    "department": "경상남도",
+    "published": "2024-12-08 ~ 2025-01-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443348+00:00"
+  },
+  {
+    "id": "94aabd6d314e3226149142c915b42b50344f6168436f78aea89df2861eb9ea14",
+    "site_name": "경상남도",
+    "title": "거제도국제펭귄수영축제",
+    "link": "https://geojekukjepenguin.modoo.at/",
+    "department": "경상남도",
+    "published": "2025-01-11 ~ 2025-01-11",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443352+00:00"
+  },
+  {
+    "id": "c5ef6ed21df9a7d669e2520ce1e9bbe8a33ae936663a6148e6291d591f5e3158",
+    "site_name": "경상남도",
+    "title": "금원산얼음축제",
+    "link": "https://blog.naver.com/gnfeel/223705284492",
+    "department": "경상남도",
+    "published": "2025-01-10 ~ 2025-01-16",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443355+00:00"
+  },
+  {
+    "id": "ea5093efd8799e456e6640a9c899d4838bc900ff1fe0b7954ed2cbf60a7af538",
+    "site_name": "경상남도",
+    "title": "진주딸기축제",
+    "link": "https://jinjustrawberry.my.canva.site/",
+    "department": "경상남도",
+    "published": "2025-04-19 ~ 2025-04-20",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443358+00:00"
+  },
+  {
+    "id": "f4fd113616a8df30d7127bad356443801bc9f875ccbeef89d63c7b1c641aaede",
+    "site_name": "경상남도",
+    "title": "율하벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/yhflower",
+    "department": "경상남도",
+    "published": "2025-03-29 ~ 2025-03-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443361+00:00"
+  },
+  {
+    "id": "9c6441914e7ee76292fcb1c344c686c19143a9015ab92ce859f56f52fd2fbfc6",
+    "site_name": "경상남도",
+    "title": "김해한우축제",
+    "link": "https://xn--4k0bl77bh5ad2lnykde.kr/",
+    "department": "경상남도",
+    "published": "2025-05-22 ~ 2025-05-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443364+00:00"
+  },
+  {
+    "id": "d9fc557b87a45647808cacf966f2b4fa2b7335848322cdde0e3a40dfa8ae76d8",
+    "site_name": "경상남도",
+    "title": "지리산 마천골 흑돼지&산나물 축제",
+    "link": "https://festa.gyeongnam.go.kr/htmc",
+    "department": "경상남도",
+    "published": "2025-04-26 ~ 2025-04-27",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443368+00:00"
+  },
+  {
+    "id": "486850564259a5d75c01d0de62e375f1922eae7f52be6806ef9f0439c4397acc",
+    "site_name": "경상남도",
+    "title": "당항포대첩축제 백일장 및 사생대회",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSe4Nw1f7CNiD1XSjT1WjdK3Linl5JjwDVfXjeKA1P7yme_0Vw/viewform",
+    "department": "경상남도",
+    "published": "2026-04-25 ~ 2026-04-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443371+00:00"
+  },
+  {
+    "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
+    "site_name": "경상남도",
+    "title": "거창에 On 봄 축제",
+    "link": "https://festa.gyeongnam.go.kr/gcon",
+    "department": "경상남도",
+    "published": "2025-05-15 ~ 2025-05-18",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443374+00:00"
+  },
+  {
+    "id": "e11ff742e8ade971ecfd1a05495bd2b29960481e784ba4243d77bbb60776781b",
+    "site_name": "경상남도",
+    "title": "당항포대첩축제",
+    "link": "https://www.gngsctf.or.kr/board/view.goseong?boardId=BBS_0000025&menuCd=DOM_000000307001000000&command=update&dataSid=4053&startPage=1&commentPage=1&keyword=",
+    "department": "경상남도",
+    "published": "2026-04-24 ~ 2026-04-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443378+00:00"
+  },
+  {
+    "id": "a56792c9f12ef97922d325a05ab1f7bde114e111d10d39d382bc59607111c098",
+    "site_name": "경상남도",
+    "title": "부뚜막전통문화어울림축제",
+    "link": "https://ggscc.or.kr/%ec%95%8c%eb%a6%bc%eb%a7%88%eb%8b%b9/%ed%96%89%ec%82%ac-%ec%86%8c%ec%8b%9d/?uid=98&mod=document",
+    "department": "경상남도",
+    "published": "2025-06-07 ~ 2025-06-07",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443381+00:00"
+  },
+  {
+    "id": "a269219cbf62c9d0923cc2e236666099ac32e88790b1434acafb6b2a093cbde8",
+    "site_name": "경상남도",
+    "title": "반려견과 함께하는 남파랑길 고성 걷기축제",
+    "link": "https://blog.naver.com/dinogoseong/224072253179",
+    "department": "경상남도",
+    "published": "2025-11-22 ~ 2025-11-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443384+00:00"
+  },
+  {
+    "id": "39b4391ed3b60b3a5b0e2d38398078a45eabd29d02399b882848d4166e0ff746",
+    "site_name": "경상남도",
+    "title": "2025 대한민국 정원산업박람회 in 진주",
+    "link": "https://www.jinju.go.kr/garden/index.php?mid=sogae",
+    "department": "경상남도",
+    "published": "2025-06-13 ~ 2025-06-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443389+00:00"
+  },
+  {
+    "id": "5d690800029028aea1663aef7aac1d567d475e87dcbba6168fe96a9f06c93ecd",
+    "site_name": "경상남도",
+    "title": "2025 월아산 수국정원 축제",
+    "link": "https://www.jinju.go.kr/forestjinju/",
+    "department": "경상남도",
+    "published": "2025-06-14 ~ 2025-06-22",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443392+00:00"
+  },
+  {
+    "id": "044b2e4d345132c202b59f9211517fb66918eb1bac4f4863d3a59d65c6b226b8",
+    "site_name": "경상남도",
+    "title": "제8회 소계동 산벚꽃 축제",
+    "link": "https://festa.gyeongnam.go.kr/sgflower",
+    "department": "경상남도",
+    "published": "2025-03-27 ~ 2025-04-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443399+00:00"
+  },
+  {
+    "id": "7ebf457c66cd62fa69ba80a88abf96a77c49e50a97b10dacdb4d8892a01a9b63",
+    "site_name": "경상남도",
+    "title": "밀양 수(水)퍼 페스티벌",
+    "link": "https://www.superfestival.co.kr/",
+    "department": "경상남도",
+    "published": "2025-08-08 ~ 2025-08-10",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443404+00:00"
+  },
+  {
+    "id": "9b165a9e0d7802f39046b45a3af8486394181d6f633fe422189626116db0724e",
+    "site_name": "경상남도",
+    "title": "2025 토요상설무대 프러포즈 및 사천 락페스티벌",
+    "link": "https://festa.gyeongnam.go.kr/scfestival",
+    "department": "경상남도",
+    "published": "2025-07-19 ~ 2025-08-23",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443410+00:00"
+  },
+  {
+    "id": "2ec7ee1f6bfee25e96f9b014c584afc638b2bad056d7d6d008bd2304cfc28cf3",
+    "site_name": "경상남도",
+    "title": "2025 거제맥주축제",
+    "link": "http://www.geojefesta.com/",
+    "department": "경상남도",
+    "published": "2025-08-29 ~ 2025-08-30",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443413+00:00"
+  },
+  {
+    "id": "1485a0fc5481df6857731a4aaaf0990e3ac8a7db625d0dd3a236951c437b240b",
+    "site_name": "경상남도",
+    "title": "하동을 먹다, 하동별맛축제",
+    "link": "https://festa.gyeongnam.go.kr/hdbm",
+    "department": "경상남도",
+    "published": "2025-11-07 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443416+00:00"
+  },
+  {
+    "id": "8928eb2cecfaca328073de8a76668e64f339b695fae25f3375b57dc195fff9ec",
+    "site_name": "경상남도",
+    "title": "2025 외계인 대축제",
+    "link": "https://www.alienfestival.kr/",
+    "department": "경상남도",
+    "published": "2025-09-20 ~ 2025-09-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443419+00:00"
+  },
+  {
+    "id": "06dd655052d8e51366bb72b9cb5b1fdc8824645f6fdad800d85a835a4b1840d6",
+    "site_name": "경상남도",
+    "title": "2025 진주 M2 페스티벌",
+    "link": "http://www.jinjumusic.com/",
+    "department": "경상남도",
+    "published": "2025-09-05 ~ 2025-09-06",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443423+00:00"
+  },
+  {
+    "id": "ad6ee7cd0eb89a71f2dbb05e2625c6822abd44f4dfd0fdd0fd794a30dcb16e4b",
+    "site_name": "경상남도",
+    "title": "거제둔덕 포도축제",
+    "link": "https://festa.gyeongnam.go.kr/grape",
+    "department": "경상남도",
+    "published": "2025-09-06 ~ 2025-09-07",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443426+00:00"
+  },
+  {
+    "id": "2b1b3fb0d8598cf1f209a115bb7eb506fe10caf7ccdf1a436a33724471f78182",
+    "site_name": "경상남도",
+    "title": "기월안뜰 경관농업지구 가을 꽃 축제",
+    "link": "https://blog.naver.com/dinogoseong/224005059967",
+    "department": "경상남도",
+    "published": "2025-09-19 ~ 2025-09-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443431+00:00"
+  },
+  {
+    "id": "47067bb373f654535f5c46767dfc63ae8cc228c3cd36b5ec307e74f3a986cf75",
+    "site_name": "경상남도",
+    "title": "무점마을 코스모스 축제",
+    "link": "https://festa.gyeongnam.go.kr/cosmos",
+    "department": "경상남도",
+    "published": "2025-09-26 ~ 2025-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443434+00:00"
+  },
+  {
+    "id": "c49921a7a980d0ec3afadb7a68882bc4cc7548988a034315fe6bab81e4d9f548",
+    "site_name": "경상남도",
+    "title": "2025 거창 한마당 대축제",
+    "link": "https://festa.gyeongnam.go.kr/geochang",
+    "department": "경상남도",
+    "published": "2025-09-25 ~ 2025-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443437+00:00"
+  },
+  {
+    "id": "4ff8d4c4fc15affa52e099ff215271a63fa9e0287116d8bc2399cdda1309c3a3",
+    "site_name": "경상남도",
+    "title": "2025 양산삽량문화축전",
+    "link": "https://festa.gyeongnam.go.kr/yangsan",
+    "department": "경상남도",
+    "published": "2025-09-26 ~ 2025-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443442+00:00"
+  },
+  {
+    "id": "4952f50ed023fcb22fa51e332e74b2ef444c00d6f6d8909d50e80ea6f33631a5",
+    "site_name": "경상남도",
+    "title": "아라가야문화제",
+    "link": "https://festa.gyeongnam.go.kr/haman",
+    "department": "경상남도",
+    "published": "2025-09-26 ~ 2025-09-28",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443446+00:00"
+  },
+  {
+    "id": "0dcf812b46ab72a57362a2eab2d5484aa75815e14d7663afc2674d8ece07a705",
+    "site_name": "경상남도",
+    "title": "소가야문화제",
+    "link": "https://festa.gyeongnam.go.kr/sgaya",
+    "department": "경상남도",
+    "published": "2025-10-01 ~ 2025-10-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443450+00:00"
+  },
+  {
+    "id": "75cc020f09456fc47840816f46daf1b989e55b57bc6a476216daab3784bbfbe5",
+    "site_name": "경상남도",
+    "title": "지리산함양 백전오미자축제",
+    "link": "https://festa.gyeongnam.go.kr/schisandraBerry",
+    "department": "경상남도",
+    "published": "2025-09-20 ~ 2025-09-20",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443453+00:00"
+  },
+  {
+    "id": "cdd56baba1fa5e322b3ec7f8083f5dc06d434884a789e9b966d181ad7ad8ce30",
+    "site_name": "경상남도",
+    "title": "고성희망드림콘서트",
+    "link": "https://sites.google.com/view/gsdreamconcert",
+    "department": "경상남도",
+    "published": "2025-09-19 ~ 2025-09-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443456+00:00"
+  },
+  {
+    "id": "5110bf79a5ed86e48a9311c516f4c96d10321b1827cf62ab3d87955c512c3894",
+    "site_name": "경상남도",
+    "title": "낭소골 뚝방길 코스모스 축제",
+    "link": "https://festa.gyeongnam.go.kr/nscosmos",
+    "department": "경상남도",
+    "published": "2025-10-10 ~ 2025-10-11",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443460+00:00"
+  },
+  {
+    "id": "22facd0cd7cfb02d1d4560569e32cc85d2e2f7642da31fc9e5ee48f351143dc7",
+    "site_name": "경상남도",
+    "title": "충무지구 근대군항 문화페스타",
+    "link": "https://festa.gyeongnam.go.kr/jinhaefesta",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443464+00:00"
+  },
+  {
+    "id": "5b43504a916b36f6716e6343ed7bfd799c292a15cd009d2a94cb426d15b2f37b",
+    "site_name": "경상남도",
+    "title": "문화다양성 축제 MAMF(맘프)",
+    "link": "https://festa.gyeongnam.go.kr/mamfff",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443467+00:00"
+  },
+  {
+    "id": "c52994cf01b6c12feb848c5e4370d59f5b7bedcdb719b02cda16b2a07f4769ba",
+    "site_name": "경상남도",
+    "title": "창원 K-POP 월드페스티벌",
+    "link": "https://festa.gyeongnam.go.kr/kpopfestival",
+    "department": "경상남도",
+    "published": "2025-10-17 ~ 2025-10-17",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443471+00:00"
+  },
+  {
+    "id": "3a4241ce5ab77752b5583024184f7d1b7b57bd08a1111a0ec2151678575a84e6",
+    "site_name": "경상남도",
+    "title": "통영어부장터축제",
+    "link": "https://festa.gyeongnam.go.kr/tongfish",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443474+00:00"
+  },
+  {
+    "id": "30a6da858eeecdec9f6caa27ac18a8c17d66cfdb36bc783c52fe51079c923c3d",
+    "site_name": "경상남도",
+    "title": "2025 김해문화재야행",
+    "link": "https://festa.gyeongnam.go.kr/kimhaenight",
+    "department": "경상남도",
+    "published": "2025-10-17 ~ 2025-10-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443480+00:00"
+  },
+  {
+    "id": "f48f2e31f93c1f46eefe96c425f63313cfb64a6af3b54824c8462919a353e1df",
+    "site_name": "경상남도",
+    "title": "김해DOIT 뒷고기거리 축제",
+    "link": "https://festa.gyeongnam.go.kr/gogii",
+    "department": "경상남도",
+    "published": "2025-11-01 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443483+00:00"
+  },
+  {
+    "id": "fbcaab97efd76ce345172a0e4eb6159be935185fe40a5638ff88733415f838e6",
+    "site_name": "경상남도",
+    "title": "김해진영단감축제",
+    "link": "https://festa.gyeongnam.go.kr/dangamfesta",
+    "department": "경상남도",
+    "published": "2025-10-31 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443486+00:00"
+  },
+  {
+    "id": "dba396f7e788ff3c7cc063c1949832a9c26f4a1a9a7fd3d04c2ed6e1a8448da3",
+    "site_name": "경상남도",
+    "title": "양산국화축제",
+    "link": "https://festa.gyeongnam.go.kr/yangsanflower",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443490+00:00"
+  },
+  {
+    "id": "0f0b1c9e834422b6ad1c800cfe0720198b060680aa5ee2e3fd99d5148af44638",
+    "site_name": "경상남도",
+    "title": "2025 의령 신번한지우륵 문화축제",
+    "link": "https://festa.gyeongnam.go.kr/shin",
+    "department": "경상남도",
+    "published": "2025-10-31 ~ 2025-11-01",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443493+00:00"
+  },
+  {
+    "id": "3b4c18b22eaaa99322eebe21abb27d5c7eb35a3d0f123f91426459d7b5fef4d0",
+    "site_name": "경상남도",
+    "title": "2025 토요애 의령 농축산물 축제",
+    "link": "https://festa.gyeongnam.go.kr/nong",
+    "department": "경상남도",
+    "published": "2025-10-09 ~ 2025-10-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443496+00:00"
+  },
+  {
+    "id": "c60c48c3235d769360323358edacdc85e276e6f82077ff57985a164b9400967c",
+    "site_name": "경상남도",
+    "title": "2025 의령 기강 리치 꽃 축제",
+    "link": "https://festa.gyeongnam.go.kr/gigang",
+    "department": "경상남도",
+    "published": "2025-10-03 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443499+00:00"
+  },
+  {
+    "id": "7984a31d2e04c41b2dc79cb4f52c5a307c4189b5bf2b6fe3a73eb68ad889be16",
+    "site_name": "경상남도",
+    "title": "비사벌문화제",
+    "link": "https://festa.gyeongnam.go.kr/bee",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443503+00:00"
+  },
+  {
+    "id": "8db7716915d382b5b3fe21e9cb931e217052707d5b1fc5816601c1cc6416e192",
+    "site_name": "경상남도",
+    "title": "독일마을 맥주축제",
+    "link": "https://festa.gyeongnam.go.kr/beer",
+    "department": "경상남도",
+    "published": "2025-10-02 ~ 2025-10-04",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443507+00:00"
+  },
+  {
+    "id": "ba4853f987a4b8d2aa92bc58b398034ef4ff8dc8b2f78c9c5fa03c20783e54d2",
+    "site_name": "경상남도",
+    "title": "하동 북천 코스모스 메일꽃 축제",
+    "link": "https://festa.gyeongnam.go.kr/hadongflower",
+    "department": "경상남도",
+    "published": "2025-10-02 ~ 2025-10-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443510+00:00"
+  },
+  {
+    "id": "e71b41fc17502eeb484360eabbc1f46af455faa903269bfc13ea1b5ae4ad182e",
+    "site_name": "경상남도",
+    "title": "합천황토한우축제",
+    "link": "https://festa.gyeongnam.go.kr/umme",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443513+00:00"
+  },
+  {
+    "id": "fb7159eb48d43f84ccec561df3b462b3c7e3072d9da3ccaf38ec2c9625a32633",
+    "site_name": "경상남도",
+    "title": "황매산 억새 축제",
+    "link": "https://festa.gyeongnam.go.kr/hwang",
+    "department": "경상남도",
+    "published": "2025-10-18 ~ 2025-10-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443516+00:00"
+  },
+  {
+    "id": "bd049b40a4618fdc648f37ef149402d3c8a813ac6de7a3ff94740dc3781606e6",
+    "site_name": "경상남도",
+    "title": "2025 대장경 기록 문화 축제",
+    "link": "https://festa.gyeongnam.go.kr/big",
+    "department": "경상남도",
+    "published": "2025-10-24 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443519+00:00"
+  },
+  {
+    "id": "11dbcfe89cf0ba15c04be16268e170b8d576d84ff667c4abebe0add871d43061",
+    "site_name": "경상남도",
+    "title": "지리산 천왕축제",
+    "link": "https://festa.gyeongnam.go.kr/cheonwang",
+    "department": "경상남도",
+    "published": "2025-11-01 ~ 2025-11-02",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443523+00:00"
+  },
+  {
+    "id": "e43b5a81cb8b2a74e35963fa6609028ad6bc846bf499a1b18e37dfd5e2196217",
+    "site_name": "경상남도",
+    "title": "청년페스티벌",
+    "link": "https://blog.naver.com/dinogoseong/224048820797",
+    "department": "경상남도",
+    "published": "2025-10-31 ~ 2025-10-31",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443526+00:00"
+  },
+  {
+    "id": "c121f655ff4a546440c3e55c4e5cc7c0783d4554500d53a218f58b178b973c5b",
+    "site_name": "경상남도",
+    "title": "잇다 플리마켓&페스티벌",
+    "link": "https://blog.naver.com/dinogoseong/224048834080",
+    "department": "경상남도",
+    "published": "2025-10-21 ~ 2025-10-21",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443529+00:00"
+  },
+  {
+    "id": "bec553693dab0f3ef0a3fe9a84b9fd42c5a32fa33fa78f0f74313a9ff8548f76",
+    "site_name": "경상남도",
+    "title": "함양수동 사과축제",
+    "link": "https://festa.gyeongnam.go.kr/sudongsagwa",
+    "department": "경상남도",
+    "published": "2025-11-08 ~ 2025-11-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443534+00:00"
+  },
+  {
+    "id": "93c898c1ab444c3d02cbc3595f5c0db86a48dea1f3da192599a5cac28dfce14c",
+    "site_name": "경상남도",
+    "title": "제30회 농업인의 날 기념, 제9회 고성군 농축산물 한마당 축제",
+    "link": "https://blog.naver.com/dinogoseong/224066500713",
+    "department": "경상남도",
+    "published": "2025-11-11 ~ 2025-11-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443538+00:00"
+  },
+  {
+    "id": "2eb8cedd5228314eec1d4e69466e19650694dc41b6d42b2e95fd4830b84bf812",
+    "site_name": "경상남도",
+    "title": "양산배내골 사과축제",
+    "link": "https://www.yangsan.go.kr/tour/contents.do?mid=0310000000",
+    "department": "경상남도",
+    "published": "2025-11-08 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443548+00:00"
+  },
+  {
+    "id": "22ba3315d15c6e51ceb76526c6984b07a9a98e4391c7706548d1a56fa1543053",
+    "site_name": "경상남도",
+    "title": "제1회 고성군 반려동물 문화행사",
+    "link": "https://blog.naver.com/dinogoseong/224062690840",
+    "department": "경상남도",
+    "published": "2025-11-09 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443553+00:00"
+  },
+  {
+    "id": "b2039bd13cfa716a23f3aab636ba5fb36de98db8a8b829a23d636358b91007eb",
+    "site_name": "경상남도",
+    "title": "제5회 작은공룡 국화 전시회",
+    "link": "https://blog.naver.com/dinogoseong/224062710054",
+    "department": "경상남도",
+    "published": "2025-10-30 ~ 2025-11-09",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443558+00:00"
+  },
+  {
+    "id": "99c803f81bc64701c487e8a000085a18a00df8d6da30d605840c6439ab50da03",
+    "site_name": "경상남도",
+    "title": "고성독수리생태축제 특별행사 몽골인의 날",
+    "link": "https://blog.naver.com/dinogoseong/224094492926",
+    "department": "경상남도",
+    "published": "2025-12-06 ~ 2025-12-07",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443563+00:00"
+  },
+  {
+    "id": "58c34e3d0ad9f87e8803ead306dc5cbd63e54e6cdac2099c05eba430dff64a4b",
+    "site_name": "경상남도",
+    "title": "지리산 산청 곶감축제",
+    "link": "https://www.gotgam.center",
+    "department": "경상남도",
+    "published": "2026-01-08 ~ 2026-01-11",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443566+00:00"
+  },
+  {
+    "id": "480ea251a33a8f226e761fe1ff979b503b4b9faa1df2a7f637e971c628726ff9",
+    "site_name": "경상남도",
+    "title": "함안 곶감 축제",
+    "link": "https://blog.naver.com/arahaman/224136061541",
+    "department": "경상남도",
+    "published": "2026-01-23 ~ 2026-01-25",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443569+00:00"
+  },
+  {
+    "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
+    "site_name": "경상남도",
+    "title": "고성군 문화유산 야행(유산 상속자들의 밤)",
+    "link": "https://festa.gyeongnam.go.kr/gsnight",
+    "department": "경상남도",
+    "published": "2026-08-28 ~ 2026-08-29",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443574+00:00"
+  },
+  {
+    "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
+    "site_name": "경상남도",
+    "title": "밀양아리랑대축제",
+    "link": "https://www.arirang.or.kr/",
+    "department": "경상남도",
+    "published": "2026-05-07 ~ 2026-05-10",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443577+00:00"
+  },
+  {
+    "id": "629e7f00921c0b777eff32efb6396385a9192f5be9ee4dba544b4a704b926074",
+    "site_name": "경상남도",
+    "title": "원동 매화 축제",
+    "link": "https://festa.gyeongnam.go.kr/wondongflower",
+    "department": "경상남도",
+    "published": "2026-03-07 ~ 2026-03-08",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443580+00:00"
+  },
+  {
+    "id": "15b0591425a3e19f704956e024a78d9ae2fcce9d6b3dc005ba6a777220065441",
+    "site_name": "경상남도",
+    "title": "진달래걷기축제",
+    "link": "https://blog.naver.com/dinogoseong/224231249484",
+    "department": "경상남도",
+    "published": "2026-03-28 ~ 2026-04-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443583+00:00"
+  },
+  {
+    "id": "e39ca7ac7c78c0946513f30a69436bfe30e9c3a32a8018dd70b2bc94d436ea80",
+    "site_name": "경상남도",
+    "title": "천주산 진달래 축제",
+    "link": "https://festa.gyeongnam.go.kr/jinflower",
+    "department": "경상남도",
+    "published": "2026-04-11 ~ 2026-04-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443589+00:00"
+  },
+  {
+    "id": "c25647e1c4157f6a4bfa829bac27efdbcfe2b9fc2dc2f34ba90ebce02d7d3c49",
+    "site_name": "경상남도",
+    "title": "와룡문화제",
+    "link": "https://festa.gyeongnam.go.kr/wawa",
+    "department": "경상남도",
+    "published": "2026-04-24 ~ 2026-04-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443593+00:00"
+  },
+  {
+    "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
+    "site_name": "경상남도",
+    "title": "가야문화축제",
+    "link": "https://festa.gyeongnam.go.kr/gayayaga",
+    "department": "경상남도",
+    "published": "2026-04-30 ~ 2026-05-03",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443597+00:00"
+  },
+  {
+    "id": "9997f83fc88e3b3a55592f287a39ac69cf56668d17fc227ccc738e6658473f93",
+    "site_name": "경상남도",
+    "title": "거제맹종대나무축제",
+    "link": "https://festa.gyeongnam.go.kr/bigtree",
+    "department": "경상남도",
+    "published": "2026-04-25 ~ 2026-04-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443600+00:00"
+  },
+  {
+    "id": "43e75e14cf393b14fe1da70c7e5f20871bacabc246c5c4171fa85ee2a26e0e7c",
+    "site_name": "경상남도",
+    "title": "물금벚꽃축제",
+    "link": "https://festa.gyeongnam.go.kr/watergold",
+    "department": "경상남도",
+    "published": "2026-04-04 ~ 2026-04-05",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443603+00:00"
+  },
+  {
+    "id": "f07e03bb0fadc90db35d684eb9f2d0e33f5e53d6410f21ad48aabdf91a48dd31",
+    "site_name": "경상남도",
+    "title": "의령 홍의장군축제",
+    "link": "https://festa.gyeongnam.go.kr/honghong",
+    "department": "경상남도",
+    "published": "2026-04-16 ~ 2026-04-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443606+00:00"
+  },
+  {
+    "id": "8fc92a6b16d3ba8a701d18d109acd6d802cecb9f252d422e1cc21ea55c3e911b",
+    "site_name": "경상남도",
+    "title": "의령 토요애수박축제",
+    "link": "https://festa.gyeongnam.go.kr/watermelonfestival",
+    "department": "경상남도",
+    "published": "2026-04-16 ~ 2026-04-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443609+00:00"
+  },
+  {
+    "id": "132f17d70e5c48e7009e46307ed84379c1944545acae01b971797766ce4b52af",
+    "site_name": "경상남도",
+    "title": "창녕낙동강유채축제",
+    "link": "https://festa.gyeongnam.go.kr/nakdongriver",
+    "department": "경상남도",
+    "published": "2026-04-09 ~ 2026-04-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443612+00:00"
+  },
+  {
+    "id": "3ee8cf4e5a2608d246303bd3e204cb5dc9612f866643c77bc8f5d9a637b175a3",
+    "site_name": "경상남도",
+    "title": "창선고사리축제",
+    "link": "https://festa.gyeongnam.go.kr/gosari",
+    "department": "경상남도",
+    "published": "2026-04-25 ~ 2026-04-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443617+00:00"
+  },
+  {
+    "id": "d64dc2cfcf3015e4b478878b0a5540700a15e9df8ff7bf18f6217bb1552a69d2",
+    "site_name": "경상남도",
+    "title": "산청 생초국제조각공원 꽃잔디 축제",
+    "link": "https://festa.gyeongnam.go.kr/flowerjandy",
+    "department": "경상남도",
+    "published": "2026-04-17 ~ 2026-04-26",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443620+00:00"
+  },
+  {
+    "id": "b71ad3a6dc7f4a8a23129073e4a483806e44352023f8a12a3f7552093b61568a",
+    "site_name": "경상남도",
+    "title": "지리산 마천골흑돼지&산나물 축제",
+    "link": "https://festa.gyeongnam.go.kr/blackpig",
+    "department": "경상남도",
+    "published": "2026-04-18 ~ 2026-04-19",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443625+00:00"
+  },
+  {
+    "id": "02cc3367a8bee517b09cff953c0c0369b05f05e86957fc123f8b8874bdc6d3ca",
+    "site_name": "경상남도",
+    "title": "서상면 남덕유산 대축제",
+    "link": "https://festa.gyeongnam.go.kr/seosang",
+    "department": "경상남도",
+    "published": "2026-04-11 ~ 2026-04-12",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-03T09:04:15.443630+00:00"
   }
 ]
