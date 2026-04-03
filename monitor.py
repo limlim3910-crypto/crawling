@@ -5,6 +5,7 @@ from pathlib import Path
 
 import feedparser
 
+print("### DEBUG VERSION 2 ###")
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 FEEDS_FILE = BASE_DIR / "feeds.txt"
