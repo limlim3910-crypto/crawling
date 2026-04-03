@@ -296,32 +296,44 @@ def parse_rows_ulsan_main(soup, site):
 def parse_rows_gyeongnam_festa(soup, site):
     rows = []
 
+    # 카드 안에 들어있는 링크 후보들을 최대한 활용
     for link_tag in soup.find_all("a", href=True):
-        title = normalize_text(link_tag.get_text(" ", strip=True))
         href = link_tag.get("href", "").strip()
-
-        if not title or len(title) < 2:
-            continue
-
         if not href:
             continue
 
         link = urljoin(site["target_url"], href)
 
-        # 경남 축제 포털 내부 링크만 우선 허용
+        # 경남 축제 사이트 내부 링크만 허용
         if "festa.gyeongnam.go.kr" not in link:
             continue
 
-        # 너무 일반적인 메인/소개/이동용 링크 제거
+        # 일반 메뉴/검색/이동성 링크 제거
         block_patterns = [
             "javascript:",
             "#",
             "/login",
             "/member",
             "/sitemap",
+            "menuCode=",
+            "siteCd=",
         ]
         if any(pattern in href for pattern in block_patterns):
             continue
+
+        # 카드 내부 제목 추정:
+        # a 태그 내부 텍스트 전체를 먼저 가져오고 정리
+        raw_text = normalize_text(link_tag.get_text(" ", strip=True))
+        if not raw_text:
+            continue
+
+        # 너무 짧은 건 제외
+        if len(raw_text) < 3:
+            continue
+
+        # 카드 링크는 보통 제목 외에 분류/장식 텍스트가 섞일 수 있어서
+        # 앞쪽 대표 텍스트를 제목으로 사용
+        title = raw_text
 
         rows.append({
             "title": title,
@@ -330,9 +342,10 @@ def parse_rows_gyeongnam_festa(soup, site):
             "published": "",
         })
 
+    # 링크 기준 중복 제거
     unique = {}
     for item in rows:
-        unique[(item["title"], item["link"])] = item
+        unique[item["link"]] = item
 
     return list(unique.values())
 
@@ -433,9 +446,7 @@ def collect_entries():
             rows = parse_rows_ulsan_main(soup, site)
 
         elif parser_type == "gyeongnam_festa":
-            link_candidates = collect_gyeongnam_festa_links(soup, site)
-            print(f"[{site['site_name']}] 상세 링크 후보 수: {len(link_candidates)}")
-            rows = build_gyeongnam_festa_items(link_candidates, site)
+            rows = parse_rows_gyeongnam_festa(soup, site)
             
         else:
             print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
