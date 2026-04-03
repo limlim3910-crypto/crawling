@@ -2,20 +2,27 @@ import json
 import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urljoin
 
-import feedparser
+import requests
+from bs4 import BeautifulSoup
 
-print("### DEBUG VERSION 2 ###")
+print("### BUSAN HTML VERSION ###")
+
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
-FEEDS_FILE = BASE_DIR / "feeds.txt"
 SEEN_FILE = DATA_DIR / "seen.json"
 RESULTS_FILE = DATA_DIR / "results.json"
 
+TARGET_URL = "https://www.busan.go.kr/nbnews"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0"
+}
+
 KEYWORDS = [
-    "부산", "울산", "경남", "경상남도",
-    "창원", "김해", "양산", "진주", "거제", "통영",
-    "축제", "행사", "공연", "페스티벌", "콘서트", "초대가수"
+    "행사", "축제", "공연", "페스티벌", "콘서트", "초대가수",
+    "모집", "체험", "전시", "개최", "수련원", "박람회", "문화"
 ]
 
 
@@ -50,19 +57,6 @@ def save_results(results):
     )
 
 
-def load_feed_urls():
-    if not FEEDS_FILE.exists():
-        raise FileNotFoundError("feeds.txt 파일이 없습니다.")
-
-    urls = []
-    for line in FEEDS_FILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        urls.append(line)
-    return urls
-
-
 def normalize_text(value):
     if not value:
         return ""
@@ -82,56 +76,126 @@ def matches_keywords(text):
     return False
 
 
-def parse_published(entry):
-    candidates = [
-        entry.get("published"),
-        entry.get("updated"),
-        entry.get("created"),
-    ]
-    for value in candidates:
-        if value:
-            return normalize_text(value)
-    return ""
+def fetch_page():
+    response = requests.get(TARGET_URL, headers=HEADERS, timeout=30)
+    response.raise_for_status()
+    return response.text
 
 
-def collect_entries(feed_urls):
+def parse_rows_from_table(soup):
+    """
+    부산시 통합 공지사항 목록 표에서 행을 추출한다.
+    최대한 구조 변화에 덜 민감하도록 일반적인 table/tr/td 형태를 우선 사용한다.
+    """
+    rows = []
+
+    # 가장 일반적인 패턴
+    for tr in soup.select("table tbody tr"):
+        cells = tr.find_all("td")
+        if len(cells) < 4:
+            continue
+
+        link_tag = tr.find("a", href=True)
+        if not link_tag:
+            continue
+
+        title = normalize_text(link_tag.get_text(" ", strip=True))
+        link = urljoin(TARGET_URL, link_tag["href"])
+
+        # 보통 컬럼 구조: 순번 / 제목 / 첨부 / 부서명 / 작성일 / 조회수
+        department = normalize_text(cells[-3].get_text(" ", strip=True)) if len(cells) >= 3 else ""
+        published = normalize_text(cells[-2].get_text(" ", strip=True)) if len(cells) >= 2 else ""
+
+        rows.append({
+            "title": title,
+            "link": link,
+            "department": department,
+            "published": published,
+        })
+
+    return rows
+
+
+def parse_rows_fallback(soup):
+    """
+    table tbody tr 파싱이 안 될 경우를 대비한 백업 로직.
+    """
+    rows = []
+
+    for tr in soup.find_all("tr"):
+        link_tag = tr.find("a", href=True)
+        if not link_tag:
+            continue
+
+        title = normalize_text(link_tag.get_text(" ", strip=True))
+        href = link_tag.get("href", "").strip()
+        if not title or not href:
+            continue
+
+        link = urljoin(TARGET_URL, href)
+
+        texts = [normalize_text(td.get_text(" ", strip=True)) for td in tr.find_all(["td", "th"])]
+        texts = [t for t in texts if t]
+
+        published = ""
+        department = ""
+
+        # 뒤쪽 셀에서 날짜/부서명 추정
+        for t in reversed(texts):
+            if len(t) == 10 and t[4] == "-" and t[7] == "-":
+                published = t
+                break
+
+        if published and published in texts:
+            idx = texts.index(published)
+            if idx - 1 >= 0:
+                department = texts[idx - 1]
+
+        rows.append({
+            "title": title,
+            "link": link,
+            "department": department,
+            "published": published,
+        })
+
+    # 중복 제거
+    unique = {}
+    for item in rows:
+        unique[(item["title"], item["link"])] = item
+
+    return list(unique.values())
+
+
+def collect_entries():
+    html = fetch_page()
+    soup = BeautifulSoup(html, "lxml")
+
+    rows = parse_rows_from_table(soup)
+    if not rows:
+        print("기본 table 파싱 실패, fallback 파싱 시도")
+        rows = parse_rows_fallback(soup)
+
+    print(f"수집된 행 수(필터 전): {len(rows)}")
+
     collected = []
+    for row in rows:
+        merged_text = f"{row['title']} {row['department']}"
+        if not matches_keywords(merged_text):
+            continue
 
-    print(f"피드 URL 개수: {len(feed_urls)}")
+        item_id = make_item_id(row["title"], row["link"])
 
-    for url in feed_urls:
-        print(f"피드 읽는 중: {url}")
-        parsed = feedparser.parse(url)
+        collected.append({
+            "id": item_id,
+            "title": row["title"],
+            "link": row["link"],
+            "department": row["department"],
+            "published": row["published"],
+            "source": TARGET_URL,
+            "collected_at_utc": datetime.now(timezone.utc).isoformat()
+        })
 
-        print(f"상태: {getattr(parsed, 'status', 'unknown')}")
-        print(f"entries 개수: {len(parsed.entries)}")
-        if getattr(parsed, "bozo", 0):
-            print(f"bozo 예외: {parsed.bozo_exception}")
-
-        for entry in parsed.entries:
-            title = normalize_text(entry.get("title", ""))
-            link = normalize_text(entry.get("link", ""))
-            summary = normalize_text(entry.get("summary", ""))
-            published = parse_published(entry)
-
-            merged_text = f"{title} {summary}"
-
-            # 현재는 RSS 자체 확인 단계라 필터 제거 상태 유지
-            # if not matches_keywords(merged_text):
-            #     continue
-
-            item_id = make_item_id(title, link)
-
-            collected.append({
-                "id": item_id,
-                "title": title,
-                "link": link,
-                "published": published,
-                "summary": summary,
-                "source_feed": url,
-                "collected_at_utc": datetime.now(timezone.utc).isoformat()
-            })
-
+    # 최종 중복 제거
     unique = {}
     for item in collected:
         unique[item["id"]] = item
@@ -143,8 +207,7 @@ def main():
     ensure_files()
 
     seen = load_seen()
-    feed_urls = load_feed_urls()
-    all_items = collect_entries(feed_urls)
+    all_items = collect_entries()
 
     new_items = [item for item in all_items if item["id"] not in seen]
 
@@ -159,6 +222,7 @@ def main():
 
     for item in new_items[:20]:
         print("-", item["title"])
+        print(" ", item["published"], "|", item["department"])
         print(" ", item["link"])
 
 
