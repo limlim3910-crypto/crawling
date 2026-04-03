@@ -1,3 +1,6 @@
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import os
 import json
 import hashlib
@@ -28,6 +31,46 @@ KEYWORDS = [
     "모집", "체험", "전시", "개최", "수련원", "박람회", "문화"
 ]
 
+def send_email(new_items):
+    if not new_items:
+        print("신규 항목 없음 -> 이메일 발송 생략")
+        return
+
+    mail_user = os.getenv("MAIL_USERNAME", "").strip()
+    mail_password = os.getenv("MAIL_PASSWORD", "").strip()
+    mail_to = os.getenv("MAIL_TO", "").strip()
+
+    if not mail_user or not mail_password or not mail_to:
+        print("메일 설정값 없음 -> 이메일 발송 생략")
+        return
+
+    subject = f"[행사 모니터링] 부산시 신규 공지 {len(new_items)}건"
+
+    lines = []
+    lines.append("부산시 신규 행사/공지 감지 결과")
+    lines.append("")
+
+    for idx, item in enumerate(new_items, start=1):
+        lines.append(f"{idx}. {item['title']}")
+        lines.append(f"- 작성일: {item['published']}")
+        lines.append(f"- 부서: {item['department']}")
+        lines.append(f"- 링크: {item['link']}")
+        lines.append("")
+
+    body = "\n".join(lines)
+
+    msg = MIMEMultipart()
+    msg["From"] = mail_user
+    msg["To"] = mail_to
+    msg["Subject"] = subject
+    msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        server.starttls()
+        server.login(mail_user, mail_password)
+        server.sendmail(mail_user, [mail_to], msg.as_string())
+
+    print("이메일 발송 완료")
 
 def ensure_files():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -224,8 +267,8 @@ def main():
         seen.add(item["id"])
 
     save_seen(seen)
-    save_results(all_items)
-
+    save_results(all_items)     
+    send_email(new_items)
     print(f"전체 감지 항목 수: {len(all_items)}")
     print(f"신규 항목 수: {len(new_items)}")
 
