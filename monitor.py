@@ -79,25 +79,15 @@ def matches_keywords(text):
 
 
 def fetch_page():
-    try:
-        response = requests.get(
-            TARGET_URL,
-            headers=HEADERS,
-            timeout=30
-        )
-        response.raise_for_status()
-        return response.text
+    html_file = os.getenv("HTML_FILE", "").strip()
 
-    except requests.exceptions.SSLError:
-        print("SSL 에러 발생 -> verify=False 로 재시도")
-        response = requests.get(
-            TARGET_URL,
-            headers=HEADERS,
-            timeout=30,
-            verify=False
-        )
-        response.raise_for_status()
-        return response.text
+    if html_file:
+        print(f"로컬 HTML 파일 사용: {html_file}")
+        return Path(html_file).read_text(encoding="utf-8", errors="ignore")
+
+    response = requests.get(TARGET_URL, headers=HEADERS, timeout=30)
+    response.raise_for_status()
+    return response.text
 
 
 def parse_rows_from_table(soup):
