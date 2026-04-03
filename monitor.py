@@ -294,6 +294,48 @@ def parse_rows_ulsan_main(soup, site):
 
     return list(unique.values())
     
+def parse_rows_gyeongnam_festa(soup, site):
+    rows = []
+
+    for link_tag in soup.find_all("a", href=True):
+        title = normalize_text(link_tag.get_text(" ", strip=True))
+        href = link_tag.get("href", "").strip()
+
+        if not title or len(title) < 2:
+            continue
+
+        if not href:
+            continue
+
+        link = urljoin(site["target_url"], href)
+
+        # 경남 축제 포털 내부 링크만 우선 허용
+        if "festa.gyeongnam.go.kr" not in link:
+            continue
+
+        # 너무 일반적인 메인/소개/이동용 링크 제거
+        block_patterns = [
+            "javascript:",
+            "#",
+            "/login",
+            "/member",
+            "/sitemap",
+        ]
+        if any(pattern in href for pattern in block_patterns):
+            continue
+
+        rows.append({
+            "title": title,
+            "link": link,
+            "department": site["site_name"],
+            "published": "",
+        })
+
+    unique = {}
+    for item in rows:
+        unique[(item["title"], item["link"])] = item
+
+    return list(unique.values())
 
 def collect_entries():
     collected = []
@@ -313,6 +355,9 @@ def collect_entries():
 
         elif parser_type == "ulsan_main":
             rows = parse_rows_ulsan_main(soup, site)
+
+        elif parser_type == "gyeongnam_festa":
+            rows = parse_rows_gyeongnam_festa(soup, site)
 
         else:
             print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
