@@ -24,6 +24,14 @@ SITES = [
     {
         "site_name": "부산시",
         "target_url": "https://www.busan.go.kr/nbnews",
+        "html_file": "busan_nbnews.html",
+        "parser_type": "busan_table",
+    },
+    {
+        "site_name": "울산시",
+        "target_url": "https://www.ulsan.go.kr/u/rep/main.ulsan",
+        "html_file": "ulsan_main.html",
+        "parser_type": "ulsan_main",
     }
 ]
 
@@ -148,9 +156,14 @@ def fetch_page(site):
     html_file = site.get("html_file", "").strip()
 
     if html_file:
-        print(f"[{site['site_name']}] 로컬 HTML 파일 사용: {html_file}")
-        return Path(html_file).read_text(encoding="utf-8", errors="ignore")
+        html_path = Path(html_file)
+        if html_path.exists():
+            print(f"[{site['site_name']}] 로컬 HTML 파일 사용: {html_file}")
+            return html_path.read_text(encoding="utf-8", errors="ignore")
+        else:
+            print(f"[{site['site_name']}] HTML 파일 없음: {html_file}")
 
+    print(f"[{site['site_name']}] 원격 페이지 요청: {site['target_url']}")
     response = requests.get(site["target_url"], headers=HEADERS, timeout=30)
     response.raise_for_status()
     return response.text
