@@ -59,7 +59,7 @@ def enrich_one_item(item):
     prompt = build_prompt(item)
 
     response = client.responses.create(
-        model="gpt-5.1-mini",
+        model="gpt-5.4-mini",
         input=prompt
     )
 
