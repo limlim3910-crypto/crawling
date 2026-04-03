@@ -56,7 +56,7 @@ def send_email(new_items):
     lines.append("")
 
     for idx, item in enumerate(new_items, start=1):
-        lines.append(f"{idx}. {item['title']}")
+        lines.append(f"{idx}. [{item['site_name']}] {item['title']}")
         lines.append(f"- 작성일: {item['published']}")
         lines.append(f"- 부서: {item['department']}")
         lines.append(f"- 링크: {item['link']}")
@@ -127,19 +127,19 @@ def matches_keywords(text):
     return False
 
 
-def fetch_page():
+def fetch_page(site):
     html_file = os.getenv("HTML_FILE", "").strip()
 
     if html_file:
-        print(f"로컬 HTML 파일 사용: {html_file}")
+        print(f"[{site['site_name']}] 로컬 HTML 파일 사용: {html_file}")
         return Path(html_file).read_text(encoding="utf-8", errors="ignore")
 
-    response = requests.get(TARGET_URL, headers=HEADERS, timeout=30)
+    response = requests.get(site["target_url"], headers=HEADERS, timeout=30)
     response.raise_for_status()
     return response.text
 
 
-def parse_rows_from_table(soup):
+def parse_rows_from_table(soup, site):
     """
     부산시 통합 공지사항 목록 표에서 행을 추출한다.
     최대한 구조 변화에 덜 민감하도록 일반적인 table/tr/td 형태를 우선 사용한다.
@@ -157,7 +157,7 @@ def parse_rows_from_table(soup):
             continue
 
         title = normalize_text(link_tag.get_text(" ", strip=True))
-        link = urljoin(TARGET_URL, link_tag["href"])
+        link = urljoin(site["target_url"], link_tag["href"])
 
         # 보통 컬럼 구조: 순번 / 제목 / 첨부 / 부서명 / 작성일 / 조회수
         department = normalize_text(cells[-3].get_text(" ", strip=True)) if len(cells) >= 3 else ""
@@ -173,7 +173,7 @@ def parse_rows_from_table(soup):
     return rows
 
 
-def parse_rows_fallback(soup):
+def parse_rows_fallback(soup, site):
     """
     table tbody tr 파싱이 안 될 경우를 대비한 백업 로직.
     """
@@ -189,7 +189,7 @@ def parse_rows_fallback(soup):
         if not title or not href:
             continue
 
-        link = urljoin(TARGET_URL, href)
+        link = urljoin(site["target_url"], href)
 
         texts = [normalize_text(td.get_text(" ", strip=True)) for td in tr.find_all(["td", "th"])]
         texts = [t for t in texts if t]
@@ -224,35 +224,38 @@ def parse_rows_fallback(soup):
 
 
 def collect_entries():
-    html = fetch_page()
-    soup = BeautifulSoup(html, "lxml")
-
-    rows = parse_rows_from_table(soup)
-    if not rows:
-        print("기본 table 파싱 실패, fallback 파싱 시도")
-        rows = parse_rows_fallback(soup)
-
-    print(f"수집된 행 수(필터 전): {len(rows)}")
-
     collected = []
-    for row in rows:
-        merged_text = f"{row['title']} {row['department']}"
-        if not matches_keywords(merged_text):
-            continue
 
-        item_id = make_item_id(row["title"], row["link"])
+    for site in SITES:
+        print(f"사이트 처리 중: {site['site_name']}")
+        html = fetch_page(site)
+        soup = BeautifulSoup(html, "lxml")
 
-        collected.append({
-            "id": item_id,
-            "title": row["title"],
-            "link": row["link"],
-            "department": row["department"],
-            "published": row["published"],
-            "source": TARGET_URL,
-            "collected_at_utc": datetime.now(timezone.utc).isoformat()
-        })
+        rows = parse_rows_from_table(soup, site)
+        if not rows:
+            print(f"[{site['site_name']}] 기본 table 파싱 실패, fallback 파싱 시도")
+            rows = parse_rows_fallback(soup, site)
 
-    # 최종 중복 제거
+        print(f"[{site['site_name']}] 수집된 행 수(필터 전): {len(rows)}")
+
+        for row in rows:
+            merged_text = f"{row['title']} {row['department']}"
+            if not matches_keywords(merged_text):
+                continue
+
+            item_id = make_item_id(row["title"], row["link"])
+
+            collected.append({
+                "id": item_id,
+                "site_name": site["site_name"],
+                "title": row["title"],
+                "link": row["link"],
+                "department": row["department"],
+                "published": row["published"],
+                "source": site["target_url"],
+                "collected_at_utc": datetime.now(timezone.utc).isoformat()
+            })
+
     unique = {}
     for item in collected:
         unique[item["id"]] = item
@@ -278,7 +281,7 @@ def main():
     print(f"신규 항목 수: {len(new_items)}")
 
     for item in new_items[:20]:
-        print("-", item["title"])
+        print(f"- [{item['site_name']}] {item['title']}")
         print(" ", item["published"], "|", item["department"])
         print(" ", item["link"])
 
