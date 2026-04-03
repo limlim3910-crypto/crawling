@@ -100,16 +100,16 @@ jobs:
         with:
           name: monitor-results
           path: data/
-      - name: seen/results 자동 커밋
+      - name: seen/results/ai 자동 커밋
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/seen.json data/results.json
+          git add data/seen.json data/results.json data/new_items.json data/enriched_items.json
 
           if git diff --cached --quiet; then
             echo "커밋할 변경 없음"
           else
-            git commit -m "Update seen/results data"
+            git commit -m "Update monitor data"
             git push
           fi
