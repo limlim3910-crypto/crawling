@@ -33,6 +33,9 @@ jobs:
       - name: 모니터링 실행
         env:
           HTML_FILE: busan_nbnews.html
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
         run: python monitor.py
 
       - name: 결과 업로드
