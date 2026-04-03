@@ -174,7 +174,6 @@ def fetch_page(site):
     response.raise_for_status()
     return response.text
 
-
 def parse_rows_from_table(soup, site):
     """
     부산시 통합 공지사항 목록 표에서 행을 추출한다.
@@ -337,6 +336,83 @@ def parse_rows_gyeongnam_festa(soup, site):
 
     return list(unique.values())
 
+def collect_gyeongnam_festa_links(soup, site):
+    links = []
+
+    for link_tag in soup.find_all("a", href=True):
+        title = normalize_text(link_tag.get_text(" ", strip=True))
+        href = link_tag.get("href", "").strip()
+
+        if not href:
+            continue
+
+        link = urljoin(site["target_url"], href)
+
+        # 경남축제다모아 내부 링크만 허용
+        if "festa.gyeongnam.go.kr" not in link:
+            continue
+
+        # 너무 일반적인 이동/메뉴 링크 제거
+        block_patterns = [
+            "javascript:",
+            "#",
+            "/login",
+            "/member",
+            "/sitemap",
+            "menuCode=",
+        ]
+        if any(pattern in href for pattern in block_patterns):
+            continue
+
+        # 제목이 너무 짧으면 제외
+        if title and len(title) < 2:
+            continue
+
+        links.append({
+            "title": title,
+            "link": link,
+        })
+
+    unique = {}
+    for item in links:
+        unique[item["link"]] = item
+
+    return list(unique.values())
+
+def build_gyeongnam_festa_items(link_candidates, site):
+    items = []
+
+    for candidate in link_candidates:
+        title = normalize_text(candidate.get("title", ""))
+        link = candidate.get("link", "").strip()
+
+        if not link:
+            continue
+
+        merged_text = title
+
+        if not matches_keywords(merged_text):
+            continue
+
+        item_id = make_item_id(title, link)
+
+        items.append({
+            "id": item_id,
+            "site_name": site["site_name"],
+            "title": title,
+            "link": link,
+            "department": site["site_name"],
+            "published": "",
+            "source": site["target_url"],
+            "collected_at_utc": datetime.now(timezone.utc).isoformat()
+        })
+
+    unique = {}
+    for item in items:
+        unique[item["id"]] = item
+
+    return list(unique.values())
+
 def collect_entries():
     collected = []
 
@@ -357,8 +433,10 @@ def collect_entries():
             rows = parse_rows_ulsan_main(soup, site)
 
         elif parser_type == "gyeongnam_festa":
-            rows = parse_rows_gyeongnam_festa(soup, site)
-
+            link_candidates = collect_gyeongnam_festa_links(soup, site)
+            print(f"[{site['site_name']}] 상세 링크 후보 수: {len(link_candidates)}")
+            rows = build_gyeongnam_festa_items(link_candidates, site)
+            
         else:
             print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
             rows = []
