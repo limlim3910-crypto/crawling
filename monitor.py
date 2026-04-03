@@ -20,7 +20,12 @@ DATA_DIR = BASE_DIR / "data"
 SEEN_FILE = DATA_DIR / "seen.json"
 RESULTS_FILE = DATA_DIR / "results.json"
 
-TARGET_URL = "https://www.busan.go.kr/nbnews"
+SITES = [
+    {
+        "site_name": "부산시",
+        "target_url": "https://www.busan.go.kr/nbnews",
+    }
+]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0"
