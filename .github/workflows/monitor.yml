@@ -27,16 +27,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: 부산시 페이지 다운로드
+      - name: 사이트 HTML 다운로드
         run: |
           curl -L --http1.1 --retry 3 --retry-delay 5 \
             -A "Mozilla/5.0" \
             "https://www.busan.go.kr/nbnews" \
             -o busan_nbnews.html
+
+          curl -L --http1.1 --retry 3 --retry-delay 5 \
+            -A "Mozilla/5.0" \
+            "https://www.ulsan.go.kr/u/rep/main.ulsan" \
+            -o ulsan_main.html
       
       - name: 모니터링 실행
         env:
-          HTML_FILE: busan_nbnews.html
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
