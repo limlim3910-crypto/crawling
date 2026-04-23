@@ -1,6 +1,3 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import os
 import json
 import hashlib
@@ -9,18 +6,15 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 import requests
-import urllib3
 from bs4 import BeautifulSoup
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-print("### BUSAN HTML VERSION ###")
+print("### MONITOR PIPELINE ###")
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 SEEN_FILE = DATA_DIR / "seen.json"
 RESULTS_FILE = DATA_DIR / "results.json"
 NEW_ITEMS_FILE = DATA_DIR / "new_items.json"
-ENRICHED_ITEMS_FILE = DATA_DIR / "enriched_items.json"
 
 SITES = [
     {
@@ -46,74 +40,18 @@ KEYWORDS = [
     "모집", "체험", "전시", "개최", "수련원", "박람회", "문화"
 ]
 
-def send_email(items):
-    if not items:
-        print("발송할 항목 없음 -> 이메일 발송 생략")
-        return
-
-    mail_user = os.getenv("MAIL_USERNAME", "").strip()
-    mail_password = os.getenv("MAIL_PASSWORD", "").strip()
-    mail_to = os.getenv("MAIL_TO", "").strip()
-
-    if not mail_user or not mail_password or not mail_to:
-        print("메일 설정값 없음 -> 이메일 발송 생략")
-        return
-
-    subject = f"[행사 모니터링] 신규 행사/공지 {len(items)}건"
-
-    lines = []
-    lines.append("부산/경남 신규 행사/공지 감지 결과")
-    lines.append("")
-
-    for idx, item in enumerate(items, start=1):
-        ai = item.get("ai", {})
-        summary = ai.get("summary", "AI 요약 없음")
-        crowd_level = ai.get("crowd_level", "미분류")
-        crowd_reason = ai.get("crowd_reason", [])
-        network_risk = ai.get("network_risk", [])
-
-        lines.append(f"{idx}. [{item.get('site_name', '')}] {item.get('title', '')}")
-        lines.append(f"- 기간/작성일: {item.get('published', '')}")
-        lines.append(f"- 부서: {item.get('department', '')}")
-        lines.append(f"- 링크: {item.get('link', '')}")
-        lines.append(f"- AI 요약: {summary}")
-        lines.append(f"- 예상 운집 수준: {crowd_level}")
-
-        if crowd_reason:
-            lines.append("- 운집 판단 근거:")
-            for reason in crowd_reason:
-                lines.append(f"  • {reason}")
-
-        if network_risk:
-            lines.append("- 통신 관점 체크포인트:")
-            for risk in network_risk:
-                lines.append(f"  • {risk}")
-
-        lines.append("")
-
-    body = "\n".join(lines)
-
-    msg = MIMEMultipart()
-    msg["From"] = mail_user
-    msg["To"] = mail_to
-    msg["Subject"] = subject
-    msg.attach(MIMEText(body, "plain", "utf-8"))
-
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.starttls()
-        server.login(mail_user, mail_password)
-        server.sendmail(mail_user, [mail_to], msg.as_string())
-
-    print("이메일 발송 완료")
 
 def ensure_files():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     if not SEEN_FILE.exists():
-        SEEN_FILE.write_text("[]", encoding="utf-8")
+        SEEN_FILE.write_text("{}", encoding="utf-8")
 
     if not RESULTS_FILE.exists():
         RESULTS_FILE.write_text("[]", encoding="utf-8")
+
+    if not NEW_ITEMS_FILE.exists():
+        NEW_ITEMS_FILE.write_text("[]", encoding="utf-8")
 
 
 def load_seen():
@@ -153,26 +91,12 @@ def save_results(results):
         encoding="utf-8"
     )
 
+
 def save_new_items(items):
     NEW_ITEMS_FILE.write_text(
         json.dumps(items, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
-
-def save_enriched_items(items):
-    ENRICHED_ITEMS_FILE.write_text(
-        json.dumps(items, ensure_ascii=False, indent=2),
-        encoding="utf-8"
-    )
-    
-def load_enriched_items():
-    if not ENRICHED_ITEMS_FILE.exists():
-        return []
-
-    try:
-        return json.loads(ENRICHED_ITEMS_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return []
 
 
 def normalize_text(value):
@@ -210,14 +134,10 @@ def fetch_page(site):
     response.raise_for_status()
     return response.text
 
+
 def parse_rows_from_table(soup, site):
-    """
-    부산시 통합 공지사항 목록 표에서 행을 추출한다.
-    최대한 구조 변화에 덜 민감하도록 일반적인 table/tr/td 형태를 우선 사용한다.
-    """
     rows = []
 
-    # 가장 일반적인 패턴
     for tr in soup.select("table tbody tr"):
         cells = tr.find_all("td")
         if len(cells) < 4:
@@ -230,7 +150,6 @@ def parse_rows_from_table(soup, site):
         title = normalize_text(link_tag.get_text(" ", strip=True))
         link = urljoin(site["target_url"], link_tag["href"])
 
-        # 보통 컬럼 구조: 순번 / 제목 / 첨부 / 부서명 / 작성일 / 조회수
         department = normalize_text(cells[-3].get_text(" ", strip=True)) if len(cells) >= 3 else ""
         published = normalize_text(cells[-2].get_text(" ", strip=True)) if len(cells) >= 2 else ""
 
@@ -245,9 +164,6 @@ def parse_rows_from_table(soup, site):
 
 
 def parse_rows_fallback(soup, site):
-    """
-    table tbody tr 파싱이 안 될 경우를 대비한 백업 로직.
-    """
     rows = []
 
     for tr in soup.find_all("tr"):
@@ -268,7 +184,6 @@ def parse_rows_fallback(soup, site):
         published = ""
         department = ""
 
-        # 뒤쪽 셀에서 날짜/부서명 추정
         for t in reversed(texts):
             if len(t) == 10 and t[4] == "-" and t[7] == "-":
                 published = t
@@ -286,181 +201,12 @@ def parse_rows_fallback(soup, site):
             "published": published,
         })
 
-    # 중복 제거
     unique = {}
     for item in rows:
         unique[(item["title"], item["link"])] = item
 
     return list(unique.values())
 
-def parse_rows_ulsan_main(soup, site):
-    rows = []
-
-    for link_tag in soup.find_all("a", href=True):
-        title = normalize_text(link_tag.get_text(" ", strip=True))
-        href = link_tag.get("href", "").strip()
-
-        if not title or len(title) < 4:
-            continue
-
-        if not href:
-            continue
-
-        link = urljoin(site["target_url"], href)
-
-        allow_patterns = [
-            "/bbs/view.ulsan",
-            "/testPblanc/view.ulsan",
-        ]
-
-        if not any(pattern in link for pattern in allow_patterns):
-            continue
-
-        rows.append({
-            "title": title,
-            "link": link,
-            "department": site["site_name"],
-            "published": "",
-        })
-
-    unique = {}
-    for item in rows:
-        unique[(item["title"], item["link"])] = item
-
-    return list(unique.values())
-    
-def parse_rows_gyeongnam_festa(soup, site):
-    rows = []
-
-    # 카드 안에 들어있는 링크 후보들을 최대한 활용
-    for link_tag in soup.find_all("a", href=True):
-        href = link_tag.get("href", "").strip()
-        if not href:
-            continue
-
-        link = urljoin(site["target_url"], href)
-
-        # 경남 축제 사이트 내부 링크만 허용
-        if "festa.gyeongnam.go.kr" not in link:
-            continue
-
-        # 일반 메뉴/검색/이동성 링크 제거
-        block_patterns = [
-            "javascript:",
-            "#",
-            "/login",
-            "/member",
-            "/sitemap",
-            "menuCode=",
-            "siteCd=",
-        ]
-        if any(pattern in href for pattern in block_patterns):
-            continue
-
-        # 카드 내부 제목 추정:
-        # a 태그 내부 텍스트 전체를 먼저 가져오고 정리
-        raw_text = normalize_text(link_tag.get_text(" ", strip=True))
-        if not raw_text:
-            continue
-
-        # 너무 짧은 건 제외
-        if len(raw_text) < 3:
-            continue
-
-        # 카드 링크는 보통 제목 외에 분류/장식 텍스트가 섞일 수 있어서
-        # 앞쪽 대표 텍스트를 제목으로 사용
-        title = raw_text
-
-        rows.append({
-            "title": title,
-            "link": link,
-            "department": site["site_name"],
-            "published": "",
-        })
-
-    # 링크 기준 중복 제거
-    unique = {}
-    for item in rows:
-        unique[item["link"]] = item
-
-    return list(unique.values())
-
-def collect_gyeongnam_festa_links(soup, site):
-    links = []
-
-    for link_tag in soup.find_all("a", href=True):
-        title = normalize_text(link_tag.get_text(" ", strip=True))
-        href = link_tag.get("href", "").strip()
-
-        if not href:
-            continue
-
-        link = urljoin(site["target_url"], href)
-
-        # 경남축제다모아 내부 링크만 허용
-        if "festa.gyeongnam.go.kr" not in link:
-            continue
-
-        # 너무 일반적인 이동/메뉴 링크 제거
-        block_patterns = [
-            "javascript:",
-            "#",
-            "/login",
-            "/member",
-            "/sitemap",
-            "menuCode=",
-        ]
-        if any(pattern in href for pattern in block_patterns):
-            continue
-
-        # 제목이 너무 짧으면 제외
-        if title and len(title) < 2:
-            continue
-
-        links.append({
-            "title": title,
-            "link": link,
-        })
-
-    unique = {}
-    for item in links:
-        unique[item["link"]] = item
-
-    return list(unique.values())
-
-def build_gyeongnam_festa_items(link_candidates, site):
-    items = []
-
-    for candidate in link_candidates:
-        title = normalize_text(candidate.get("title", ""))
-        link = candidate.get("link", "").strip()
-
-        if not link:
-            continue
-
-        merged_text = title
-
-        if not matches_keywords(merged_text):
-            continue
-
-        item_id = make_item_id(title, link)
-
-        items.append({
-            "id": item_id,
-            "site_name": site["site_name"],
-            "title": title,
-            "link": link,
-            "department": site["site_name"],
-            "published": "",
-            "source": site["target_url"],
-            "collected_at_utc": datetime.now(timezone.utc).isoformat()
-        })
-
-    unique = {}
-    for item in items:
-        unique[item["id"]] = item
-
-    return list(unique.values())
 
 def fetch_gyeongnam_festival_api(site):
     api_url = urljoin(site["target_url"], "/api/callFestivalList.do")
@@ -475,16 +221,11 @@ def fetch_gyeongnam_festival_api(site):
     print(f"[{site['site_name']}] API 상태코드: {response.status_code}")
     print(f"[{site['site_name']}] API Content-Type: {response.headers.get('Content-Type', '')}")
 
-    text_preview = response.text[:1000].replace("\n", " ")
-    print(f"[{site['site_name']}] API 응답 미리보기: {text_preview}")
-
     try:
         data = response.json()
     except Exception as e:
         print(f"[{site['site_name']}] API JSON 파싱 실패: {e}")
         return []
-
-    print(f"[{site['site_name']}] API 응답 타입: {type(data).__name__}")
 
     if isinstance(data, list):
         print(f"[{site['site_name']}] API list 응답 감지")
@@ -510,7 +251,6 @@ def fetch_gyeongnam_festival_api(site):
                         print(f"[{site['site_name']}] 문자열 JSON 리스트 키 발견: {key}")
                         return parsed_value
                     if isinstance(parsed_value, dict):
-                        print(f"[{site['site_name']}] 문자열 JSON dict 키 발견: {key} -> {list(parsed_value.keys())[:20]}")
                         for nested_key in ["resultData", "data", "list", "items"]:
                             if nested_key in parsed_value and isinstance(parsed_value[nested_key], list):
                                 print(f"[{site['site_name']}] 문자열 JSON 중첩 리스트 키 발견: {key}.{nested_key}")
@@ -519,7 +259,6 @@ def fetch_gyeongnam_festival_api(site):
                     pass
 
             if isinstance(value, dict):
-                print(f"[{site['site_name']}] 중첩 dict 키 발견: {key} -> {list(value.keys())[:20]}")
                 for nested_key in ["resultData", "data", "list", "items"]:
                     if nested_key in value and isinstance(value[nested_key], list):
                         print(f"[{site['site_name']}] 중첩 리스트 키 발견: {key}.{nested_key}")
@@ -527,6 +266,7 @@ def fetch_gyeongnam_festival_api(site):
 
     print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
     return []
+
 
 def build_gyeongnam_festival_items_from_api(festival_list, site):
     items = []
@@ -572,30 +312,30 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
 
     return list(unique.values())
 
+
 def collect_entries():
     collected = []
 
     for site in SITES:
         print(f"사이트 처리 중: {site['site_name']}")
-        html = fetch_page(site)
-        soup = BeautifulSoup(html, "lxml")
-
         parser_type = site.get("parser_type", "")
 
         if parser_type == "busan_table":
+            html = fetch_page(site)
+            soup = BeautifulSoup(html, "lxml")
+
             rows = parse_rows_from_table(soup, site)
             if not rows:
                 print(f"[{site['site_name']}] 기본 table 파싱 실패, fallback 파싱 시도")
                 rows = parse_rows_fallback(soup, site)
 
-        elif parser_type == "ulsan_main":
-            rows = parse_rows_ulsan_main(soup, site)
-
         elif parser_type == "gyeongnam_festa":
+            html = fetch_page(site)
+            _ = BeautifulSoup(html, "lxml")  # 현재 로컬 HTML 존재 확인용
             festival_list = fetch_gyeongnam_festival_api(site)
             print(f"[{site['site_name']}] API 축제 건수: {len(festival_list)}")
             rows = build_gyeongnam_festival_items_from_api(festival_list, site)
-            
+
         else:
             print(f"[{site['site_name']}] 알 수 없는 parser_type: {parser_type}")
             rows = []
@@ -652,9 +392,6 @@ def main():
     save_results(all_items)
     save_new_items(new_items)
 
-    enriched_items = load_enriched_items()
-    send_email(enriched_items)
-    
     print(f"전체 감지 항목 수: {len(all_items)}")
     print(f"신규 항목 수: {len(new_items)}")
 
