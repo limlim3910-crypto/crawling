@@ -30,12 +30,6 @@ SITES = [
         "parser_type": "busan_table",
     },
     {
-        "site_name": "울산시",
-        "target_url": "https://www.ulsan.go.kr/u/rep/main.ulsan",
-        "html_file": "ulsan_main.html",
-        "parser_type": "ulsan_main",
-    },
-    {
         "site_name": "경상남도",
         "target_url": "https://festa.gyeongnam.go.kr/",
         "html_file": "gyeongnam_festa.html",
