@@ -136,41 +136,92 @@ def extract_address_from_detail_page(url: str) -> str:
     try:
         response = requests.get(url, headers=HEADERS, timeout=30)
         response.raise_for_status()
-        html = response.text
-        text = BeautifulSoup(html, "lxml").get_text("\n", strip=True)
+        text = BeautifulSoup(response.text, "lxml").get_text("\n", strip=True)
+        lines = [normalize_text(line) for line in text.split("\n") if normalize_text(line)]
 
-        # 1순위: 일반적인 도로명/지번 주소 패턴
+        blocked_exact = {
+            "경상남도 창원시 의창구 중앙대로 300",
+            "셔틀버스안내",
+            "개인정보처리방침",
+            "사이트맵",
+            "TOP",
+        }
+
+        blocked_keywords = [
+            "개인정보처리방침",
+            "사이트맵",
+            "셔틀버스",
+            "예약",
+            "문의",
+            "copyright",
+            "all rights reserved",
+            "바로가기",
+            "로그인",
+        ]
+
+        def is_bad_candidate(value: str) -> bool:
+            if not value:
+                return True
+            if value in blocked_exact:
+                return True
+            if len(value) < 8:
+                return True
+
+            lower = value.lower()
+            for keyword in blocked_keywords:
+                if keyword.lower() in lower:
+                    return True
+
+            return False
+
+        # 1순위: 상단 날짜 | 주소 바
+        date_address_patterns = [
+            r"\d{4}\.\s*\d{2}\.\s*\d{2}\.[^|\n]*\|\s*([^\n]+)",
+            r"\d{4}-\d{2}-\d{2}[^|\n]*\|\s*([^\n]+)",
+        ]
+
+        for line in lines:
+            for pattern in date_address_patterns:
+                match = re.search(pattern, line)
+                if match:
+                    candidate = normalize_text(match.group(1))
+                    if not is_bad_candidate(candidate):
+                        return candidate
+
+        # 2순위: 장소/위치 키워드 주변
+        place_patterns = [
+            r"📍\s*([^\n]+)",
+            r"(?:장소|행사장소|개최장소|위치|오시는길)\s*[:：]?\s*([^\n]+)",
+        ]
+
+        for line in lines:
+            for pattern in place_patterns:
+                match = re.search(pattern, line)
+                if match:
+                    candidate = normalize_text(match.group(1))
+                    if not is_bad_candidate(candidate):
+                        return candidate
+
+        # 3순위: 일반 주소 패턴
         address_patterns = [
             r"\(\d{5}\)\s*[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+",
             r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
             r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
         ]
 
-        for pattern in address_patterns:
-            match = re.search(pattern, text)
-            if match:
-                return normalize_text(match.group(0))
-
-        # 2순위: 장소 키워드 주변 텍스트 추출
-        place_patterns = [
-            r"📍\s*([^\n]+)",
-            r"(?:장소|위치|오시는길|행사장소|개최장소)\s*[:：]?\s*([^\n]+)",
-        ]
-
-        for pattern in place_patterns:
-            match = re.search(pattern, text)
-            if match:
-                candidate = normalize_text(match.group(1))
-                if candidate:
-                    return candidate
+        for line in lines:
+            for pattern in address_patterns:
+                match = re.search(pattern, line)
+                if match:
+                    candidate = normalize_text(match.group(0))
+                    if not is_bad_candidate(candidate):
+                        return candidate
 
         return ""
 
     except Exception as e:
         print(f"상세페이지 주소 추출 실패: {url} / {e}")
         return ""
-
-
 
 
 def make_item_id(title, link):
@@ -388,6 +439,8 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
             link = site["target_url"]
         if not address and link:
             address = extract_address_from_detail_page(link)
+        if address in ["경상남도 창원시 의창구 중앙대로 300", "셔틀버스안내"]:
+            address = ""
             
         published = ""
         if start_date or end_date:
