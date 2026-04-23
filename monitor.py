@@ -1,7 +1,9 @@
 import os
+import re
 import json
 import hashlib
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -116,6 +118,33 @@ def matches_keywords(text):
         if keyword.lower() in text_lower:
             return True
     return False
+
+
+def extract_date_range_from_published(published: str):
+    if not published:
+        return None, None
+
+    matches = re.findall(r"\d{4}-\d{2}-\d{2}", published)
+    if len(matches) >= 2:
+        try:
+            start_date = datetime.strptime(matches[0], "%Y-%m-%d").date()
+            end_date = datetime.strptime(matches[1], "%Y-%m-%d").date()
+            return start_date, end_date
+        except Exception:
+            return None, None
+
+    return None, None
+
+
+def is_expired_event(published: str) -> bool:
+    start_date, end_date = extract_date_range_from_published(published)
+
+    # 기간형 문자열이 아니면 종료 행사 판정 안 함
+    if start_date is None or end_date is None:
+        return False
+
+    today_kst = datetime.now(ZoneInfo("Asia/Seoul")).date()
+    return end_date < today_kst
 
 
 def fetch_page(site):
@@ -303,7 +332,7 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
             "department": site["site_name"],
             "published": published,
             "source": site["target_url"],
-            "collected_at_utc": datetime.now(timezone.utc).isoformat()
+            "collected_at_utc": datetime.now().astimezone().isoformat()
         })
 
     unique = {}
@@ -331,7 +360,7 @@ def collect_entries():
 
         elif parser_type == "gyeongnam_festa":
             html = fetch_page(site)
-            _ = BeautifulSoup(html, "lxml")  # 현재 로컬 HTML 존재 확인용
+            _ = BeautifulSoup(html, "lxml")  # 로컬 HTML 존재 확인용
             festival_list = fetch_gyeongnam_festival_api(site)
             print(f"[{site['site_name']}] API 축제 건수: {len(festival_list)}")
             rows = build_gyeongnam_festival_items_from_api(festival_list, site)
@@ -347,6 +376,10 @@ def collect_entries():
             if not matches_keywords(merged_text):
                 continue
 
+            if is_expired_event(row["published"]):
+                print(f"[{site['site_name']}] 종료된 행사 제외: {row['title']} / {row['published']}")
+                continue
+
             item_id = make_item_id(row["title"], row["link"])
 
             collected.append({
@@ -357,7 +390,7 @@ def collect_entries():
                 "department": row["department"],
                 "published": row["published"],
                 "source": site["target_url"],
-                "collected_at_utc": datetime.now(timezone.utc).isoformat()
+                "collected_at_utc": datetime.now().astimezone().isoformat()
             })
 
     unique = {}
