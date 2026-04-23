@@ -35,13 +35,6 @@ jobs:
             "https://www.busan.go.kr/nbnews" \
             -o busan_nbnews.html
 
-      - name: 울산시 HTML 다운로드
-        run: |
-          curl -L --http1.1 --retry 5 --retry-delay 5 --connect-timeout 20 --fail \
-            -A "Mozilla/5.0" \
-            "https://www.ulsan.go.kr/u/rep/main.ulsan" \
-            -o ulsan_main.html
-
       - name: 경상남도 HTML 다운로드
         run: |
           curl -L --http1.1 --retry 5 --retry-delay 5 --connect-timeout 20 --fail \
