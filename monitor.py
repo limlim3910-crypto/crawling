@@ -325,6 +325,30 @@ def fetch_gyeongnam_festival_api(site):
     print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
     return []
 
+def debug_fetch_detail_page_for_address(url: str):
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=30)
+        response.raise_for_status()
+        html = response.text
+
+        print("===== 상세페이지 주소 디버그 시작 =====")
+        print(f"URL: {url}")
+        print(f"HTML 길이: {len(html)}")
+
+        preview_keywords = ["주소", "장소", "위치", "개최장소", "행사장", "오시는길"]
+        for keyword in preview_keywords:
+            if keyword in html:
+                print(f"[키워드 발견] {keyword}")
+
+        soup = BeautifulSoup(html, "lxml")
+        text_preview = soup.get_text(" ", strip=True)
+        print("텍스트 미리보기:", text_preview[:1000])
+        print("===== 상세페이지 주소 디버그 종료 =====")
+
+    except Exception as e:
+        print(f"상세페이지 디버그 실패: {e}")
+
+
 
 def build_gyeongnam_festival_items_from_api(festival_list, site):
     items = []
@@ -437,7 +461,11 @@ def main():
 
     seen = load_seen()
     all_items = collect_entries()
-
+    for item in all_items:
+        if item["site_name"] == "경상남도":
+            debug_fetch_detail_page_for_address(item["link"])
+            break
+            
     new_items = []
 
     for item in all_items:
