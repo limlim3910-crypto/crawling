@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 */3 * * *"
+
 permissions:
   contents: write
-  
+
 jobs:
   monitor:
     runs-on: ubuntu-latest
@@ -26,80 +27,46 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
-      - name: 사이트 HTML 다운로드
+
+      - name: 부산시 HTML 다운로드
         run: |
-          curl -L --http1.1 --retry 3 --retry-delay 5 \
+          curl -L --http1.1 --retry 5 --retry-delay 5 --connect-timeout 20 --fail \
             -A "Mozilla/5.0" \
             "https://www.busan.go.kr/nbnews" \
             -o busan_nbnews.html
 
-          curl -L --http1.1 --retry 3 --retry-delay 5 \
+      - name: 울산시 HTML 다운로드
+        run: |
+          curl -L --http1.1 --retry 5 --retry-delay 5 --connect-timeout 20 --fail \
             -A "Mozilla/5.0" \
             "https://www.ulsan.go.kr/u/rep/main.ulsan" \
             -o ulsan_main.html
 
-          curl -L --http1.1 --retry 3 --retry-delay 5 \
+      - name: 경상남도 HTML 다운로드
+        run: |
+          curl -L --http1.1 --retry 5 --retry-delay 5 --connect-timeout 20 --fail \
             -A "Mozilla/5.0" \
             "https://festa.gyeongnam.go.kr/" \
             -o gyeongnam_festa.html
-      
-      - name: 경남 HTML 확인
-        run: |
-          echo "===== 경남 HTML 파일 크기 ====="
-          wc -c gyeongnam_festa.html
 
-          echo "===== 경남 HTML 일부 검색 ====="
-          grep -i "축제 검색결과" gyeongnam_festa.html | head
-          grep -i "card" gyeongnam_festa.html | head
-          grep -i "festival" gyeongnam_festa.html | head
-          grep -i "행사" gyeongnam_festa.html | head     
+      - name: 모니터링 실행
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python monitor.py
 
-      - name: 경남 카드 구조 확인
-        run: |
-          echo "===== 경남 card/list 관련 검색 ====="
-          grep -in "축제 검색결과" gyeongnam_festa.html | head -20 || true
-          grep -in "236건" gyeongnam_festa.html | head -20 || true
-          grep -in "card" gyeongnam_festa.html | head -50 || true
-          grep -in "list" gyeongnam_festa.html | head -50 || true
-          grep -in "festival" gyeongnam_festa.html | head -50 || true
-          grep -in "thumbnail" gyeongnam_festa.html | head -50 || true
-          grep -in "poster" gyeongnam_festa.html | head -50 || true
-          grep -in "img" gyeongnam_festa.html | head -50 || true
-
-      - name: 경남 JS 확인
-        run: |
-          curl -L --http1.1 --retry 3 --retry-delay 5 \
-            -A "Mozilla/5.0" \
-            "https://festa.gyeongnam.go.kr/gn_festival/js/festival_main.js" \
-            -o festival_main.js
-
-          echo "===== festival_main.js 주요 검색 ====="
-          grep -in "ajax" festival_main.js | head -50 || true
-          grep -in "fetch" festival_main.js | head -50 || true
-          grep -in "festival" festival_main.js | head -50 || true
-          grep -in "list" festival_main.js | head -50 || true
-          grep -in "url" festival_main.js | head -50 || true
-          grep -in ".do" festival_main.js | head -50 || true
-
-          
-#      - name: 모니터링 실행
-#        env:
-#          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-#          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-#         MAIL_TO: ${{ secrets.MAIL_TO }}
-#        run: python monitor.py
-        
       - name: AI 요약 실행
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python enrich_with_ai.py
-        
+
       - name: 결과 업로드
         uses: actions/upload-artifact@v4
         with:
           name: monitor-results
           path: data/
+
       - name: seen/results/ai 자동 커밋
         run: |
           git config user.name "github-actions[bot]"
