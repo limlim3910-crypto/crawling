@@ -43,16 +43,19 @@ jobs:
             -o gyeongnam_festa.html
 
       - name: 모니터링 실행
-        env:
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
         run: python monitor.py
 
       - name: AI 요약 실행
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python enrich_with_ai.py
+
+      - name: 메일 발송 실행
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python send_mail.py
 
       - name: 결과 업로드
         uses: actions/upload-artifact@v4
