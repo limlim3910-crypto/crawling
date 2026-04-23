@@ -38,6 +38,7 @@ def build_prompt(item):
 - 제목: {item.get("title", "")}
 - 기간/작성일: {item.get("published", "")}
 - 부서: {item.get("department", "")}
+- 주소/장소: {item.get("address", "")}
 - 링크: {item.get("link", "")}
 
 [출력 규칙]
