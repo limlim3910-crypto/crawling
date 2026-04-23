@@ -46,9 +46,9 @@ KEYWORDS = [
     "모집", "체험", "전시", "개최", "수련원", "박람회", "문화"
 ]
 
-def send_email(new_items):
-    if not new_items:
-        print("신규 항목 없음 -> 이메일 발송 생략")
+def send_email(items):
+    if not items:
+        print("발송할 항목 없음 -> 이메일 발송 생략")
         return
 
     mail_user = os.getenv("MAIL_USERNAME", "").strip()
@@ -59,17 +59,36 @@ def send_email(new_items):
         print("메일 설정값 없음 -> 이메일 발송 생략")
         return
 
-    subject = f"[행사 모니터링] 부산시 신규 공지 {len(new_items)}건"
+    subject = f"[행사 모니터링] 신규 행사/공지 {len(items)}건"
 
     lines = []
-    lines.append("부산시 신규 행사/공지 감지 결과")
+    lines.append("부산/경남 신규 행사/공지 감지 결과")
     lines.append("")
 
-    for idx, item in enumerate(new_items, start=1):
-        lines.append(f"{idx}. [{item['site_name']}] {item['title']}")
-        lines.append(f"- 작성일: {item['published']}")
-        lines.append(f"- 부서: {item['department']}")
-        lines.append(f"- 링크: {item['link']}")
+    for idx, item in enumerate(items, start=1):
+        ai = item.get("ai", {})
+        summary = ai.get("summary", "AI 요약 없음")
+        crowd_level = ai.get("crowd_level", "미분류")
+        crowd_reason = ai.get("crowd_reason", [])
+        network_risk = ai.get("network_risk", [])
+
+        lines.append(f"{idx}. [{item.get('site_name', '')}] {item.get('title', '')}")
+        lines.append(f"- 기간/작성일: {item.get('published', '')}")
+        lines.append(f"- 부서: {item.get('department', '')}")
+        lines.append(f"- 링크: {item.get('link', '')}")
+        lines.append(f"- AI 요약: {summary}")
+        lines.append(f"- 예상 운집 수준: {crowd_level}")
+
+        if crowd_reason:
+            lines.append("- 운집 판단 근거:")
+            for reason in crowd_reason:
+                lines.append(f"  • {reason}")
+
+        if network_risk:
+            lines.append("- 통신 관점 체크포인트:")
+            for risk in network_risk:
+                lines.append(f"  • {risk}")
+
         lines.append("")
 
     body = "\n".join(lines)
@@ -145,7 +164,15 @@ def save_enriched_items(items):
         json.dumps(items, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
+    
+def load_enriched_items():
+    if not ENRICHED_ITEMS_FILE.exists():
+        return []
 
+    try:
+        return json.loads(ENRICHED_ITEMS_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return []
 
 
 def normalize_text(value):
@@ -622,9 +649,12 @@ def main():
         seen[site_name].add(item["id"])
 
     save_seen(seen)
-    save_results(all_items)     
-    send_email(new_items)
+    save_results(all_items)
     save_new_items(new_items)
+
+    enriched_items = load_enriched_items()
+    send_email(enriched_items)
+    
     print(f"전체 감지 항목 수: {len(all_items)}")
     print(f"신규 항목 수: {len(new_items)}")
 
