@@ -132,6 +132,45 @@ def extract_address_from_festival(festival: dict) -> str:
 
     return ""
 
+def extract_address_from_detail_page(url: str) -> str:
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=30)
+        response.raise_for_status()
+        html = response.text
+        text = BeautifulSoup(html, "lxml").get_text("\n", strip=True)
+
+        # 1순위: 일반적인 도로명/지번 주소 패턴
+        address_patterns = [
+            r"\(\d{5}\)\s*[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+",
+            r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
+            r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
+        ]
+
+        for pattern in address_patterns:
+            match = re.search(pattern, text)
+            if match:
+                return normalize_text(match.group(0))
+
+        # 2순위: 장소 키워드 주변 텍스트 추출
+        place_patterns = [
+            r"📍\s*([^\n]+)",
+            r"(?:장소|위치|오시는길|행사장소|개최장소)\s*[:：]?\s*([^\n]+)",
+        ]
+
+        for pattern in place_patterns:
+            match = re.search(pattern, text)
+            if match:
+                candidate = normalize_text(match.group(1))
+                if candidate:
+                    return candidate
+
+        return ""
+
+    except Exception as e:
+        print(f"상세페이지 주소 추출 실패: {url} / {e}")
+        return ""
+
+
 
 
 def make_item_id(title, link):
@@ -325,30 +364,6 @@ def fetch_gyeongnam_festival_api(site):
     print(f"[{site['site_name']}] API 응답 구조를 해석하지 못함")
     return []
 
-def debug_fetch_detail_page_for_address(url: str):
-    try:
-        response = requests.get(url, headers=HEADERS, timeout=30)
-        response.raise_for_status()
-        html = response.text
-
-        print("===== 상세페이지 주소 디버그 시작 =====")
-        print(f"URL: {url}")
-        print(f"HTML 길이: {len(html)}")
-
-        preview_keywords = ["주소", "장소", "위치", "개최장소", "행사장", "오시는길"]
-        for keyword in preview_keywords:
-            if keyword in html:
-                print(f"[키워드 발견] {keyword}")
-
-        soup = BeautifulSoup(html, "lxml")
-        text_preview = soup.get_text(" ", strip=True)
-        print("텍스트 미리보기:", text_preview[:1000])
-        print("===== 상세페이지 주소 디버그 종료 =====")
-
-    except Exception as e:
-        print(f"상세페이지 디버그 실패: {e}")
-
-
 
 def build_gyeongnam_festival_items_from_api(festival_list, site):
     items = []
@@ -360,7 +375,7 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
         start_date = normalize_text(festival.get("festivalStartDate", ""))
         end_date = normalize_text(festival.get("festivalEndDate", ""))
         address = extract_address_from_festival(festival)
-
+        
         title = site_name
         if not title:
             continue
@@ -371,7 +386,9 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
             link = urljoin(site["target_url"], "/" + sub_path.lstrip("/"))
         else:
             link = site["target_url"]
-
+        if not address and link:
+            address = extract_address_from_detail_page(link)
+            
         published = ""
         if start_date or end_date:
             published = f"{start_date} ~ {end_date}".strip(" ~")
@@ -460,12 +477,7 @@ def main():
     ensure_files()
 
     seen = load_seen()
-    all_items = collect_entries()
-    for item in all_items:
-        if item["site_name"] == "경상남도":
-            debug_fetch_detail_page_for_address(item["link"])
-            break
-            
+    all_items = collect_entries()           
     new_items = []
 
     for item in all_items:
