@@ -106,6 +106,33 @@ def normalize_text(value):
         return ""
     return " ".join(str(value).split())
 
+def extract_address_from_festival(festival: dict) -> str:
+    candidate_keys = [
+        "address",
+        "addr",
+        "roadAddr",
+        "jibunAddr",
+        "place",
+        "placeNm",
+        "placeName",
+        "eventPlace",
+        "festivalPlace",
+        "location",
+        "locationName",
+        "venue",
+        "venueName",
+        "spot",
+        "spotName",
+    ]
+
+    for key in candidate_keys:
+        value = normalize_text(festival.get(key, ""))
+        if value:
+            return value
+
+    return ""
+
+
 
 def make_item_id(title, link):
     raw = f"{title}|{link}"
@@ -187,6 +214,7 @@ def parse_rows_from_table(soup, site):
             "link": link,
             "department": department,
             "published": published,
+            "address": "",
         })
 
     return rows
@@ -228,6 +256,7 @@ def parse_rows_fallback(soup, site):
             "link": link,
             "department": department,
             "published": published,
+            "address": "",
         })
 
     unique = {}
@@ -306,6 +335,7 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
         sub_path = normalize_text(festival.get("subPath", ""))
         start_date = normalize_text(festival.get("festivalStartDate", ""))
         end_date = normalize_text(festival.get("festivalEndDate", ""))
+        address = extract_address_from_festival(festival)
 
         title = site_name
         if not title:
@@ -331,6 +361,7 @@ def build_gyeongnam_festival_items_from_api(festival_list, site):
             "link": link,
             "department": site["site_name"],
             "published": published,
+            "address": address,
             "source": site["target_url"],
             "collected_at_utc": datetime.now().astimezone().isoformat()
         })
@@ -389,6 +420,7 @@ def collect_entries():
                 "link": row["link"],
                 "department": row["department"],
                 "published": row["published"],
+                "address": row.get("address", ""),
                 "source": site["target_url"],
                 "collected_at_utc": datetime.now().astimezone().isoformat()
             })
@@ -431,6 +463,8 @@ def main():
     for item in new_items[:20]:
         print(f"- [{item['site_name']}] {item['title']}")
         print(" ", item["published"], "|", item["department"])
+        if item.get("address"):
+            print(" ", "주소:", item["address"])
         print(" ", item["link"])
 
 
