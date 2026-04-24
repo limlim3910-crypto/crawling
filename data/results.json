@@ -8,7 +8,7 @@
     "published": "2026-04-24",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-24T06:31:28.820176+00:00"
+    "collected_at_utc": "2026-04-24T12:08:45.633671+00:00"
   },
   {
     "id": "3078051e0eabcafc2e2e85db35973de58abab24c509f46e08f13bbb7b9ed16d8",
@@ -19,7 +19,7 @@
     "published": "2026-04-24",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-24T06:31:28.820215+00:00"
+    "collected_at_utc": "2026-04-24T12:08:45.633713+00:00"
   },
   {
     "id": "18aa995805a94b228e7999b2d67a6e780bca93a92a77f89fc75ec5d9f0cbda25",
@@ -30,18 +30,7 @@
     "published": "2026-04-24",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-24T06:31:28.820224+00:00"
-  },
-  {
-    "id": "6a37739a37597d382fc133a2417f5e9a868bec263c35d66223f2a577ef94c09f",
-    "site_name": "부산시",
-    "title": "‘루프 랩 부산(LOOP Lab Busan)’ 연계 디지털 미디어 아트 전시 <색동정원> 개최 안내",
-    "link": "https://www.busan.go.kr/nbnews/1728692?curPage=&srchBeginDt=2025-04-24&srchEndDt=2026-04-24&srchKey=&srchText=",
-    "department": "전시운영팀",
-    "published": "2026-04-23",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-24T06:31:28.820243+00:00"
+    "collected_at_utc": "2026-04-24T12:08:45.633729+00:00"
   },
   {
     "id": "15b7f88beeb9a91a70d8c18d82a2c0013ef4f939c6340b0d3084621dc9bbdcbf",
@@ -52,7 +41,7 @@
     "published": "2026-04-25 ~ 2026-04-25",
     "address": "당항포관광지 일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.245964+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.996452+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -63,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.246784+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.997487+00:00"
   },
   {
     "id": "8612ada2a33ccbf2ae02f485f9074a3aa364397f042b9fb5ed2105f77c318b52",
@@ -74,7 +63,7 @@
     "published": "2026-04-25 ~ 2026-04-25",
     "address": "당항포관광지 일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.247498+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.998353+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -85,7 +74,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.247520+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.998391+00:00"
   },
   {
     "id": "e11ff742e8ade971ecfd1a05495bd2b29960481e784ba4243d77bbb60776781b",
@@ -96,7 +85,7 @@
     "published": "2026-04-24 ~ 2026-04-26",
     "address": "당항포관광지 일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.247538+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.998425+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -107,7 +96,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248168+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999222+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -118,7 +107,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248187+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999249+00:00"
   },
   {
     "id": "c25647e1c4157f6a4bfa829bac27efdbcfe2b9fc2dc2f34ba90ebce02d7d3c49",
@@ -129,7 +118,7 @@
     "published": "2026-04-24 ~ 2026-04-26",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248242+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999312+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -140,7 +129,7 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248258+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999330+00:00"
   },
   {
     "id": "9997f83fc88e3b3a55592f287a39ac69cf56668d17fc227ccc738e6658473f93",
@@ -151,7 +140,7 @@
     "published": "2026-04-25 ~ 2026-04-26",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248274+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999348+00:00"
   },
   {
     "id": "3ee8cf4e5a2608d246303bd3e204cb5dc9612f866643c77bc8f5d9a637b175a3",
@@ -162,7 +151,7 @@
     "published": "2026-04-25 ~ 2026-04-26",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248336+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999418+00:00"
   },
   {
     "id": "d64dc2cfcf3015e4b478878b0a5540700a15e9df8ff7bf18f6217bb1552a69d2",
@@ -173,6 +162,6 @@
     "published": "2026-04-17 ~ 2026-04-26",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-24T06:41:50.248353+00:00"
+    "collected_at_utc": "2026-04-24T12:19:09.999437+00:00"
   }
 ]
