@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": "11c7077da6e6a6df630cd1f5ab8f520e8c6e3d50bfeb2e31cb17ee4fddd856c9",
+    "site_name": "부산시",
+    "title": "\"제6회 해외 사건사고 경험담 공모전\" 개최 안내",
+    "link": "https://www.busan.go.kr/nbnews/1728825?curPage=&srchBeginDt=2025-04-24&srchEndDt=2026-04-24&srchKey=&srchText=",
+    "department": "구조구급과",
+    "published": "2026-04-24",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-24T06:31:28.820176+00:00"
+  },
+  {
+    "id": "3078051e0eabcafc2e2e85db35973de58abab24c509f46e08f13bbb7b9ed16d8",
+    "site_name": "부산시",
+    "title": "2026년도 국립부경대학교 「수산업전문가과정」 신입생 모집",
+    "link": "https://www.busan.go.kr/nbnews/1728788?curPage=&srchBeginDt=2025-04-24&srchEndDt=2026-04-24&srchKey=&srchText=",
+    "department": "수산진흥과",
+    "published": "2026-04-24",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-24T06:31:28.820215+00:00"
+  },
+  {
+    "id": "18aa995805a94b228e7999b2d67a6e780bca93a92a77f89fc75ec5d9f0cbda25",
+    "site_name": "부산시",
+    "title": "★2026 부산브랜드페스타★ 참가업체 모집",
+    "link": "https://www.busan.go.kr/nbnews/1728775?curPage=&srchBeginDt=2025-04-24&srchEndDt=2026-04-24&srchKey=&srchText=",
+    "department": "경제정책과",
+    "published": "2026-04-24",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-24T06:31:28.820224+00:00"
+  }
+]
