@@ -8,7 +8,7 @@
     "published": "2026-04-26",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-26T20:03:46.179437+00:00"
+    "collected_at_utc": "2026-04-26T23:24:53.317225+00:00"
   },
   {
     "id": "c1d4e8b338da56457d145ae3c1d498c8b3ef0058905c8b08dcc6a1fcb1c93d29",
@@ -19,7 +19,7 @@
     "published": "2026-04-24",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-26T20:03:46.179492+00:00"
+    "collected_at_utc": "2026-04-26T23:24:53.317281+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -30,7 +30,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-26T20:15:43.447963+00:00"
+    "collected_at_utc": "2026-04-26T23:36:14.190485+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -41,7 +41,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-26T20:15:43.448840+00:00"
+    "collected_at_utc": "2026-04-26T23:36:14.191421+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -52,7 +52,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-26T20:15:43.449505+00:00"
+    "collected_at_utc": "2026-04-26T23:36:14.192074+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -63,7 +63,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-26T20:15:43.449525+00:00"
+    "collected_at_utc": "2026-04-26T23:36:14.192094+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -74,6 +74,6 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "까지 오시는 길을",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-26T20:15:43.449600+00:00"
+    "collected_at_utc": "2026-04-26T23:36:14.192167+00:00"
   }
 ]
