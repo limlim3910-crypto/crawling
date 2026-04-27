@@ -159,6 +159,11 @@ def extract_address_from_detail_page(url: str) -> str:
             "로그인",
         ]
 
+        def clean_address_candidate(value: str) -> str:
+            value = normalize_text(value)
+            value = value.strip(" ,|:-")
+            return value
+
         def is_bad_candidate(value: str) -> bool:
             if not value:
                 return True
@@ -172,6 +177,17 @@ def extract_address_from_detail_page(url: str) -> str:
                 if keyword.lower() in lower:
                     return True
 
+            if "오시는 길" in value:
+                return True
+            if "까지 오시는" in value:
+                return True
+            if value.endswith("길을"):
+                return True
+            if value.endswith("오시는길"):
+                return True
+            if "자세히 보기" in value:
+                return True
+
             return False
 
         # 1순위: 상단 날짜 | 주소 바
@@ -184,36 +200,37 @@ def extract_address_from_detail_page(url: str) -> str:
             for pattern in date_address_patterns:
                 match = re.search(pattern, line)
                 if match:
-                    candidate = normalize_text(match.group(1))
+                    candidate = clean_address_candidate(match.group(1))
                     if not is_bad_candidate(candidate):
                         return candidate
 
         # 2순위: 장소/위치 키워드 주변
         place_patterns = [
             r"📍\s*([^\n]+)",
-            r"(?:장소|행사장소|개최장소|위치|오시는길)\s*[:：]?\s*([^\n]+)",
+            r"(?:장소|행사장소|개최장소|위치)\s*[:：]?\s*([^\n]+)",
         ]
 
         for line in lines:
             for pattern in place_patterns:
                 match = re.search(pattern, line)
                 if match:
-                    candidate = normalize_text(match.group(1))
+                    candidate = clean_address_candidate(match.group(1))
                     if not is_bad_candidate(candidate):
                         return candidate
 
-        # 3순위: 일반 주소 패턴
+        # 3순위: 일반 주소 및 문장형 장소 패턴
         address_patterns = [
             r"\(\d{5}\)\s*[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+",
-            r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
-            r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로)\s*\d+[^\n]*",
+            r"[가-힣0-9\s\-]+(?:시|도)\s+[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로|번길)\s*\d+[^\n]*",
+            r"[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로|번길)\s*\d+[^\n]*",
+            r"[가-힣0-9\s\-]+(?:시|군|구)\s+[가-힣0-9\s\-]+(?:읍|면|동)\s+[가-힣0-9\s\-]+(?:로|길|대로|번길)\s*\d+\s+[가-힣0-9\s·&]+(?:일원|일대|광장|공원|관광지|행사장|주변)?",
         ]
 
         for line in lines:
             for pattern in address_patterns:
                 match = re.search(pattern, line)
                 if match:
-                    candidate = normalize_text(match.group(0))
+                    candidate = clean_address_candidate(match.group(0))
                     if not is_bad_candidate(candidate):
                         return candidate
 
