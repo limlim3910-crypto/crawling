@@ -1,13 +1,24 @@
 [
   {
-    "id": "a859095b9247600d990c280a8aaebb6128d06a1ef8f9084ec50565088ee7bbcc",
+    "id": "72de8c3b36a135218fa085be9c28ad314756119a871565990f9edcde6321a8ec",
     "site_name": "부산시",
-    "title": "2025년 부산광역시 공공언어 사용 실태조사 결과보고",
+    "title": "2026년 도시민 농사요령교육 교육생 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1728949?curPage=&srchBeginDt=2025-04-27&srchEndDt=2026-04-27&srchKey=&srchText=",
+    "department": "시민농업팀",
+    "published": "2026-04-27",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-27T02:39:28.381822+00:00"
+  },
+  {
+    "id": "0fce65562b7c533efeb3f3e6e9e138673ce9d852d59d5e4fa6efbe715276aabd",
+    "site_name": "부산시",
+    "title": "2025년 부산광역시 공공언어 등 사용 실태조사 결과",
     "link": "https://www.busan.go.kr/nbnews/1728947?curPage=&srchBeginDt=2025-04-27&srchEndDt=2026-04-27&srchKey=&srchText=",
     "department": "문화예술과",
     "published": "2026-04-27",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-27T00:46:07.107724+00:00"
+    "collected_at_utc": "2026-04-27T02:39:28.381851+00:00"
   }
 ]
