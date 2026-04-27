@@ -36,6 +36,11 @@ def build_mail_body(items):
         lines.append(f"{idx}. [{item.get('site_name', '')}] {item.get('title', '')}")
         lines.append(f"- 기간/작성일: {item.get('published', '')}")
         lines.append(f"- 부서: {item.get('department', '')}")
+
+        address = (item.get("address") or "").strip()
+        if address:
+            lines.append(f"- 주소/장소: {address}")
+
         lines.append(f"- 링크: {item.get('link', '')}")
         lines.append(f"- AI 요약: {summary}")
         lines.append(f"- 예상 운집 수준: {crowd_level}")
