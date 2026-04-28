@@ -1,25 +1,47 @@
 [
   {
-    "id": "114bec5f25ba9d003370a13e332fbb7106c011ea17637e3d00a307c700de0cd7",
+    "id": "0f04e0fc463d72f94b928ca931b2f0ddfc974b5697ce165e9db0c3a8bc79a462",
     "site_name": "부산시",
-    "title": "2026년 제3기 여성문화회관 문화교실 강사 공개모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1729105?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
-    "department": "교육복지팀",
-    "published": "2026-04-27",
+    "title": "2026 119시민수상구조대 자원봉사자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729341?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
+    "department": "구조구급과",
+    "published": "2026-04-28",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-27T21:38:50.077799+00:00"
+    "collected_at_utc": "2026-04-28T09:12:12.897488+00:00"
   },
   {
-    "id": "4400c403726a661e28b05bea2916c1a4f0f10ed28ad832998e4ba342a2a5e4ff",
+    "id": "128d750c21d2312637f3fb9a4416b85c593f505eae4b1d62fe111f814fe74f55",
     "site_name": "부산시",
-    "title": "[창업] 2026년 제2기「IP디딤돌 프로그램」IP창업존 여성 예비창업자 교육생 모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1729016?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
-    "department": "교육복지팀",
-    "published": "2026-04-27",
+    "title": "2026년 부산 범천 가죽·가방·신발 소공인특화지원센터 지원사업 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729336?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
+    "department": "산업정책과",
+    "published": "2026-04-28",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-27T21:38:50.077850+00:00"
+    "collected_at_utc": "2026-04-28T09:12:12.897521+00:00"
+  },
+  {
+    "id": "c2c497130908875214741d481760deeea444f868e0f1ae0cd005c148c88b5996",
+    "site_name": "부산시",
+    "title": "5월 종합운동장(사직, 아시아드) 행사 일정 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729328?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
+    "department": "운영팀",
+    "published": "2026-04-28",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-28T09:12:12.897543+00:00"
+  },
+  {
+    "id": "50ef8a59ee5d165134048177cf626163daf6ef5f423e55fe3cda03acca50b0b5",
+    "site_name": "부산시",
+    "title": "가덕도신공항 여객터미널 설계 시민참여단 모집 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729318?curPage=&srchBeginDt=2025-04-28&srchEndDt=2026-04-28&srchKey=&srchText=",
+    "department": "공항기획과",
+    "published": "2026-04-28",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-28T09:12:12.897553+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -30,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-27T21:51:21.104321+00:00"
+    "collected_at_utc": "2026-04-28T09:21:31.473672+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -41,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-27T21:51:21.105265+00:00"
+    "collected_at_utc": "2026-04-28T09:21:31.474484+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -52,7 +74,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-27T21:51:21.105970+00:00"
+    "collected_at_utc": "2026-04-28T09:21:31.475167+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -63,7 +85,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-27T21:51:21.105994+00:00"
+    "collected_at_utc": "2026-04-28T09:21:31.475189+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -74,6 +96,6 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-27T21:51:21.106108+00:00"
+    "collected_at_utc": "2026-04-28T09:21:31.475265+00:00"
   }
 ]
