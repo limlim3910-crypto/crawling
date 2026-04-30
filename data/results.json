@@ -1,5 +1,49 @@
 [
   {
+    "id": "72a123c740514805a2b6e3407de9e7cf1fcc4c2a7aa38add4f4be79d80c3fd46",
+    "site_name": "부산시",
+    "title": "2026년 119시민수상구조대 자원봉사자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729634?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "119특수대응단",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866712+00:00"
+  },
+  {
+    "id": "e7e69fb0cc4e9528eefd79d3ba3dfcec21dabec05c9ef68dc528bee5ddd16553",
+    "site_name": "부산시",
+    "title": "2026년 부산박물관 문화상품(굿즈)숍 운영 기간제노동자 채용 최종합격자 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729602?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "교육홍보팀",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866762+00:00"
+  },
+  {
+    "id": "fc079fcdad65827c5959eac0f9c6eb04b0bb68092255600927f282ac7e062d45",
+    "site_name": "부산시",
+    "title": "2026년 부산근현대역사관 5월 운영안내",
+    "link": "https://www.busan.go.kr/nbnews/1729590?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "전시팀",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866773+00:00"
+  },
+  {
+    "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
+    "site_name": "경상남도",
+    "title": "천령문화제",
+    "link": "https://festa.gyeongnam.go.kr/hycl",
+    "department": "경상남도",
+    "published": "2026-05-01 ~ 2026-05-04",
+    "address": "",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-30T08:50:26.681402+00:00"
+  },
+  {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
     "site_name": "경상남도",
     "title": "하동야생차문화축제",
@@ -8,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-29T21:54:28.233582+00:00"
+    "collected_at_utc": "2026-04-30T08:50:26.682116+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -19,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-29T21:54:28.234382+00:00"
+    "collected_at_utc": "2026-04-30T08:50:26.682891+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -30,7 +74,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-29T21:54:28.235086+00:00"
+    "collected_at_utc": "2026-04-30T08:50:26.683534+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -41,7 +85,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-29T21:54:28.235110+00:00"
+    "collected_at_utc": "2026-04-30T08:50:26.683552+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -52,6 +96,6 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-29T21:54:28.235188+00:00"
+    "collected_at_utc": "2026-04-30T08:50:26.683641+00:00"
   }
 ]

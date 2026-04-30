@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": "72a123c740514805a2b6e3407de9e7cf1fcc4c2a7aa38add4f4be79d80c3fd46",
+    "site_name": "부산시",
+    "title": "2026년 119시민수상구조대 자원봉사자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729634?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "119특수대응단",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866712+00:00"
+  },
+  {
+    "id": "e7e69fb0cc4e9528eefd79d3ba3dfcec21dabec05c9ef68dc528bee5ddd16553",
+    "site_name": "부산시",
+    "title": "2026년 부산박물관 문화상품(굿즈)숍 운영 기간제노동자 채용 최종합격자 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729602?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "교육홍보팀",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866762+00:00"
+  },
+  {
+    "id": "fc079fcdad65827c5959eac0f9c6eb04b0bb68092255600927f282ac7e062d45",
+    "site_name": "부산시",
+    "title": "2026년 부산근현대역사관 5월 운영안내",
+    "link": "https://www.busan.go.kr/nbnews/1729590?curPage=&srchBeginDt=2025-04-30&srchEndDt=2026-04-30&srchKey=&srchText=",
+    "department": "전시팀",
+    "published": "2026-04-30",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-04-30T08:37:52.866773+00:00"
+  },
+  {
+    "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
+    "site_name": "경상남도",
+    "title": "천령문화제",
+    "link": "https://festa.gyeongnam.go.kr/hycl",
+    "department": "경상남도",
+    "published": "2026-05-01 ~ 2026-05-04",
+    "address": "",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-04-30T08:50:26.681402+00:00"
+  }
+]
