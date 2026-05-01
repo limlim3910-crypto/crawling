@@ -1,5 +1,16 @@
 [
   {
+    "id": "316340b2086dd44c3b96f6940c59e869ca6a1a2c129f293ffe876f9e58222fcd",
+    "site_name": "부산시",
+    "title": "가덕도신공항 여객터미널 설계 시민참여단 모집 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729318?curPage=&srchBeginDt=2025-05-01&srchEndDt=2026-05-01&srchKey=&srchText=",
+    "department": "공항기획과",
+    "published": "2026-05-01",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-01T07:54:52.316022+00:00"
+  },
+  {
     "id": "e45f4170e7cba1d828f1c0af4315f357fd6284d2d4e0ed77b8585cf5cb558512",
     "site_name": "부산시",
     "title": "삼락생태공원 36홀 파크골프장, 그라운드골프장, 게이트볼장 \"제21회 어르신체육대회\" 개최 알림(5.9.토)",
@@ -8,7 +19,7 @@
     "published": "2026-04-30",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-30T21:39:57.423140+00:00"
+    "collected_at_utc": "2026-05-01T07:54:52.316067+00:00"
   },
   {
     "id": "b62dcd91db0bb75d4429c638548c3fd461a7093aeb79f87c31ed693d92632d3c",
@@ -19,18 +30,7 @@
     "published": "2026-04-30",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-30T21:39:57.423186+00:00"
-  },
-  {
-    "id": "36b491c48c257ecebcb504c6b99d92478344faaf5d38a867f90cc73e75b67785",
-    "site_name": "부산시",
-    "title": "2026년 부산박물관 문화상품(굿즈)숍 운영 기간제노동자 채용 최종합격자 공고",
-    "link": "https://www.busan.go.kr/nbnews/1729602?curPage=&srchBeginDt=2025-05-01&srchEndDt=2026-05-01&srchKey=&srchText=",
-    "department": "교육홍보팀",
-    "published": "2026-04-30",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-04-30T21:39:57.423203+00:00"
+    "collected_at_utc": "2026-05-01T07:54:52.316090+00:00"
   },
   {
     "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
@@ -41,7 +41,7 @@
     "published": "2026-05-01 ~ 2026-05-04",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.522945+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.881135+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -52,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.523970+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.881945+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -63,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.524826+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.882908+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -74,7 +74,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.525518+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.883620+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -85,7 +85,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.525539+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.883645+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -96,6 +96,6 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-04-30T21:50:44.525609+00:00"
+    "collected_at_utc": "2026-05-01T08:03:35.883721+00:00"
   }
 ]
