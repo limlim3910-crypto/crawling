@@ -1,5 +1,16 @@
 [
   {
+    "id": "d83d28662d28cf5fae7860258e237e5b2755ac303e852bdaa8f7bc7104f89736",
+    "site_name": "부산시",
+    "title": "(장소 변경 공지)가정의 달 문화행사<니캉내캉 부산모캉_초록빛 마당>",
+    "link": "https://www.busan.go.kr/nbnews/1729766?curPage=&srchBeginDt=2025-05-02&srchEndDt=2026-05-02&srchKey=&srchText=",
+    "department": "학예연구실",
+    "published": "2026-05-02",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-02T07:09:46.153233+00:00"
+  },
+  {
     "id": "207682b0b1217f5a26d7cc913a4670f9f8962acbde814f5f2f4397c4cf308f90",
     "site_name": "부산시",
     "title": "가덕도신공항 여객터미널 설계 시민참여단 모집 안내",
@@ -8,7 +19,7 @@
     "published": "2026-05-01",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-02T00:08:32.061435+00:00"
+    "collected_at_utc": "2026-05-02T07:09:46.153275+00:00"
   },
   {
     "id": "5439c54650adb7092e271a9985b4453d21cef7f35cd7430b166452802f4c228d",
@@ -19,18 +30,7 @@
     "published": "2026-04-30",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-02T00:08:32.061465+00:00"
-  },
-  {
-    "id": "ce688d7c7bc338c256d6ec7cad8b3b9054069fb8a927c3f5505c87479962f07f",
-    "site_name": "부산시",
-    "title": "2026년 119시민수상구조대 자원봉사자 모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1729634?curPage=&srchBeginDt=2025-05-02&srchEndDt=2026-05-02&srchKey=&srchText=",
-    "department": "119특수대응단",
-    "published": "2026-04-30",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-02T00:08:32.061481+00:00"
+    "collected_at_utc": "2026-05-02T07:09:46.153294+00:00"
   },
   {
     "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
@@ -41,7 +41,7 @@
     "published": "2026-05-01 ~ 2026-05-04",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.623054+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.438856+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -50,9 +50,9 @@
     "link": "https://festa.gyeongnam.go.kr/hdwtea",
     "department": "경상남도",
     "published": "2026-05-01 ~ 2026-05-06",
-    "address": "",
+    "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.623675+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.439788+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -63,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.624354+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.440682+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -74,7 +74,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.624906+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.441398+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -85,7 +85,7 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.624928+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.441424+00:00"
   },
   {
     "id": "86760b20c59b12edf86baf20953a5e580e5a38f8afdc8ef6048331b184db8e0d",
@@ -96,6 +96,6 @@
     "published": "2026-04-30 ~ 2026-05-03",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-02T00:23:43.624998+00:00"
+    "collected_at_utc": "2026-05-02T07:21:02.441501+00:00"
   }
 ]
