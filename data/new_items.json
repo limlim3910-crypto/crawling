@@ -1,24 +1,35 @@
 [
   {
-    "id": "533aa0d1b79d432f481c4baefd7661beea9d0824b1f82a1655b8b73c05ca372e",
+    "id": "a2cc04b0fe7baa52899565b97d6dcb9766baedf184676b67d1c8166ae357b639",
+    "site_name": "부산시",
+    "title": "2026년 부산광역시 공공데이터·AI 활용 창업경진대회 참가자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729973?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
+    "department": "빅데이터과",
+    "published": "2026-05-04",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-04T17:00:44.157146+00:00"
+  },
+  {
+    "id": "f71bbb22bc7f15aca50bec766e2ab284338077860d4bc98244b9cbd70c5d316b",
     "site_name": "부산시",
     "title": "제2전시실(3층) 임시 휴관 안내",
-    "link": "https://www.busan.go.kr/nbnews/1729967?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "link": "https://www.busan.go.kr/nbnews/1729967?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
     "department": "복천박물관",
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556853+00:00"
+    "collected_at_utc": "2026-05-04T17:00:44.157197+00:00"
   },
   {
-    "id": "98a314407b1d20d2f7416706354722d52ce3020e7b8a1c18c574204c1493c467",
+    "id": "136ff9e084dd94433300d7a746a3e13557e4a7f455579c95ab73957b6dd7f0d8",
     "site_name": "부산시",
     "title": "제26회 불조심 어린이마당 행사",
-    "link": "https://www.busan.go.kr/nbnews/1729938?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "link": "https://www.busan.go.kr/nbnews/1729938?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
     "department": "구조구급과",
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556914+00:00"
+    "collected_at_utc": "2026-05-04T17:00:44.157215+00:00"
   }
 ]

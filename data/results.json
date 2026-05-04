@@ -1,58 +1,36 @@
 [
   {
-    "id": "533aa0d1b79d432f481c4baefd7661beea9d0824b1f82a1655b8b73c05ca372e",
+    "id": "a2cc04b0fe7baa52899565b97d6dcb9766baedf184676b67d1c8166ae357b639",
+    "site_name": "부산시",
+    "title": "2026년 부산광역시 공공데이터·AI 활용 창업경진대회 참가자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1729973?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
+    "department": "빅데이터과",
+    "published": "2026-05-04",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-04T17:00:44.157146+00:00"
+  },
+  {
+    "id": "f71bbb22bc7f15aca50bec766e2ab284338077860d4bc98244b9cbd70c5d316b",
     "site_name": "부산시",
     "title": "제2전시실(3층) 임시 휴관 안내",
-    "link": "https://www.busan.go.kr/nbnews/1729967?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "link": "https://www.busan.go.kr/nbnews/1729967?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
     "department": "복천박물관",
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556853+00:00"
+    "collected_at_utc": "2026-05-04T17:00:44.157197+00:00"
   },
   {
-    "id": "98a314407b1d20d2f7416706354722d52ce3020e7b8a1c18c574204c1493c467",
+    "id": "136ff9e084dd94433300d7a746a3e13557e4a7f455579c95ab73957b6dd7f0d8",
     "site_name": "부산시",
     "title": "제26회 불조심 어린이마당 행사",
-    "link": "https://www.busan.go.kr/nbnews/1729938?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "link": "https://www.busan.go.kr/nbnews/1729938?curPage=&srchBeginDt=2025-05-05&srchEndDt=2026-05-05&srchKey=&srchText=",
     "department": "구조구급과",
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556914+00:00"
-  },
-  {
-    "id": "3d47eb3ae283e5e5a79f18f5b654772f29d48933f6ae22971a8ef14f5df87cab",
-    "site_name": "부산시",
-    "title": "2026년 낙동강 물길따라 떠나는 식도락 생태여행 참가 안내",
-    "link": "https://www.busan.go.kr/nbnews/1729898?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
-    "department": "전시교육팀",
-    "published": "2026-05-04",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556937+00:00"
-  },
-  {
-    "id": "5c66e8f68d0abbfddab4f0e8fd2dc5dc118b901eb1dafc76320b53bfe9c6987c",
-    "site_name": "부산시",
-    "title": "임시수도기념관 특별기획전 <경계와 기억의 땅, 하야리아> 개최 기간 연장 안내",
-    "link": "https://www.busan.go.kr/nbnews/1729867?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
-    "department": "임시수도기념관",
-    "published": "2026-05-04",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T08:42:19.556950+00:00"
-  },
-  {
-    "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
-    "site_name": "경상남도",
-    "title": "천령문화제",
-    "link": "https://festa.gyeongnam.go.kr/hycl",
-    "department": "경상남도",
-    "published": "2026-05-01 ~ 2026-05-04",
-    "address": "",
-    "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T08:54:24.740962+00:00"
+    "collected_at_utc": "2026-05-04T17:00:44.157215+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -63,7 +41,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T08:54:24.741925+00:00"
+    "collected_at_utc": "2026-05-04T17:10:32.337889+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -74,7 +52,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T08:54:24.742665+00:00"
+    "collected_at_utc": "2026-05-04T17:10:32.338630+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -85,7 +63,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T08:54:24.743345+00:00"
+    "collected_at_utc": "2026-05-04T17:10:32.339323+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -96,6 +74,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T08:54:24.743364+00:00"
+    "collected_at_utc": "2026-05-04T17:10:32.339345+00:00"
   }
 ]
