@@ -1,36 +1,47 @@
 [
   {
-    "id": "bfa7fc90308911254c00b0bb5af84be8d3594f49d022d0056f24c7556229ffd9",
+    "id": "3d47eb3ae283e5e5a79f18f5b654772f29d48933f6ae22971a8ef14f5df87cab",
     "site_name": "부산시",
-    "title": "(장소 변경 공지)가정의 달 문화행사<니캉내캉 부산모캉_초록빛 마당>",
-    "link": "https://www.busan.go.kr/nbnews/1729766?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
-    "department": "학예연구실",
-    "published": "2026-05-02",
+    "title": "2026년 낙동강 물길따라 떠나는 식도락 생태여행 참가 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729898?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "department": "전시교육팀",
+    "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-03T21:59:53.258580+00:00"
+    "collected_at_utc": "2026-05-04T04:08:28.238867+00:00"
   },
   {
-    "id": "0fea60471b41ce95da1556c73fa3fea794548ef3e7b3276aafd4b74bbf8cf944",
+    "id": "5c66e8f68d0abbfddab4f0e8fd2dc5dc118b901eb1dafc76320b53bfe9c6987c",
     "site_name": "부산시",
-    "title": "가덕도신공항 여객터미널 설계 시민참여단 모집 안내",
-    "link": "https://www.busan.go.kr/nbnews/1729318?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
-    "department": "공항기획과",
-    "published": "2026-05-01",
+    "title": "임시수도기념관 특별기획전 <경계와 기억의 땅, 하야리아> 개최 기간 연장 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729867?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "department": "임시수도기념관",
+    "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-03T21:59:53.258620+00:00"
+    "collected_at_utc": "2026-05-04T04:08:28.238900+00:00"
   },
   {
-    "id": "45bfdb8bbb31f129ce07bd4dc206444885d347b12acedd0de31d924e7e77158b",
+    "id": "58fbbb2ac672acf85b11ceb4d07a2e7a9b30f5741cbbbe9db8e3a4dfd35b5def",
     "site_name": "부산시",
-    "title": "삼락생태공원 36홀 파크골프장, 그라운드골프장, 게이트볼장 \"제21회 어르신체육대회\" 개최 알림(5.9.토)",
-    "link": "https://www.busan.go.kr/nbnews/1729691?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
-    "department": "공원관리팀",
-    "published": "2026-04-30",
+    "title": "임시수도기념관 특별기획전 <경계와 기억의 땅, 하야리아> 개최 기간 연장 안내",
+    "link": "https://www.busan.go.kr/nbnews/1729864?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "department": "임시수도기념관",
+    "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-03T21:59:53.258635+00:00"
+    "collected_at_utc": "2026-05-04T04:08:28.238911+00:00"
+  },
+  {
+    "id": "cecea729132d5765102d6ef7470826a4b69b407045d110aa95b759311109613c",
+    "site_name": "부산시",
+    "title": "2026 파이콘 부산 (PyCon Busan 2026) 개최",
+    "link": "https://www.busan.go.kr/nbnews/1729857?curPage=&srchBeginDt=2025-05-04&srchEndDt=2026-05-04&srchKey=&srchText=",
+    "department": "인공지능소프트웨어과",
+    "published": "2026-05-04",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-04T04:08:28.238924+00:00"
   },
   {
     "id": "38e47ebf3a025018055cb3d002e69483146bf62401714c2fbc9babf2f334a598",
@@ -41,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-04",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-03T22:09:20.102274+00:00"
+    "collected_at_utc": "2026-05-04T04:18:00.581734+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -52,7 +63,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-03T22:09:20.103232+00:00"
+    "collected_at_utc": "2026-05-04T04:18:00.582900+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -63,7 +74,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-03T22:09:20.104278+00:00"
+    "collected_at_utc": "2026-05-04T04:18:00.584021+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -74,7 +85,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-03T22:09:20.104985+00:00"
+    "collected_at_utc": "2026-05-04T04:18:00.585117+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -85,6 +96,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-03T22:09:20.105008+00:00"
+    "collected_at_utc": "2026-05-04T04:18:00.585149+00:00"
   }
 ]
