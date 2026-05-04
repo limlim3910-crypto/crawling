@@ -8,7 +8,7 @@
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T17:00:44.157146+00:00"
+    "collected_at_utc": "2026-05-04T19:54:52.059304+00:00"
   },
   {
     "id": "f71bbb22bc7f15aca50bec766e2ab284338077860d4bc98244b9cbd70c5d316b",
@@ -19,7 +19,7 @@
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T17:00:44.157197+00:00"
+    "collected_at_utc": "2026-05-04T19:54:52.059338+00:00"
   },
   {
     "id": "136ff9e084dd94433300d7a746a3e13557e4a7f455579c95ab73957b6dd7f0d8",
@@ -30,7 +30,7 @@
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-04T17:00:44.157215+00:00"
+    "collected_at_utc": "2026-05-04T19:54:52.059357+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -41,7 +41,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T17:10:32.337889+00:00"
+    "collected_at_utc": "2026-05-04T20:04:20.295384+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -52,7 +52,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T17:10:32.338630+00:00"
+    "collected_at_utc": "2026-05-04T20:04:20.296211+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -63,7 +63,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T17:10:32.339323+00:00"
+    "collected_at_utc": "2026-05-04T20:04:20.296911+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -74,6 +74,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-04T17:10:32.339345+00:00"
+    "collected_at_utc": "2026-05-04T20:04:20.296933+00:00"
   }
 ]
