@@ -8,7 +8,7 @@
     "published": "2026-05-05",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-05T16:54:47.197693+00:00"
+    "collected_at_utc": "2026-05-05T19:51:58.834926+00:00"
   },
   {
     "id": "c0f759045dc4b694bf6f522919168e997c6ff9c991c74e3137a1b2f1318db4b5",
@@ -19,7 +19,7 @@
     "published": "2026-05-05",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-05T16:54:47.197738+00:00"
+    "collected_at_utc": "2026-05-05T19:51:58.834961+00:00"
   },
   {
     "id": "7a90a860df6c3f89876c40c1d0f6e6b345c50d638552592636a6136c213a8814",
@@ -30,7 +30,7 @@
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-05T16:54:47.197750+00:00"
+    "collected_at_utc": "2026-05-05T19:51:58.834973+00:00"
   },
   {
     "id": "06e9ab5624e864baf97449fcc97ae7290ab8756259eb7214a920273f7c250f9e",
@@ -41,7 +41,7 @@
     "published": "2026-05-04",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-05T16:54:47.197767+00:00"
+    "collected_at_utc": "2026-05-05T19:51:58.834990+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -52,7 +52,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-05T17:04:15.154012+00:00"
+    "collected_at_utc": "2026-05-05T20:00:51.406845+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -63,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-05T17:04:15.155203+00:00"
+    "collected_at_utc": "2026-05-05T20:00:51.407664+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -74,7 +74,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-05T17:04:15.156351+00:00"
+    "collected_at_utc": "2026-05-05T20:00:51.408317+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -85,6 +85,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-05T17:04:15.156387+00:00"
+    "collected_at_utc": "2026-05-05T20:00:51.408336+00:00"
   }
 ]
