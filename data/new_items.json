@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": "e8a94add127e0ee84802cc491a5762931f297778abd932ded795189ad4b6af81",
+    "site_name": "부산시",
+    "title": "제26회 불조심 어린이마당 행사 참가 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730071?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
+    "department": "구조구급과",
+    "published": "2026-05-06",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-06T04:04:22.344766+00:00"
+  },
+  {
+    "id": "35bbd71fe21cd7918b2331c2a66771dc91e509c679939ffa05bed04d0576ceee",
+    "site_name": "부산시",
+    "title": "소방청 중앙화재안전조사단 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1730058?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
+    "department": "재난예방담당관",
+    "published": "2026-05-06",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-06T04:04:22.344806+00:00"
+  },
+  {
+    "id": "f691607fd2e24942246226bdf4e6b0bb751ccd349f2aa031b407b7c43f2bc581",
+    "site_name": "부산시",
+    "title": "청소년운영위원회 수호천사 20기 면접 평가 결과",
+    "link": "https://www.busan.go.kr/nbnews/1730050?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
+    "department": "금련산청소년수련원",
+    "published": "2026-05-06",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-06T04:04:22.344818+00:00"
+  }
+]
