@@ -8,7 +8,7 @@
     "published": "2026-05-06",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T20:00:48.795326+00:00"
+    "collected_at_utc": "2026-05-06T22:08:46.365916+00:00"
   },
   {
     "id": "a8e32ffe0f65e212b233a7f4d40a184a43ddf6bde724f4985ea3cbe13f39bf90",
@@ -19,7 +19,7 @@
     "published": "2026-05-06",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T20:00:48.795379+00:00"
+    "collected_at_utc": "2026-05-06T22:08:46.365961+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -30,7 +30,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T20:12:40.560667+00:00"
+    "collected_at_utc": "2026-05-06T22:21:22.095276+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -41,7 +41,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T20:12:40.561341+00:00"
+    "collected_at_utc": "2026-05-06T22:21:22.096049+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -52,6 +52,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T20:12:40.561361+00:00"
+    "collected_at_utc": "2026-05-06T22:21:22.096073+00:00"
   }
 ]
