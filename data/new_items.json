@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "f7091c69cb5852f3d6d57a5176af94ac79a9c1691b4d41fa96f56310f7133e22",
+    "site_name": "부산시",
+    "title": "제26회 불조심 어린이마당 행사 개최 계획 알림",
+    "link": "https://www.busan.go.kr/nbnews/1730164?curPage=&srchBeginDt=2025-05-07&srchEndDt=2026-05-07&srchKey=&srchText=",
+    "department": "구조구급과",
+    "published": "2026-05-06",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-06T16:53:57.949640+00:00"
+  },
+  {
+    "id": "a8e32ffe0f65e212b233a7f4d40a184a43ddf6bde724f4985ea3cbe13f39bf90",
+    "site_name": "부산시",
+    "title": "제26회 불조심 어린이마당 행사 알림",
+    "link": "https://www.busan.go.kr/nbnews/1730107?curPage=&srchBeginDt=2025-05-07&srchEndDt=2026-05-07&srchKey=&srchText=",
+    "department": "구조구급과",
+    "published": "2026-05-06",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-06T16:53:57.949708+00:00"
+  }
+]
