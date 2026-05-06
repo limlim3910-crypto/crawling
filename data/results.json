@@ -1,69 +1,25 @@
 [
   {
-    "id": "e8a94add127e0ee84802cc491a5762931f297778abd932ded795189ad4b6af81",
+    "id": "eb2e09ba9d8c1ff248dc868a995c0ddb9ab8479676b6ffdd17c065d55a8cf825",
     "site_name": "부산시",
-    "title": "제26회 불조심 어린이마당 행사 참가 안내",
-    "link": "https://www.busan.go.kr/nbnews/1730071?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
+    "title": "제26회 불조심 어린이마당 행사 개최 계획 알림",
+    "link": "https://www.busan.go.kr/nbnews/1730164?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
     "department": "구조구급과",
     "published": "2026-05-06",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344766+00:00"
+    "collected_at_utc": "2026-05-06T11:19:57.048672+00:00"
   },
   {
-    "id": "35bbd71fe21cd7918b2331c2a66771dc91e509c679939ffa05bed04d0576ceee",
-    "site_name": "부산시",
-    "title": "소방청 중앙화재안전조사단 모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1730058?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
-    "department": "재난예방담당관",
-    "published": "2026-05-06",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344806+00:00"
-  },
-  {
-    "id": "f691607fd2e24942246226bdf4e6b0bb751ccd349f2aa031b407b7c43f2bc581",
-    "site_name": "부산시",
-    "title": "청소년운영위원회 수호천사 20기 면접 평가 결과",
-    "link": "https://www.busan.go.kr/nbnews/1730050?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
-    "department": "금련산청소년수련원",
-    "published": "2026-05-06",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344818+00:00"
-  },
-  {
-    "id": "598e9290b44b681a17a5b39a9da0fa00b4a9d413d936cda1c68c486e8533e5ab",
-    "site_name": "부산시",
-    "title": "제26회 불조심 어린이마당 행사 안내",
-    "link": "https://www.busan.go.kr/nbnews/1730006?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
-    "department": "구조구급과",
-    "published": "2026-05-05",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344832+00:00"
-  },
-  {
-    "id": "c0f759045dc4b694bf6f522919168e997c6ff9c991c74e3137a1b2f1318db4b5",
+    "id": "d800de79b8b9cd2a8f90da46d29f5d4973b2c5d9c27b691ce81ed57d1cc85ecc",
     "site_name": "부산시",
     "title": "제26회 불조심 어린이마당 행사 알림",
-    "link": "https://www.busan.go.kr/nbnews/1729990?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
+    "link": "https://www.busan.go.kr/nbnews/1730107?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
     "department": "구조구급과",
-    "published": "2026-05-05",
+    "published": "2026-05-06",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344842+00:00"
-  },
-  {
-    "id": "7a90a860df6c3f89876c40c1d0f6e6b345c50d638552592636a6136c213a8814",
-    "site_name": "부산시",
-    "title": "2026년 부산광역시 공공데이터·AI 활용 창업경진대회 참가자 모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1729973?curPage=&srchBeginDt=2025-05-06&srchEndDt=2026-05-06&srchKey=&srchText=",
-    "department": "빅데이터과",
-    "published": "2026-05-04",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-06T04:04:22.344851+00:00"
+    "collected_at_utc": "2026-05-06T11:19:57.048717+00:00"
   },
   {
     "id": "f4c4eea4df541058d59301ed30cb6b893a0492250d28bdf3d0a6eac90871b9c3",
@@ -74,7 +30,7 @@
     "published": "2026-05-01 ~ 2026-05-06",
     "address": "경남 하동군 화개면 쌍계로 571-27 하동야생차치유관, 박물관일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T04:15:27.590102+00:00"
+    "collected_at_utc": "2026-05-06T11:29:32.684648+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -85,7 +41,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T04:15:27.590944+00:00"
+    "collected_at_utc": "2026-05-06T11:29:32.685517+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -96,7 +52,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T04:15:27.591628+00:00"
+    "collected_at_utc": "2026-05-06T11:29:32.686202+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -107,6 +63,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-06T04:15:27.591648+00:00"
+    "collected_at_utc": "2026-05-06T11:29:32.686227+00:00"
   }
 ]
