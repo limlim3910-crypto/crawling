@@ -1,5 +1,16 @@
 [
   {
+    "id": "dd2fd4dffd6c6793a3c2e0c5a819f2f7639351f228d726ebe6ca1ab1e709543b",
+    "site_name": "부산시",
+    "title": "2026년 금고미술관 기획전 <2050 해양수도 부산, 파도를 넘어 미래로> 개최 알림",
+    "link": "https://www.busan.go.kr/nbnews/1730357?curPage=&srchBeginDt=2025-05-07&srchEndDt=2026-05-07&srchKey=&srchText=",
+    "department": "전시팀",
+    "published": "2026-05-07",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-07T14:49:59.260090+00:00"
+  },
+  {
     "id": "81cb0032cadd83e08298f678a0db45add9ced5aa751b80ff55cfef39be298abe",
     "site_name": "부산시",
     "title": "2026 부산원아시아페스티벌(BOF) 5월 12일 티켓오픈!",
@@ -8,7 +19,7 @@
     "published": "2026-05-07",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T11:18:26.599371+00:00"
+    "collected_at_utc": "2026-05-07T14:49:59.260122+00:00"
   },
   {
     "id": "174bed139e52db41726341a8fb85199ffbdc20a41d429c8a5ed56632d255a7f1",
@@ -19,7 +30,7 @@
     "published": "2026-05-07",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T11:18:26.599414+00:00"
+    "collected_at_utc": "2026-05-07T14:49:59.260143+00:00"
   },
   {
     "id": "5c4f05e123b0013e996a16e1fe3ebf045866b1e5b5f3d34b20f13f366f80aeae",
@@ -30,7 +41,7 @@
     "published": "2026-05-07",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T11:18:26.599426+00:00"
+    "collected_at_utc": "2026-05-07T14:49:59.260152+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -41,7 +52,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T11:31:42.040361+00:00"
+    "collected_at_utc": "2026-05-07T15:00:23.642570+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -52,7 +63,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T11:31:42.041490+00:00"
+    "collected_at_utc": "2026-05-07T15:00:23.643421+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -63,6 +74,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T11:31:42.041525+00:00"
+    "collected_at_utc": "2026-05-07T15:00:23.643447+00:00"
   }
 ]
