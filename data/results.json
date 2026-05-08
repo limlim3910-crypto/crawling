@@ -1,5 +1,38 @@
 [
   {
+    "id": "a1f5c1af3668ecb201ecfd86aad7e959ebd43c8c0208826b232636c742b5a9c6",
+    "site_name": "부산시",
+    "title": "2026년 \"부산가족, 스무살의 축제\" 제20회 부산가족축제 개최",
+    "link": "https://www.busan.go.kr/nbnews/1730441?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
+    "department": "여성가족과",
+    "published": "2026-05-08",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-08T03:53:21.182283+00:00"
+  },
+  {
+    "id": "2c55a33348eb1ac088861e90bf97422f2b7deb7c5ebbf44cc0909df6d449c10c",
+    "site_name": "부산시",
+    "title": "5월 부산에서 뭐 하지? 축제부터 가족 행사까지, 부산 5월 행사 모음",
+    "link": "https://www.busan.go.kr/nbnews/1730421?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
+    "department": "홍보담당관",
+    "published": "2026-05-08",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-08T03:53:21.182325+00:00"
+  },
+  {
+    "id": "3ad7cb6370b490e9114d95010b958c4daba23083910ab6ce93ce3330d8c8c73b",
+    "site_name": "부산시",
+    "title": "2026년 제69회 부산광역시 문화상 후보자 추천 접수 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730419?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
+    "department": "문화예술과",
+    "published": "2026-05-08",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-08T03:53:21.182337+00:00"
+  },
+  {
     "id": "0cdb5b2300b219f7c0e77a685b8ad43ebcb1ea422595e6362a934ee8cb19347e",
     "site_name": "부산시",
     "title": "2026년 금고미술관 기획전 <2050 해양수도 부산, 파도를 넘어 미래로> 개최 알림",
@@ -8,40 +41,7 @@
     "published": "2026-05-07",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T22:15:52.231939+00:00"
-  },
-  {
-    "id": "aa6ce02b9a72a198d3856f1e5752fe4032f9e94b2a5676d7bbfb2505dc590f9d",
-    "site_name": "부산시",
-    "title": "2026 부산원아시아페스티벌(BOF) 5월 12일 티켓오픈!",
-    "link": "https://www.busan.go.kr/nbnews/1730310?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
-    "department": "영상콘텐츠산업과",
-    "published": "2026-05-07",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T22:15:52.231972+00:00"
-  },
-  {
-    "id": "b535a88a91bec0818b83d0dcb8561350e42db9dd8afea3552e181e91f7726227",
-    "site_name": "부산시",
-    "title": "제26회 불조심 어린이마당 행사 알림",
-    "link": "https://www.busan.go.kr/nbnews/1730278?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
-    "department": "구조구급과",
-    "published": "2026-05-07",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T22:15:52.231993+00:00"
-  },
-  {
-    "id": "28b334e12e24b5472b73ee74ea008a86332adcd3b2c755a9e975671c1d16392c",
-    "site_name": "부산시",
-    "title": "소방청 중앙화재안전조사단 모집 공고",
-    "link": "https://www.busan.go.kr/nbnews/1730266?curPage=&srchBeginDt=2025-05-08&srchEndDt=2026-05-08&srchKey=&srchText=",
-    "department": "예방안전과",
-    "published": "2026-05-07",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-07T22:15:52.232003+00:00"
+    "collected_at_utc": "2026-05-08T03:53:21.182351+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -52,7 +52,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T22:29:23.527860+00:00"
+    "collected_at_utc": "2026-05-08T04:02:55.006748+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -63,7 +63,7 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T22:29:23.528555+00:00"
+    "collected_at_utc": "2026-05-08T04:02:55.007491+00:00"
   },
   {
     "id": "0b5841baa5fb75c8372a201a2a418d5aecb8aa05acb409e9c01b6c88e708ac14",
@@ -74,6 +74,6 @@
     "published": "2026-05-07 ~ 2026-05-10",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-07T22:29:23.528577+00:00"
+    "collected_at_utc": "2026-05-08T04:02:55.007516+00:00"
   }
 ]
