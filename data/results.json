@@ -8,7 +8,7 @@
     "published": "2026-05-08",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-10T22:04:24.754502+00:00"
+    "collected_at_utc": "2026-05-11T04:35:26.036440+00:00"
   },
   {
     "id": "29fb7c182bb091734b9ed2cf464cae18b42f54e11b86ca018a6ee1c454f934a8",
@@ -19,7 +19,7 @@
     "published": "2026-05-08",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-10T22:04:24.754538+00:00"
+    "collected_at_utc": "2026-05-11T04:35:26.036477+00:00"
   },
   {
     "id": "952079a6b16ce9fe2b0807461499a547a7d764f180c398c2e427fbeffa2c0d93",
@@ -30,18 +30,7 @@
     "published": "2026-05-08",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-10T22:04:24.754548+00:00"
-  },
-  {
-    "id": "ba31250c76c614ede4915b1a70b0f81f8fd75199baed9c1c5c26b405e98b2292",
-    "site_name": "부산시",
-    "title": "5월 부산에서 뭐 하지? 축제부터 가족 행사까지, 부산 5월 행사 모음",
-    "link": "https://www.busan.go.kr/nbnews/1730421?curPage=&srchBeginDt=2025-05-11&srchEndDt=2026-05-11&srchKey=&srchText=",
-    "department": "홍보담당관",
-    "published": "2026-05-08",
-    "address": "",
-    "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-10T22:04:24.754569+00:00"
+    "collected_at_utc": "2026-05-11T04:35:26.036486+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -52,7 +41,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-10T22:15:42.760328+00:00"
+    "collected_at_utc": "2026-05-11T04:44:45.281847+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -63,6 +52,6 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-10T22:15:42.760960+00:00"
+    "collected_at_utc": "2026-05-11T04:44:45.282497+00:00"
   }
 ]
