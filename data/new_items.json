@@ -1,1 +1,57 @@
-[]
+[
+  {
+    "id": "24251c5423faf5eaaa59b66e507805e4831d43c967c691bb439fa0aebe310412",
+    "site_name": "부산시",
+    "title": "해운대수목원 장미축제 - 숲속의 장미 여행 (밤숲) 참가 신청 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730751?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
+    "department": "해운대수목원팀",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T17:22:42.593296+00:00"
+  },
+  {
+    "id": "97181508ac44117e3878c70947698ae0288d0392d1866cefa4c78f0c1c9455e8",
+    "site_name": "부산시",
+    "title": "「제3회 위험물 안전관리 우수사례 경진대회」 개최 알림",
+    "link": "https://www.busan.go.kr/nbnews/1730743?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
+    "department": "예방안전과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T17:22:42.593355+00:00"
+  },
+  {
+    "id": "449f915b0e710f6e9190ddca7509a1a018dcd63cdb9944a151509c3f2e87e7ca",
+    "site_name": "부산시",
+    "title": "「세계유산위원회 성공개최 응원 걸음기부 챌린지」 참여 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730742?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
+    "department": "문화유산과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T17:22:42.593369+00:00"
+  },
+  {
+    "id": "a7d8eb99baf36cebfb71aa1d0ad78e6a6c7066d2750e4972bb15e381aca374b7",
+    "site_name": "부산시",
+    "title": "2026년 부산광역시 공공데이터·AI 활용 창업경진대회 참가자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1730727?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
+    "department": "빅데이터과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T17:22:42.593385+00:00"
+  },
+  {
+    "id": "5a3bae46a9355da161cc4b2d1b44c8b96ef6a3fbdbecf692a9ad6f7d2a9fe719",
+    "site_name": "부산시",
+    "title": "2026 부산원아시아페스티벌(BOF) 5월 12일 20시 티켓오픈!",
+    "link": "https://www.busan.go.kr/nbnews/1730721?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
+    "department": "영상콘텐츠산업과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T17:22:42.593395+00:00"
+  }
+]
