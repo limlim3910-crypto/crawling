@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": "fb1964c7c5780cbc65261ca066a6dd10204c0aa815876fbd73d30626a3285943",
+    "site_name": "부산시",
+    "title": "2026년 부산광역시 공공데이터·AI 활용 창업경진대회 참가자 모집 공고",
+    "link": "https://www.busan.go.kr/nbnews/1730727?curPage=&srchBeginDt=2025-05-12&srchEndDt=2026-05-12&srchKey=&srchText=",
+    "department": "빅데이터과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T04:04:46.652750+00:00"
+  },
+  {
+    "id": "503c33bd99006b5e4bf8751d977f59d2d2643b5a1d03df7c2763fd29a0d8ea07",
+    "site_name": "부산시",
+    "title": "2026 부산원아시아페스티벌(BOF) 5월 12일 20시 티켓오픈!",
+    "link": "https://www.busan.go.kr/nbnews/1730721?curPage=&srchBeginDt=2025-05-12&srchEndDt=2026-05-12&srchKey=&srchText=",
+    "department": "영상콘텐츠산업과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T04:04:46.652781+00:00"
+  },
+  {
+    "id": "4b315e399ddddf901131df141f205eb38909b2deeedbd981ee241292c10fba54",
+    "site_name": "부산시",
+    "title": "2026년 사상여성새로일하기센터 직업교육훈련 <노인 돌봄 전담인력 양성과정> 교육생 모집",
+    "link": "https://www.busan.go.kr/nbnews/1730711?curPage=&srchBeginDt=2025-05-12&srchEndDt=2026-05-12&srchKey=&srchText=",
+    "department": "여성가족과",
+    "published": "2026-05-12",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-12T04:04:46.652797+00:00"
+  }
+]
