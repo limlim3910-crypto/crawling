@@ -8,7 +8,7 @@
     "published": "2026-05-12",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-12T17:22:42.593296+00:00"
+    "collected_at_utc": "2026-05-12T20:07:22.462889+00:00"
   },
   {
     "id": "97181508ac44117e3878c70947698ae0288d0392d1866cefa4c78f0c1c9455e8",
@@ -19,7 +19,7 @@
     "published": "2026-05-12",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-12T17:22:42.593355+00:00"
+    "collected_at_utc": "2026-05-12T20:07:22.462938+00:00"
   },
   {
     "id": "449f915b0e710f6e9190ddca7509a1a018dcd63cdb9944a151509c3f2e87e7ca",
@@ -30,7 +30,7 @@
     "published": "2026-05-12",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-12T17:22:42.593369+00:00"
+    "collected_at_utc": "2026-05-12T20:07:22.462958+00:00"
   },
   {
     "id": "a7d8eb99baf36cebfb71aa1d0ad78e6a6c7066d2750e4972bb15e381aca374b7",
@@ -41,7 +41,7 @@
     "published": "2026-05-12",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-12T17:22:42.593385+00:00"
+    "collected_at_utc": "2026-05-12T20:07:22.462982+00:00"
   },
   {
     "id": "5a3bae46a9355da161cc4b2d1b44c8b96ef6a3fbdbecf692a9ad6f7d2a9fe719",
@@ -52,7 +52,7 @@
     "published": "2026-05-12",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-12T17:22:42.593395+00:00"
+    "collected_at_utc": "2026-05-12T20:07:22.463004+00:00"
   },
   {
     "id": "0a3ccf1a6e25c37a8abc88c4dfc694d216d86d01e29ec487b98b16895b7e772b",
@@ -63,7 +63,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-12T17:32:47.231273+00:00"
+    "collected_at_utc": "2026-05-12T20:17:43.643878+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -74,6 +74,6 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-12T17:32:47.232477+00:00"
+    "collected_at_utc": "2026-05-12T20:17:43.644575+00:00"
   }
 ]
