@@ -407,6 +407,10 @@ def resolve_place_to_address(place_name: str, region_hint: str = "") -> str:
 
     try:
         response = SESSION.get(url, headers=headers, params=params, timeout=10)
+        if response.status_code != 200:
+            print(f"카카오 API 상태코드: {response.status_code}")
+            print(f"카카오 API 응답: {response.text[:500]}")
+            
         response.raise_for_status()
         data = response.json()
 
