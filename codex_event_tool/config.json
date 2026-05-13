@@ -7,7 +7,7 @@
   },
   "geocoding": {
   "enabled": true,
-  "provider": "kakao",
+  "provider": "tmap",
   "region_hint": "부산 울산 경남"
   },
   "output": {
