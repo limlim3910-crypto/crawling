@@ -3,6 +3,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 import argparse
 import hashlib
 import json
@@ -1170,17 +1173,122 @@ def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
 
 
 def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str) -> None:
-    core, app = doc_props_xml(datetime.now(timezone.utc).isoformat())
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(output_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("[Content_Types].xml", content_types_xml())
-        zf.writestr("_rels/.rels", root_rels_xml())
-        zf.writestr("docProps/core.xml", core)
-        zf.writestr("docProps/app.xml", app)
-        zf.writestr("xl/workbook.xml", workbook_xml())
-        zf.writestr("xl/_rels/workbook.xml.rels", workbook_rels_xml())
-        zf.writestr("xl/styles.xml", styles_xml())
-        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml(items, generated_at))
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "관리대장"
+
+    title = "부울경 행사 특별소통 관리대장"
+    subtitle = f"생성시각: {generated_at} / 신규 감지: {len(items)}건"
+
+    ws.append([title])
+    ws.append([subtitle])
+    ws.append(EVENT_HEADERS)
+
+    # Title merge
+    last_col = len(EVENT_HEADERS)
+    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=last_col)
+    ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=last_col)
+
+    # Styles
+    title_fill = PatternFill("solid", fgColor="0F3B57")
+    header_fill_left = PatternFill("solid", fgColor="D9E2F3")
+    header_fill_mid = PatternFill("solid", fgColor="FCE4D6")
+    header_fill_right = PatternFill("solid", fgColor="E7E6E6")
+
+    white_font = Font(name="맑은 고딕", size=16, bold=True, color="FFFFFF")
+    header_font = Font(name="맑은 고딕", size=10, bold=True)
+    normal_font = Font(name="맑은 고딕", size=10)
+    link_font = Font(name="맑은 고딕", size=9, color="0563C1", underline="single")
+
+    thin = Side(style="thin", color="7F7F7F")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+    center = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    left = Alignment(horizontal="left", vertical="center", wrap_text=True)
+
+    # Title rows
+    ws["A1"].font = white_font
+    ws["A1"].fill = title_fill
+    ws["A1"].alignment = center
+
+    ws["A2"].font = Font(name="맑은 고딕", size=9, color="666666")
+    ws["A2"].alignment = left
+
+    # Header row
+    for col_idx, header in enumerate(EVENT_HEADERS, start=1):
+        cell = ws.cell(row=3, column=col_idx)
+        cell.value = header
+        cell.font = header_font
+        cell.alignment = center
+        cell.border = border
+
+        if col_idx <= 7:
+            cell.fill = header_fill_left
+        elif col_idx <= 11:
+            cell.fill = header_fill_mid
+        else:
+            cell.fill = header_fill_right
+
+    # Data rows
+    for row_idx, item in enumerate(items, start=4):
+        crowd_numeric = item.get("crowd_value")
+        crowd_value = crowd_numeric if isinstance(crowd_numeric, int) else item.get("crowd", "(자료 없음)")
+
+        row_values = [
+            row_idx - 3,
+            item.get("period", ""),
+            item.get("title", ""),
+            item.get("place", ""),
+            item.get("type", ""),
+            item.get("start_short", ""),
+            item.get("end_short", ""),
+            item.get("grade", ""),
+            item.get("feature", ""),
+            item.get("network", ""),
+            crowd_value,
+            item.get("source_name", ""),
+            item.get("published", ""),
+            item.get("link", ""),
+            item.get("summary", ""),
+            item.get("collected_at", ""),
+            item.get("status", ""),
+        ]
+
+        for col_idx, value in enumerate(row_values, start=1):
+            cell = ws.cell(row=row_idx, column=col_idx)
+            cell.value = value
+            cell.font = normal_font
+            cell.border = border
+
+            if col_idx in [3, 4, 14, 15]:
+                cell.alignment = left
+            else:
+                cell.alignment = center
+
+            # 원문링크 컬럼
+            if col_idx == 14 and value:
+                cell.hyperlink = str(value)
+                cell.value = "원문"
+                cell.font = link_font
+                cell.alignment = center
+
+        ws.row_dimensions[row_idx].height = 58
+
+    # Column widths
+    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 15]
+    for idx, width in enumerate(widths, start=1):
+        ws.column_dimensions[get_column_letter(idx)].width = width
+
+    ws.row_dimensions[1].height = 28
+    ws.row_dimensions[2].height = 20
+    ws.row_dimensions[3].height = 32
+
+    ws.freeze_panes = "A4"
+    ws.auto_filter.ref = f"A3:{get_column_letter(last_col)}{max(4, len(items) + 3)}"
+
+    wb.save(output_path)
 
 
 def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
