@@ -1,0 +1,117 @@
+{
+  "mail": {
+    "to": "",
+    "cc": "",
+    "subject_prefix": "[부울경 행사 특별소통 알림]",
+    "mode": "display"
+  },
+  "output": {
+    "max_items_total": 30,
+    "max_items_per_source": 10,
+    "open_after_run": true
+  },
+  "filters": {
+    "require_keyword": true,
+    "require_region": true,
+    "skip_expired_events": true,
+    "region_keywords": [
+      "부산",
+      "울산",
+      "경남",
+      "경상남도",
+      "김해",
+      "창원",
+      "양산",
+      "진주",
+      "거제",
+      "통영",
+      "사천",
+      "밀양",
+      "하동",
+      "함안",
+      "거창",
+      "고성",
+      "남해",
+      "합천",
+      "산청",
+      "의령",
+      "창녕"
+    ],
+    "include_keywords": [
+      "행사",
+      "축제",
+      "공연",
+      "페스티벌",
+      "콘서트",
+      "초대가수",
+      "모집",
+      "체험",
+      "전시",
+      "개최",
+      "박람회",
+      "문화",
+      "집회",
+      "걷기",
+      "마라톤",
+      "불꽃",
+      "개막"
+    ],
+    "exclude_keywords": [
+      "인사",
+      "입찰",
+      "채용",
+      "분양",
+      "공고문",
+      "선거",
+      "정당",
+      "성료",
+      "교육생",
+      "직업교육훈련",
+      "창업경진대회",
+      "공공데이터",
+      "수업 공개",
+      "수업혁신",
+      "헌혈",
+      "장기등 기증",
+      "센터 개소",
+      "봉사단",
+      "홍보관"
+    ]
+  },
+  "rules": {
+    "default_network": "검토",
+    "unknown_crowd_grade": "검토",
+    "grade_thresholds": {
+      "상": 10000,
+      "중": 3000,
+      "하": 0
+    }
+  },
+  "sources": [
+    {
+      "name": "부산시 보도자료",
+      "type": "busan_notice",
+      "url": "https://www.busan.go.kr/nbnews"
+    },
+    {
+      "name": "경남축제포털",
+      "type": "gyeongnam_festa",
+      "url": "https://festa.gyeongnam.go.kr/"
+    },
+    {
+      "name": "부산 행사 뉴스",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=%EB%B6%80%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+    },
+    {
+      "name": "울산 행사 뉴스",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=%EC%9A%B8%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+    },
+    {
+      "name": "경남 행사 뉴스",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=%EA%B2%BD%EB%82%A8%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+    }
+  ]
+}

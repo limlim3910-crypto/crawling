@@ -1,0 +1,1095 @@
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import re
+import sys
+import zipfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import date, datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+from html import escape
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional, Tuple
+from urllib.parse import urljoin
+from xml.etree import ElementTree as ET
+from xml.sax.saxutils import escape as xml_escape
+
+import requests
+from bs4 import BeautifulSoup
+
+try:
+    import win32com.client  # type: ignore
+except Exception:
+    win32com = None  # type: ignore
+
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+REPORT_DIR = BASE_DIR / "reports"
+DEFAULT_CONFIG = BASE_DIR / "config.json"
+DEFAULT_STATE = BASE_DIR / "state.json"
+DEFAULT_RUN_SUMMARY = BASE_DIR / "run_summary.json"
+KST = timezone(timedelta(hours=9))
+
+SESSION = requests.Session()
+SESSION.headers.update(
+    {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36"
+        )
+    }
+)
+
+DEFAULT_CONFIG_DATA: Dict[str, Any] = {
+    "mail": {
+        "to": "",
+        "cc": "",
+        "subject_prefix": "[부울경 행사 특별소통 알림]",
+        "mode": "display"
+    },
+    "output": {
+        "max_items_total": 30,
+        "max_items_per_source": 10,
+        "open_after_run": True
+    },
+    "filters": {
+        "require_keyword": True,
+        "require_region": True,
+        "skip_expired_events": True,
+        "region_keywords": [
+            "부산", "울산", "경남", "경상남도", "김해", "창원", "양산",
+            "진주", "거제", "통영", "사천", "밀양", "하동", "함안",
+            "거창", "고성", "남해", "합천", "산청", "의령", "창녕"
+        ],
+        "include_keywords": [
+            "행사", "축제", "공연", "페스티벌", "콘서트", "초대가수",
+            "모집", "체험", "전시", "개최", "박람회", "문화", "집회",
+            "걷기", "마라톤", "불꽃", "개막"
+        ],
+        "exclude_keywords": [
+            "인사", "입찰", "채용", "분양", "공고문", "선거", "정당", "성료",
+            "교육생", "직업교육훈련", "창업경진대회", "공공데이터", "수업 공개", "수업혁신",
+            "헌혈", "장기등 기증", "센터 개소", "봉사단", "홍보관"
+        ]
+    },
+    "rules": {
+        "default_network": "검토",
+        "unknown_crowd_grade": "검토",
+        "grade_thresholds": {
+            "상": 10000,
+            "중": 3000,
+            "하": 0
+        }
+    },
+    "sources": [
+        {
+            "name": "부산시 보도자료",
+            "type": "busan_notice",
+            "url": "https://www.busan.go.kr/nbnews"
+        },
+        {
+            "name": "경남축제포털",
+            "type": "gyeongnam_festa",
+            "url": "https://festa.gyeongnam.go.kr/"
+        },
+        {
+            "name": "부산 행사 뉴스",
+            "type": "rss",
+            "url": "https://news.google.com/rss/search?q=%EB%B6%80%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+        },
+        {
+            "name": "울산 행사 뉴스",
+            "type": "rss",
+            "url": "https://news.google.com/rss/search?q=%EC%9A%B8%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+        },
+        {
+            "name": "경남 행사 뉴스",
+            "type": "rss",
+            "url": "https://news.google.com/rss/search?q=%EA%B2%BD%EB%82%A8%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+        }
+    ]
+}
+
+EVENT_HEADERS = [
+    "구분",
+    "기간",
+    "Event명",
+    "장소",
+    "Type",
+    "시작일",
+    "종료일",
+    "이벤트 등급",
+    "이벤트 특성 구분",
+    "공동망 여부",
+    "예상운집인원(Peak Time)",
+    "출처",
+    "게시일",
+    "원문링크",
+    "요약",
+    "수집일",
+    "상태/비고",
+]
+
+WEEKDAYS = ["월", "화", "수", "목", "금", "토", "일"]
+
+
+def clean_text(value: Any) -> str:
+    if value is None:
+        return ""
+    text = str(value)
+    if "<" in text and ">" in text:
+        text = BeautifulSoup(text, "html.parser").get_text(" ", strip=True)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+def ensure_runtime_files() -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    if not DEFAULT_CONFIG.exists():
+        write_json(DEFAULT_CONFIG, DEFAULT_CONFIG_DATA)
+        print(f"설정 파일을 만들었습니다: {DEFAULT_CONFIG}")
+        print("메일 수신자와 추가 사이트는 config.json에서 수정하면 됩니다.")
+
+
+def read_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def write_json(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def public_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    excluded = {"sort_dt", "event_start_ord"}
+    return {key: value for key, value in item.items() if key not in excluded}
+
+
+def append_history(path: Path, run_id: str, items: List[Dict[str, Any]]) -> None:
+    if not items:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        for item in items:
+            record = public_item(item)
+            record["run_id"] = run_id
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def make_item_id(title: str, link: str) -> str:
+    return sha256_text(f"{clean_text(title)}|{clean_text(link)}")
+
+
+def fetch_url(url: str, timeout: int = 25) -> requests.Response:
+    response = SESSION.get(url, timeout=timeout)
+    response.raise_for_status()
+    return response
+
+
+def first_text(data: Dict[str, Any], keys: Iterable[str]) -> str:
+    for key in keys:
+        value = clean_text(data.get(key, ""))
+        if value:
+            return value
+    return ""
+
+
+def parse_any_date(value: str) -> Optional[date]:
+    value = clean_text(value).replace("/", "-").replace(".", "-")
+    match = re.search(r"(20\d{2})-(\d{1,2})-(\d{1,2})", value)
+    if match:
+        try:
+            return date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+        except ValueError:
+            return None
+    match = re.search(r"(\d{1,2})\s*월\s*(\d{1,2})\s*일", value)
+    if match:
+        year = datetime.now(KST).year
+        try:
+            return date(year, int(match.group(1)), int(match.group(2)))
+        except ValueError:
+            return None
+    return None
+
+
+def parse_date_range(*texts: str) -> Tuple[Optional[date], Optional[date]]:
+    merged = " ".join(clean_text(t) for t in texts if clean_text(t))
+    normalized = merged.replace("/", "-").replace(".", "-")
+    matches = re.findall(r"20\d{2}-\d{1,2}-\d{1,2}", normalized)
+    parsed = [parse_any_date(m) for m in matches]
+    parsed = [d for d in parsed if d is not None]
+    if len(parsed) >= 2:
+        return parsed[0], parsed[1]
+    if len(parsed) == 1:
+        return parsed[0], parsed[0]
+
+    range_match = re.search(r"(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*[~\-∼]\s*(\d{1,2})\s*일", merged)
+    if range_match:
+        year = datetime.now(KST).year
+        month = int(range_match.group(1))
+        try:
+            return date(year, month, int(range_match.group(2))), date(year, month, int(range_match.group(3)))
+        except ValueError:
+            pass
+
+    single = parse_any_date(merged)
+    if single:
+        return single, single
+    return None, None
+
+
+def parse_datetime_value(value: str) -> Optional[datetime]:
+    value = clean_text(value)
+    if not value:
+        return None
+    try:
+        parsed = parsedate_to_datetime(value)
+        if parsed:
+            return parsed.astimezone(KST).replace(tzinfo=None)
+    except Exception:
+        pass
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d", "%Y.%m.%d"):
+        try:
+            return datetime.strptime(value, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def short_date(value: Optional[date]) -> str:
+    if value is None:
+        return ""
+    return f"{value.month}.{value.day}({WEEKDAYS[value.weekday()]})"
+
+
+def period_text(start: Optional[date], end: Optional[date], fallback: str) -> str:
+    if start and end:
+        left = f"{start:%Y.%m.%d}.({WEEKDAYS[start.weekday()]})"
+        right = f"{end:%Y.%m.%d}.({WEEKDAYS[end.weekday()]})"
+        if start == end:
+            return left
+        return f"{left}~{right}"
+    return clean_text(fallback) or "(자료 없음)"
+
+
+def split_sentences(text: str) -> List[str]:
+    text = clean_text(text)
+    if not text:
+        return []
+    return [clean_text(p) for p in re.split(r"(?<=[.!?。])\s+|\n+", text) if clean_text(p)]
+
+
+def summarize(text: str, max_len: int = 180) -> str:
+    sentences = split_sentences(text)
+    summary = " ".join(sentences[:2]) if sentences else clean_text(text)
+    if not summary:
+        return "(자료 없음)"
+    if len(summary) > max_len:
+        return summary[: max_len - 1].rstrip() + "…"
+    return summary
+
+
+def extract_place(text: str) -> str:
+    text = clean_text(text)
+    patterns = [
+        r"(?:장소|위치|개최지|집결지|행사장)\s*[:：]?\s*([^\n\r,;|]+)",
+        r"([가-힣0-9\-\s]+(?:시청|구청|군청|문화회관|체육관|센터|공원|광장|호텔|역|마당|대학|컨벤션|아트홀|전시장|복합문화공간|수목원|체험관|운동장))",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            place = clean_text(match.group(1)).strip(" ,.|:：")
+            if len(place) >= 2:
+                return place
+    return ""
+
+
+def extract_crowd(text: str) -> Tuple[Optional[int], str]:
+    text = clean_text(text)
+    patterns = [
+        r"(\d{1,3}(?:,\d{3})*|\d+)\s*(?:명|여명)",
+        r"(\d+(?:\.\d+)?)\s*만\s*(?:명|여명)",
+        r"(\d+(?:\.\d+)?)\s*천\s*(?:명|여명)",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if not match:
+            continue
+        raw = match.group(1)
+        if "만" in match.group(0):
+            value = int(float(raw.replace(",", "")) * 10000)
+        elif "천" in match.group(0):
+            value = int(float(raw.replace(",", "")) * 1000)
+        else:
+            value = int(raw.replace(",", ""))
+        return value, f"{value:,}"
+    return None, "(자료 없음)"
+
+
+def classify_type(text: str) -> str:
+    text = clean_text(text)
+    rules = [
+        ("집회", ["집회", "시위", "기자회견"]),
+        ("축제", ["축제", "페스티벌", "불꽃", "개막"]),
+        ("공연", ["공연", "콘서트", "버스킹", "초대가수"]),
+        ("전시", ["전시", "박람회", "엑스포"]),
+        ("스포츠", ["걷기", "마라톤", "대회", "리그", "투어"]),
+        ("체험", ["체험", "캠프", "교육"]),
+    ]
+    for label, keywords in rules:
+        if any(keyword in text for keyword in keywords):
+            return label
+    return "행사"
+
+
+def grade_event(crowd: Optional[int], rules: Dict[str, Any]) -> str:
+    if crowd is None:
+        return clean_text(rules.get("unknown_crowd_grade", "검토")) or "검토"
+    thresholds = rules.get("grade_thresholds", {})
+    high = int(thresholds.get("상", 10000))
+    mid = int(thresholds.get("중", 3000))
+    if crowd >= high:
+        return "상"
+    if crowd >= mid:
+        return "중"
+    return "하"
+
+
+def priority_score(
+    start: Optional[date],
+    place: str,
+    crowd: Optional[int],
+    event_type: str,
+    source_type: str,
+    grade: str,
+) -> int:
+    score = 0
+    if start:
+        score += 45
+    if place and place != "(자료 없음)":
+        score += 20
+    if crowd is not None:
+        score += 25
+    if source_type in {"gyeongnam_festa", "busan_notice", "html"}:
+        score += 20
+    if event_type in {"축제", "공연", "집회", "스포츠", "전시"}:
+        score += 15
+    if grade == "검토":
+        score -= 5
+    return score
+
+
+def classify_feature(start: Optional[date], end: Optional[date], text: str) -> str:
+    if start and end and end > start:
+        return "1일이상"
+    if re.search(r"\d{1,2}\s*[:시]\s*\d{0,2}\s*[~\-∼]\s*\d{1,2}\s*[:시]", text):
+        return "1시간이상"
+    if re.search(r"\(\s*\d{1,2}\s*:\s*\d{2}\s*[~\-∼]\s*\d{1,2}\s*:\s*\d{2}\s*\)", text):
+        return "1시간이상"
+    return "(자료 없음)"
+
+
+def passes_filters(item: Dict[str, Any], filters: Dict[str, Any]) -> bool:
+    item_text = f"{item.get('title', '')} {item.get('body', '')} {item.get('place', '')}"
+    text = f"{item.get('source_name', '')} {item_text}"
+    region_text = item_text if item.get("source_type") == "rss" else text
+    include = [clean_text(v) for v in filters.get("include_keywords", []) if clean_text(v)]
+    exclude = [clean_text(v) for v in filters.get("exclude_keywords", []) if clean_text(v)]
+    regions = [clean_text(v) for v in filters.get("region_keywords", []) if clean_text(v)]
+    if any(keyword in text for keyword in exclude):
+        return False
+    if filters.get("require_region", False) and regions:
+        if not any(keyword in region_text for keyword in regions):
+            return False
+    if filters.get("require_keyword", True) and include:
+        return any(keyword in text for keyword in include)
+    return True
+
+
+def is_expired(start: Optional[date], end: Optional[date], filters: Dict[str, Any]) -> bool:
+    if not filters.get("skip_expired_events", True):
+        return False
+    if end is None:
+        return False
+    return end < datetime.now(KST).date()
+
+
+def parse_rss_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+    response = fetch_url(source["url"])
+    root = ET.fromstring(response.content)
+    rows: List[Dict[str, Any]] = []
+
+    for element in root.iter():
+        local = element.tag.rsplit("}", 1)[-1].lower()
+        if local not in {"item", "entry"}:
+            continue
+
+        fields: Dict[str, str] = {}
+        for child in element:
+            key = child.tag.rsplit("}", 1)[-1].lower()
+            if child.text:
+                fields[key] = clean_text(child.text)
+            if key == "link" and not fields.get("link"):
+                fields["link"] = clean_text(child.attrib.get("href", ""))
+
+        title = fields.get("title", "")
+        body = fields.get("description") or fields.get("summary") or fields.get("content") or ""
+        rows.append(
+            {
+                "source_name": source["name"],
+                "source_type": "rss",
+                "source_url": source["url"],
+                "title": title,
+                "link": fields.get("link", source["url"]),
+                "published": fields.get("pubdate") or fields.get("published") or fields.get("updated") or "",
+                "event_period": "",
+                "body": body,
+                "place": "",
+            }
+        )
+    return rows
+
+
+def parse_html_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+    response = fetch_url(source["url"])
+    soup = BeautifulSoup(response.text, "html.parser")
+    containers = soup.select(source.get("item_selector", "article, li, .item, .news-item, .post, .card"))
+    if not containers:
+        containers = [soup]
+    rows: List[Dict[str, Any]] = []
+    for container in containers:
+        title_el = container.select_one(source.get("title_selector", "a, h2, h3, h4"))
+        link_el = container.select_one(source.get("link_selector", "a"))
+        body_el = container.select_one(source.get("body_selector", "p, .desc, .summary, .content"))
+        date_el = container.select_one(source.get("date_selector", "time, .date, .day"))
+        title = clean_text(title_el.get_text(" ", strip=True) if title_el else "")
+        body = clean_text(body_el.get_text(" ", strip=True) if body_el else "")
+        link = ""
+        if link_el:
+            link = clean_text(link_el.get("href") or link_el.get("data-href") or "")
+        if not title and not body:
+            continue
+        rows.append(
+            {
+                "source_name": source["name"],
+                "source_type": "html",
+                "source_url": source["url"],
+                "title": title or "(제목 없음)",
+                "link": urljoin(source["url"], link) if link else source["url"],
+                "published": clean_text(date_el.get_text(" ", strip=True) if date_el else ""),
+                "event_period": "",
+                "body": body,
+                "place": "",
+            }
+        )
+    return rows
+
+
+def parse_busan_notice(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+    response = fetch_url(source["url"])
+    soup = BeautifulSoup(response.text, "html.parser")
+    rows: List[Dict[str, Any]] = []
+    for tr in soup.select("table tbody tr"):
+        cells = tr.find_all("td")
+        link_tag = tr.find("a", href=True)
+        if not link_tag or len(cells) < 2:
+            continue
+        title = clean_text(link_tag.get_text(" ", strip=True))
+        texts = [clean_text(td.get_text(" ", strip=True)) for td in cells if clean_text(td.get_text(" ", strip=True))]
+        published = ""
+        department = ""
+        for idx, text in enumerate(texts):
+            if re.search(r"20\d{2}[-.]\d{1,2}[-.]\d{1,2}", text):
+                published = text
+                if idx > 0:
+                    department = texts[idx - 1]
+                break
+        rows.append(
+            {
+                "source_name": source["name"],
+                "source_type": "busan_notice",
+                "source_url": source["url"],
+                "title": title,
+                "link": urljoin(source["url"], link_tag["href"]),
+                "published": published,
+                "event_period": "",
+                "body": department,
+                "place": "",
+            }
+        )
+    return rows
+
+
+def find_first_list(data: Any) -> List[Dict[str, Any]]:
+    if isinstance(data, list):
+        return [x for x in data if isinstance(x, dict)]
+    if isinstance(data, dict):
+        for key in ("resultData", "data", "list", "items", "result", "body"):
+            if key in data:
+                found = find_first_list(data[key])
+                if found:
+                    return found
+        for value in data.values():
+            found = find_first_list(value)
+            if found:
+                return found
+    if isinstance(data, str):
+        try:
+            return find_first_list(json.loads(data))
+        except Exception:
+            return []
+    return []
+
+
+def parse_gyeongnam_festa(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+    api_url = urljoin(source["url"], "/api/callFestivalList.do")
+    response = fetch_url(api_url)
+    festivals = find_first_list(response.json())
+    rows: List[Dict[str, Any]] = []
+    for festival in festivals:
+        title = first_text(
+            festival,
+            ["siteName", "festivalName", "eventName", "title", "name", "contentName"],
+        )
+        if not title:
+            continue
+        start = first_text(festival, ["festivalStartDate", "startDate", "eventStartDate", "beginDate"])
+        end = first_text(festival, ["festivalEndDate", "endDate", "eventEndDate", "finishDate"])
+        place = first_text(
+            festival,
+            [
+                "festivalAddress", "festivalDetailAddress", "address", "addr",
+                "roadAddr", "jibunAddr", "place", "placeNm", "eventPlace",
+                "festivalPlace", "location", "venue", "sigunguName"
+            ],
+        )
+        detail_place = first_text(festival, ["festivalDetailAddress"])
+        if place and detail_place and detail_place not in place:
+            place = f"{place} {detail_place}"
+        body = first_text(
+            festival,
+            ["contentsIntro", "siteKeyword", "content", "summary", "description", "intro", "mainContent"],
+        )
+        link = first_text(festival, ["linkUrl", "url", "homepage", "homepageUrl"])
+        if not link:
+            sub_path = first_text(festival, ["subPath", "path"])
+            link = urljoin(source["url"], "/" + sub_path.lstrip("/")) if sub_path else source["url"]
+        rows.append(
+            {
+                "source_name": source["name"],
+                "source_type": "gyeongnam_festa",
+                "source_url": source["url"],
+                "title": title,
+                "link": link,
+                "published": "",
+                "event_period": f"{start} ~ {end}".strip(" ~"),
+                "body": body,
+                "place": place,
+            }
+        )
+    return rows
+
+
+def parse_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+    source_type = clean_text(source.get("type", "rss")).lower()
+    if source_type == "rss":
+        return parse_rss_source(source)
+    if source_type == "html":
+        return parse_html_source(source)
+    if source_type == "busan_notice":
+        return parse_busan_notice(source)
+    if source_type == "gyeongnam_festa":
+        return parse_gyeongnam_festa(source)
+    raise ValueError(f"지원하지 않는 source type: {source_type}")
+
+
+def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    filters = config.get("filters", {})
+    rules = config.get("rules", {})
+    if not passes_filters(raw, filters):
+        return None
+
+    text = " ".join(
+        [
+            clean_text(raw.get("title")),
+            clean_text(raw.get("body")),
+            clean_text(raw.get("place")),
+            clean_text(raw.get("event_period")),
+        ]
+    )
+    start, end = parse_date_range(raw.get("event_period", ""), text)
+    if is_expired(start, end, filters):
+        return None
+
+    place = clean_text(raw.get("place")) or extract_place(text) or "(자료 없음)"
+    crowd_value, crowd_display = extract_crowd(text)
+    event_type = classify_type(text)
+    grade = grade_event(crowd_value, rules)
+    source_type = clean_text(raw.get("source_type"))
+    score = priority_score(start, place, crowd_value, event_type, source_type, grade)
+    generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+    link = clean_text(raw.get("link")) or clean_text(raw.get("source_url"))
+    title = clean_text(raw.get("title")) or "(제목 없음)"
+
+    return {
+        "id": make_item_id(title, link),
+        "period": period_text(start, end, raw.get("event_period", "")),
+        "title": title,
+        "place": place,
+        "type": event_type,
+        "start_short": short_date(start),
+        "end_short": short_date(end),
+        "grade": grade,
+        "feature": classify_feature(start, end, text),
+        "network": clean_text(rules.get("default_network", "검토")) or "검토",
+        "crowd": crowd_display,
+        "crowd_value": crowd_value,
+        "source_name": clean_text(raw.get("source_name")),
+        "published": clean_text(raw.get("published")) or "(자료 없음)",
+        "link": link,
+        "summary": summarize(text),
+        "collected_at": generated_at,
+        "status": "신규",
+        "sort_dt": parse_datetime_value(raw.get("published", "")),
+        "event_start_ord": start.toordinal() if start else 99999999,
+        "priority_score": score,
+    }
+
+
+def sort_items(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def key(item: Dict[str, Any]) -> Tuple[int, int, int, float, str]:
+        sort_dt = item.get("sort_dt")
+        priority = int(item.get("priority_score", 0))
+        event_start = int(item.get("event_start_ord", 99999999))
+        if isinstance(sort_dt, datetime):
+            return (-priority, 0 if event_start < 99999999 else 1, event_start, -sort_dt.timestamp(), item.get("title", ""))
+        return (-priority, 0 if event_start < 99999999 else 1, event_start, 0.0, item.get("title", ""))
+
+    return sorted(items, key=key)
+
+
+def apply_limits(items: List[Dict[str, Any]], config: Dict[str, Any]) -> List[Dict[str, Any]]:
+    output_cfg = config.get("output", {})
+    total = int(output_cfg.get("max_items_total", 30))
+    per_source = int(output_cfg.get("max_items_per_source", 10))
+    limited: List[Dict[str, Any]] = []
+    counts: Dict[str, int] = {}
+    for item in sort_items(items):
+        source_name = item.get("source_name", "")
+        counts[source_name] = counts.get(source_name, 0)
+        if per_source > 0 and counts[source_name] >= per_source:
+            continue
+        counts[source_name] += 1
+        limited.append(item)
+        if total > 0 and len(limited) >= total:
+            break
+    return limited
+
+
+def dedupe_new_items(items: List[Dict[str, Any]], state: Dict[str, Any], include_seen: bool) -> List[Dict[str, Any]]:
+    seen = state.setdefault("seen_ids", {})
+    fresh: List[Dict[str, Any]] = []
+    for item in items:
+        item_id = item["id"]
+        if include_seen or item_id not in seen:
+            fresh.append(item)
+        seen[item_id] = {
+            "title": item["title"],
+            "source": item["source_name"],
+            "seen_at": datetime.now(KST).isoformat(timespec="seconds"),
+        }
+    if len(seen) > 1500:
+        ordered = sorted(seen.items(), key=lambda kv: kv[1].get("seen_at", ""))
+        state["seen_ids"] = dict(ordered[-1500:])
+    state["last_run"] = datetime.now(KST).isoformat(timespec="seconds")
+    return fresh
+
+
+def collect_items(config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[str]]:
+    sources = config.get("sources", [])
+    collected: List[Dict[str, Any]] = []
+    errors: List[str] = []
+
+    with ThreadPoolExecutor(max_workers=min(6, max(1, len(sources)))) as executor:
+        futures = {executor.submit(parse_source, source): source for source in sources}
+        for future in as_completed(futures):
+            source = futures[future]
+            try:
+                for raw in future.result():
+                    item = normalize_item(raw, config)
+                    if item:
+                        collected.append(item)
+            except Exception as exc:
+                errors.append(f"{source.get('name', '(이름 없음)')}: {exc}")
+
+    unique: Dict[str, Dict[str, Any]] = {}
+    for item in collected:
+        unique[item["id"]] = item
+    return list(unique.values()), errors
+
+
+def col_name(index: int) -> str:
+    name = ""
+    while index:
+        index, remainder = divmod(index - 1, 26)
+        name = chr(65 + remainder) + name
+    return name
+
+
+def cell_xml(row: int, col: int, value: Any, style: int = 0, numeric: bool = False) -> str:
+    ref = f"{col_name(col)}{row}"
+    style_attr = f' s="{style}"' if style else ""
+    if value is None or value == "":
+        return f'<c r="{ref}"{style_attr}/>'
+    if numeric and isinstance(value, (int, float)):
+        return f'<c r="{ref}"{style_attr}><v>{value}</v></c>'
+    text = xml_escape(str(value))
+    return f'<c r="{ref}"{style_attr} t="inlineStr"><is><t xml:space="preserve">{text}</t></is></c>'
+
+
+def row_xml(row_num: int, values: List[Tuple[Any, int, bool]], height: Optional[int] = None) -> str:
+    height_attr = f' ht="{height}" customHeight="1"' if height else ""
+    cells = "".join(cell_xml(row_num, idx + 1, value, style, numeric) for idx, (value, style, numeric) in enumerate(values))
+    return f'<row r="{row_num}"{height_attr}>{cells}</row>'
+
+
+def styles_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <fonts count="5">
+    <font><sz val="10"/><name val="맑은 고딕"/></font>
+    <font><b/><sz val="16"/><color rgb="FFFFFFFF"/><name val="맑은 고딕"/></font>
+    <font><b/><sz val="10"/><name val="맑은 고딕"/></font>
+    <font><sz val="9"/><color rgb="FF666666"/><name val="맑은 고딕"/></font>
+    <font><u/><sz val="9"/><color rgb="FF0563C1"/><name val="맑은 고딕"/></font>
+  </fonts>
+  <fills count="6">
+    <fill><patternFill patternType="none"/></fill>
+    <fill><patternFill patternType="gray125"/></fill>
+    <fill><patternFill patternType="solid"><fgColor rgb="FF0F3B57"/><bgColor indexed="64"/></patternFill></fill>
+    <fill><patternFill patternType="solid"><fgColor rgb="FFD9E2F3"/><bgColor indexed="64"/></patternFill></fill>
+    <fill><patternFill patternType="solid"><fgColor rgb="FFFCE4D6"/><bgColor indexed="64"/></patternFill></fill>
+    <fill><patternFill patternType="solid"><fgColor rgb="FFE7E6E6"/><bgColor indexed="64"/></patternFill></fill>
+  </fills>
+  <borders count="2">
+    <border><left/><right/><top/><bottom/><diagonal/></border>
+    <border>
+      <left style="thin"><color rgb="FF7F7F7F"/></left>
+      <right style="thin"><color rgb="FF7F7F7F"/></right>
+      <top style="thin"><color rgb="FF7F7F7F"/></top>
+      <bottom style="thin"><color rgb="FF7F7F7F"/></bottom>
+      <diagonal/>
+    </border>
+  </borders>
+  <cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
+  <cellXfs count="10">
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>
+    <xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"><alignment horizontal="center" vertical="center"/></xf>
+    <xf numFmtId="0" fontId="3" fillId="0" borderId="0" xfId="0"><alignment horizontal="left" vertical="center"/></xf>
+    <xf numFmtId="0" fontId="2" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>
+    <xf numFmtId="0" fontId="2" fillId="4" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>
+    <xf numFmtId="0" fontId="2" fillId="5" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"><alignment horizontal="left" vertical="center" wrapText="1"/></xf>
+    <xf numFmtId="3" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyNumberFormat="1"><alignment horizontal="right" vertical="center"/></xf>
+    <xf numFmtId="0" fontId="4" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1"><alignment horizontal="left" vertical="center" wrapText="1"/></xf>
+  </cellXfs>
+  <cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>
+</styleSheet>"""
+
+
+def workbook_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <sheets><sheet name="관리대장" sheetId="1" r:id="rId1"/></sheets>
+</workbook>"""
+
+
+def workbook_rels_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+</Relationships>"""
+
+
+def root_rels_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
+  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
+</Relationships>"""
+
+
+def content_types_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+  <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+  <Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>
+  <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
+  <Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
+</Types>"""
+
+
+def doc_props_xml(generated_at: str) -> Tuple[str, str]:
+    core = f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:dcmitype="http://purl.org/dc/dcmitype/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dc:title>부울경 행사 특별소통 관리대장</dc:title>
+  <dc:creator>Codex</dc:creator>
+  <dcterms:created xsi:type="dcterms:W3CDTF">{xml_escape(generated_at)}</dcterms:created>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">{xml_escape(generated_at)}</dcterms:modified>
+</cp:coreProperties>"""
+    app = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
+ xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
+  <Application>Codex Event Monitor</Application>
+</Properties>"""
+    return core, app
+
+
+def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
+    cols = [8, 24, 34, 24, 11, 12, 12, 12, 17, 16, 19, 16, 18, 38, 45, 20, 15]
+    col_xml = "".join(f'<col min="{idx}" max="{idx}" width="{width}" customWidth="1"/>' for idx, width in enumerate(cols, 1))
+    rows: List[str] = []
+    last_col = col_name(len(EVENT_HEADERS))
+    rows.append(row_xml(1, [(f"부울경 행사 특별소통 관리대장", 1, False)] + [("", 1, False)] * (len(EVENT_HEADERS) - 1), 28))
+    rows.append(row_xml(2, [(f"생성시각: {generated_at} / 신규 감지: {len(items)}건", 2, False)] + [("", 2, False)] * (len(EVENT_HEADERS) - 1), 20))
+    header_values = []
+    for idx, header in enumerate(EVENT_HEADERS, 1):
+        style = 3 if idx <= 7 else 4 if idx <= 11 else 5
+        header_values.append((header, style, False))
+    rows.append(row_xml(3, header_values, 32))
+
+    for row_idx, item in enumerate(items, 4):
+        crowd_numeric = item.get("crowd_value")
+        crowd_value: Any = crowd_numeric if isinstance(crowd_numeric, int) else item.get("crowd", "(자료 없음)")
+        values = [
+            (row_idx - 3, 6, True),
+            (item.get("period", ""), 7, False),
+            (item.get("title", ""), 7, False),
+            (item.get("place", ""), 7, False),
+            (item.get("type", ""), 6, False),
+            (item.get("start_short", ""), 6, False),
+            (item.get("end_short", ""), 6, False),
+            (item.get("grade", ""), 6, False),
+            (item.get("feature", ""), 6, False),
+            (item.get("network", ""), 6, False),
+            (crowd_value, 8 if isinstance(crowd_value, int) else 6, isinstance(crowd_value, int)),
+            (item.get("source_name", ""), 6, False),
+            (item.get("published", ""), 7, False),
+            (item.get("link", ""), 9, False),
+            (item.get("summary", ""), 7, False),
+            (item.get("collected_at", ""), 6, False),
+            (item.get("status", ""), 6, False),
+        ]
+        rows.append(row_xml(row_idx, values, 58))
+
+    dimension = f"A1:{last_col}{max(4, len(items) + 3)}"
+    merge_xml = f'<mergeCells count="2"><mergeCell ref="A1:{last_col}1"/><mergeCell ref="A2:{last_col}2"/></mergeCells>'
+    auto_filter = f'<autoFilter ref="A3:{last_col}{max(4, len(items) + 3)}"/>'
+    return f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <dimension ref="{dimension}"/>
+  <sheetViews><sheetView workbookViewId="0"><pane ySplit="3" topLeftCell="A4" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>
+  <sheetFormatPr defaultRowHeight="16"/>
+  <cols>{col_xml}</cols>
+  <sheetData>{''.join(rows)}</sheetData>
+  {merge_xml}
+  {auto_filter}
+  <pageMargins left="0.3" right="0.3" top="0.5" bottom="0.5" header="0.3" footer="0.3"/>
+</worksheet>"""
+
+
+def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str) -> None:
+    core, app = doc_props_xml(datetime.now(timezone.utc).isoformat())
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(output_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", content_types_xml())
+        zf.writestr("_rels/.rels", root_rels_xml())
+        zf.writestr("docProps/core.xml", core)
+        zf.writestr("docProps/app.xml", app)
+        zf.writestr("xl/workbook.xml", workbook_xml())
+        zf.writestr("xl/_rels/workbook.xml.rels", workbook_rels_xml())
+        zf.writestr("xl/styles.xml", styles_xml())
+        zf.writestr("xl/worksheets/sheet1.xml", sheet_xml(items, generated_at))
+
+
+def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
+    rows = []
+    for item in items:
+        rows.append(
+            f"""
+            <tr>
+              <td>{escape(item.get('grade', ''))}</td>
+              <td><strong>{escape(item.get('title', ''))}</strong><br><span>{escape(item.get('summary', ''))}</span></td>
+              <td>{escape(item.get('period', ''))}</td>
+              <td>{escape(item.get('place', ''))}</td>
+              <td>{escape(item.get('type', ''))}</td>
+              <td>{escape(str(item.get('crowd', '')))}</td>
+              <td><a href="{escape(item.get('link', ''))}">원문</a></td>
+            </tr>
+            """
+        )
+    body = "".join(rows) if rows else '<tr><td colspan="7">새 게시물이 없습니다.</td></tr>'
+    return f"""<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>부울경 행사 특별소통 알림</title>
+  <style>
+    body {{ font-family: "Malgun Gothic", "Segoe UI", sans-serif; margin: 24px; color: #17212b; }}
+    h1 {{ margin: 0 0 6px; font-size: 22px; }}
+    .meta {{ color: #5f6f7a; margin-bottom: 16px; }}
+    table {{ border-collapse: collapse; width: 100%; font-size: 13px; }}
+    th {{ background: #0f3b57; color: white; padding: 9px; border: 1px solid #9aa7b0; }}
+    td {{ padding: 9px; border: 1px solid #c7d0d8; vertical-align: top; }}
+    tr:nth-child(even) td {{ background: #f7fafc; }}
+    span {{ color: #495762; }}
+  </style>
+</head>
+<body>
+  <h1>부울경 행사 특별소통 알림</h1>
+  <div class="meta">생성시각: {escape(generated_at)} / 신규 감지: {len(items)}건</div>
+  <table>
+    <thead>
+      <tr>
+        <th>등급</th><th>Event명/요약</th><th>기간</th><th>장소</th><th>Type</th><th>예상운집</th><th>링크</th>
+      </tr>
+    </thead>
+    <tbody>{body}</tbody>
+  </table>
+</body>
+</html>"""
+
+
+def send_outlook_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_body: str, attachment: Path, display: bool) -> None:
+    mail_cfg = config.get("mail", {})
+    to = clean_text(mail_cfg.get("to", ""))
+    cc = clean_text(mail_cfg.get("cc", ""))
+    if not to:
+        print("메일 수신자가 비어 있어 Outlook 메일은 만들지 않았습니다.")
+        return
+    if win32com is None:
+        print("win32com.client를 사용할 수 없어 Outlook 메일은 만들지 않았습니다.")
+        return
+    outlook = win32com.client.Dispatch("Outlook.Application")
+    mail = outlook.CreateItem(0)
+    mail.To = to
+    if cc:
+        mail.CC = cc
+    prefix = clean_text(mail_cfg.get("subject_prefix", "[부울경 행사 특별소통 알림]"))
+    mail.Subject = f"{prefix} 신규 {len(items)}건"
+    mail.HTMLBody = html_body
+    if attachment.exists():
+        mail.Attachments.Add(str(attachment))
+    mode = "display" if display else clean_text(mail_cfg.get("mode", "display")).lower()
+    if mode == "send":
+        mail.Send()
+    else:
+        mail.Display()
+
+
+def open_output(path: Path) -> None:
+    try:
+        if sys.platform.startswith("win"):
+            os.startfile(path)  # type: ignore[attr-defined]
+    except Exception as exc:
+        print(f"자동 열기 실패: {exc}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="부울경 행사 모니터링 통합본")
+    parser.add_argument("--config", default=str(DEFAULT_CONFIG), help="설정 JSON 경로")
+    parser.add_argument("--state", default=str(DEFAULT_STATE), help="중복 확인 상태 JSON 경로")
+    parser.add_argument("--dry-run", action="store_true", help="메일 발송 없이 수집/엑셀 생성만 실행")
+    parser.add_argument("--display", action="store_true", help="Outlook 메일 창만 열기")
+    parser.add_argument("--include-seen", action="store_true", help="이미 본 항목도 결과에 포함")
+    parser.add_argument("--reset-state", action="store_true", help="중복 기록 초기화 후 실행")
+    parser.add_argument("--no-open", action="store_true", help="결과 파일 자동 열기 생략")
+    args = parser.parse_args()
+
+    ensure_runtime_files()
+    config_path = Path(args.config)
+    config = read_json(config_path, DEFAULT_CONFIG_DATA)
+    state_path = Path(args.state)
+    if args.reset_state and state_path.exists():
+        state_path.unlink()
+    state = read_json(state_path, {"seen_ids": {}})
+
+    all_items, errors = collect_items(config)
+    new_items = dedupe_new_items(all_items, state, args.include_seen)
+    new_items = apply_limits(new_items, config)
+    write_json(state_path, state)
+
+    generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+    file_tag = datetime.now(KST).strftime("%Y-%m-%d_%H%M")
+    run_id = datetime.now(KST).strftime("%Y%m%d_%H%M%S")
+    xlsx_path = REPORT_DIR / f"{file_tag}_부울경행사_관리대장.xlsx"
+    html_path = REPORT_DIR / f"{file_tag}_부울경행사_요약.html"
+    write_xlsx(new_items, xlsx_path, generated_at)
+    html_body = build_html_report(new_items, generated_at)
+    html_path.write_text(html_body, encoding="utf-8")
+    write_json(DATA_DIR / "results.json", [public_item(item) for item in sort_items(all_items)])
+    write_json(DATA_DIR / "new_items.json", [public_item(item) for item in new_items])
+    append_history(DATA_DIR / "history.jsonl", run_id, new_items)
+    write_json(
+        DEFAULT_RUN_SUMMARY,
+        {
+            "run_id": run_id,
+            "generated_at": generated_at,
+            "candidate_count": len(all_items),
+            "new_count": len(new_items),
+            "xlsx_path": str(xlsx_path),
+            "html_path": str(html_path),
+            "errors": errors,
+        },
+    )
+
+    print(f"전체 감지 후보: {len(all_items)}건")
+    print(f"신규/출력 대상: {len(new_items)}건")
+    print(f"엑셀 저장: {xlsx_path}")
+    print(f"요약 저장: {html_path}")
+    if errors:
+        print("수집 오류:")
+        for error in errors:
+            print(f"- {error}")
+
+    if not args.dry_run and new_items:
+        send_outlook_mail(config, new_items, html_body, xlsx_path, args.display)
+    elif args.dry_run:
+        print("--dry-run 이라서 메일은 만들지 않았습니다.")
+    else:
+        print("새 항목이 없어 메일은 만들지 않았습니다.")
+
+    if config.get("output", {}).get("open_after_run", True) and not args.no_open:
+        open_output(xlsx_path)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
