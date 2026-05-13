@@ -1365,7 +1365,7 @@ def send_outlook_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_
     else:
         mail.Display()
 
-def send_smtp_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_body: str, attachment: Path) -> None:
+def send_smtp_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_body: str, attachments: List[Path]) -> None:
     mail_cfg = config.get("mail", {})
 
     mail_user = os.getenv("MAIL_USERNAME", "").strip()
@@ -1407,11 +1407,12 @@ def send_smtp_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_bod
 
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
-    if attachment and attachment.exists():
-        with attachment.open("rb") as f:
-            part = MIMEApplication(f.read(), Name=attachment.name)
-        part["Content-Disposition"] = f'attachment; filename="{attachment.name}"'
-        msg.attach(part)
+    for attachment in attachments:
+        if attachment and attachment.exists():
+            with attachment.open("rb") as f:
+                part = MIMEApplication(f.read(), Name=attachment.name)
+            part["Content-Disposition"] = f'attachment; filename="{attachment.name}"'
+            msg.attach(part)
 
     with smtplib.SMTP(smtp_host, smtp_port) as server:
         if smtp_use_tls:
@@ -1458,8 +1459,11 @@ def main() -> int:
     generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
     file_tag = datetime.now(KST).strftime("%Y-%m-%d_%H%M")
     run_id = datetime.now(KST).strftime("%Y%m%d_%H%M%S")
-    xlsx_path = REPORT_DIR / f"{file_tag}_부울경행사_관리대장.xlsx"
+    xlsx_path = REPORT_DIR / f"{file_tag}_부울경행사_신규관리대장.xlsx"
+    all_xlsx_path = REPORT_DIR / f"{file_tag}_부울경행사_전체관리대장.xlsx"
     html_path = REPORT_DIR / f"{file_tag}_부울경행사_요약.html"
+    write_xlsx(new_items, xlsx_path, generated_at)
+    write_xlsx(sort_items(all_items), all_xlsx_path, generated_at)
     write_xlsx(new_items, xlsx_path, generated_at)
     html_body = build_html_report(new_items, generated_at)
     html_path.write_text(html_body, encoding="utf-8")
@@ -1489,7 +1493,7 @@ def main() -> int:
             print(f"- {error}")
 
     if not args.dry_run and new_items:
-        send_smtp_mail(config, new_items, html_body, xlsx_path)
+        send_smtp_mail(config, new_items, html_body, [xlsx_path, all_xlsx_path])
     elif args.dry_run:
         print("--dry-run 이라서 메일은 만들지 않았습니다.")
     else:
