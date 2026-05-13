@@ -1,9 +1,9 @@
 {
-  "run_id": "20260513_152622",
-  "generated_at": "2026-05-13 15:26:22",
-  "candidate_count": 80,
-  "new_count": 11,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-13_1526_부울경행사_관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-13_1526_부울경행사_요약.html",
+  "run_id": "20260513_153247",
+  "generated_at": "2026-05-13 15:32:47",
+  "candidate_count": 112,
+  "new_count": 12,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-13_1532_부울경행사_관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-13_1532_부울경행사_요약.html",
   "errors": []
 }
