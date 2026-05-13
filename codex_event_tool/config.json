@@ -5,6 +5,11 @@
     "subject_prefix": "[부울경 행사 특별소통 알림]",
     "mode": "send"
   },
+  "geocoding": {
+  "enabled": true,
+  "provider": "kakao",
+  "region_hint": "부산 울산 경남"
+  },
   "output": {
     "max_items_total": 30,
     "max_items_per_source": 10,
