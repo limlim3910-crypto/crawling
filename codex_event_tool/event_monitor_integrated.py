@@ -52,6 +52,11 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
         "subject_prefix": "[부울경 행사 특별소통 알림]",
         "mode": "display"
     },
+    "geocoding": {
+        "enabled": True,
+        "provider": "kakao",
+        "region_hint": "부산 울산 경남"
+    },
     "output": {
         "max_items_total": 30,
         "max_items_per_source": 10,
@@ -317,6 +322,144 @@ def extract_place(text: str) -> str:
             if len(place) >= 2:
                 return place
     return ""
+
+
+
+
+KAKAO_PLACE_CACHE: Dict[str, str] = {}
+
+
+def looks_like_address(value: str) -> bool:
+    value = clean_text(value)
+    if not value or value == "(자료 없음)":
+        return False
+
+    patterns = [
+        r"(?:부산|울산|경남|경상남도|부산광역시|울산광역시)",
+        r"(?:시|도)\s+.+(?:시|군|구)",
+        r"(?:읍|면|동)\s+",
+        r"(?:로|길|대로|번길)\s*\d+",
+    ]
+
+    return any(re.search(pattern, value) for pattern in patterns)
+
+
+def is_weak_place_name(value: str) -> bool:
+    value = clean_text(value)
+
+    if not value:
+        return True
+
+    weak_values = {
+        "(자료 없음)",
+        "지역",
+        "행사",
+        "축제",
+        "문화",
+        "공연",
+        "부산",
+        "울산",
+        "경남",
+        "경상남도",
+    }
+
+    if value in weak_values:
+        return True
+
+    if len(value) <= 2:
+        return True
+
+    # 너무 긴 문장형 텍스트는 장소 검색 품질이 떨어짐.
+    # 단, 이미 주소처럼 보이면 그대로 사용한다.
+    if len(value) > 40 and not looks_like_address(value):
+        return True
+
+    return False
+
+
+def resolve_place_to_address(place_name: str, region_hint: str = "") -> str:
+    place_name = clean_text(place_name)
+
+    if is_weak_place_name(place_name):
+        return ""
+
+    if looks_like_address(place_name):
+        return place_name
+
+    kakao_key = os.getenv("KAKAO_REST_API_KEY", "").strip()
+    if not kakao_key:
+        print("KAKAO_REST_API_KEY 없음 -> 장소 주소 변환 생략")
+        return ""
+
+    query = clean_text(f"{region_hint} {place_name}")
+
+    if query in KAKAO_PLACE_CACHE:
+        return KAKAO_PLACE_CACHE[query]
+
+    url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+    headers = {
+        "Authorization": f"KakaoAK {kakao_key}"
+    }
+    params = {
+        "query": query,
+        "size": 3,
+    }
+
+    try:
+        response = SESSION.get(url, headers=headers, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        documents = data.get("documents", [])
+        if not documents:
+            print(f"카카오 장소 검색 결과 없음: {query}")
+            KAKAO_PLACE_CACHE[query] = ""
+            return ""
+
+        # 1순위: 도로명주소가 있는 결과
+        for doc in documents:
+            road_address = clean_text(doc.get("road_address_name", ""))
+            address = clean_text(doc.get("address_name", ""))
+            if road_address:
+                KAKAO_PLACE_CACHE[query] = road_address
+                return road_address
+            if address:
+                KAKAO_PLACE_CACHE[query] = address
+                return address
+
+        KAKAO_PLACE_CACHE[query] = ""
+        return ""
+
+    except Exception as e:
+        print(f"카카오 장소 주소 변환 실패: {query} / {e}")
+        return ""
+
+
+def enrich_place_with_kakao(place: str, config: Dict[str, Any]) -> str:
+    place = clean_text(place)
+
+    if not place or place == "(자료 없음)":
+        return place
+
+    if looks_like_address(place):
+        return place
+
+    geocoding = config.get("geocoding", {})
+    if not geocoding.get("enabled", False):
+        return place
+
+    provider = clean_text(geocoding.get("provider", "kakao")).lower()
+    if provider != "kakao":
+        return place
+
+    region_hint = clean_text(geocoding.get("region_hint", "부산 울산 경남"))
+    resolved = resolve_place_to_address(place, region_hint=region_hint)
+
+    if resolved:
+        print(f"장소 주소 변환: {place} -> {resolved}")
+        return resolved
+
+    return place
 
 
 def extract_crowd(text: str) -> Tuple[Optional[int], str]:
@@ -636,7 +779,8 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     if is_expired(start, end, filters):
         return None
 
-    place = clean_text(raw.get("place")) or extract_place(text) or "(자료 없음)"
+    raw_place = clean_text(raw.get("place")) or extract_place(text) or "(자료 없음)"
+    place = enrich_place_with_kakao(raw_place, config)
     crowd_value, crowd_display = extract_crowd(text)
     event_type = classify_type(text)
     grade = grade_event(crowd_value, rules)
