@@ -3,7 +3,7 @@
     "to": "",
     "cc": "",
     "subject_prefix": "[부울경 행사 특별소통 알림]",
-    "mode": "display"
+    "mode": "send"
   },
   "output": {
     "max_items_total": 30,
