@@ -40,7 +40,7 @@ jobs:
           SMTP_USE_TLS: ${{ secrets.SMTP_USE_TLS }}
           MAIL_SUBJECT_PREFIX: ${{ secrets.MAIL_SUBJECT_PREFIX }}
         run: |
-          python event_monitor_integrated.py --dry-run
+          python event_monitor_integrated.py
 
       - name: 결과 업로드
         uses: actions/upload-artifact@v4
