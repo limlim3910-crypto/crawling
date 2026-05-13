@@ -1,5 +1,8 @@
 from __future__ import annotations
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 import argparse
 import hashlib
 import json
@@ -1254,6 +1257,63 @@ def send_outlook_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_
     else:
         mail.Display()
 
+def send_smtp_mail(config: Dict[str, Any], items: List[Dict[str, Any]], html_body: str, attachment: Path) -> None:
+    mail_cfg = config.get("mail", {})
+
+    mail_user = os.getenv("MAIL_USERNAME", "").strip()
+    mail_password = os.getenv("MAIL_PASSWORD", "").strip()
+    mail_to = os.getenv("MAIL_TO", "").strip() or clean_text(mail_cfg.get("to", ""))
+    mail_cc = os.getenv("MAIL_CC", "").strip() or clean_text(mail_cfg.get("cc", ""))
+
+    mail_from = os.getenv("MAIL_FROM", "").strip() or mail_user
+    smtp_host = os.getenv("SMTP_HOST", "").strip() or "smtp.gmail.com"
+    smtp_port = int(os.getenv("SMTP_PORT", "").strip() or "587")
+    smtp_use_tls = (os.getenv("SMTP_USE_TLS", "").strip().lower() or "true") in {"true", "1", "yes", "y"}
+
+    subject_prefix = (
+        os.getenv("MAIL_SUBJECT_PREFIX", "").strip()
+        or clean_text(mail_cfg.get("subject_prefix", "[부울경 행사 특별소통 알림]"))
+    )
+
+    if not mail_user or not mail_password:
+        print("MAIL_USERNAME 또는 MAIL_PASSWORD가 없어 SMTP 메일을 보내지 않았습니다.")
+        return
+
+    if not mail_to:
+        print("MAIL_TO가 없어 SMTP 메일을 보내지 않았습니다.")
+        return
+
+    generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+    subject = f"{subject_prefix} 신규 {len(items)}건 ({generated_at})"
+
+    recipients = [addr.strip() for addr in mail_to.split(",") if addr.strip()]
+    cc_recipients = [addr.strip() for addr in mail_cc.split(",") if addr.strip()]
+    all_recipients = recipients + cc_recipients
+
+    msg = MIMEMultipart()
+    msg["From"] = mail_from
+    msg["To"] = ", ".join(recipients)
+    if cc_recipients:
+        msg["Cc"] = ", ".join(cc_recipients)
+    msg["Subject"] = subject
+
+    msg.attach(MIMEText(html_body, "html", "utf-8"))
+
+    if attachment and attachment.exists():
+        with attachment.open("rb") as f:
+            part = MIMEApplication(f.read(), Name=attachment.name)
+        part["Content-Disposition"] = f'attachment; filename="{attachment.name}"'
+        msg.attach(part)
+
+    with smtplib.SMTP(smtp_host, smtp_port) as server:
+        if smtp_use_tls:
+            server.starttls()
+        server.login(mail_user, mail_password)
+        server.sendmail(mail_from, all_recipients, msg.as_string())
+
+    print("SMTP 이메일 발송 완료")
+
+
 
 def open_output(path: Path) -> None:
     try:
@@ -1321,7 +1381,7 @@ def main() -> int:
             print(f"- {error}")
 
     if not args.dry_run and new_items:
-        send_outlook_mail(config, new_items, html_body, xlsx_path, args.display)
+        send_smtp_mail(config, new_items, html_body, xlsx_path)
     elif args.dry_run:
         print("--dry-run 이라서 메일은 만들지 않았습니다.")
     else:
