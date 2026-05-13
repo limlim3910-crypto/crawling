@@ -54,7 +54,7 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
     },
     "geocoding": {
         "enabled": True,
-        "provider": "kakao",
+        "provider": "tmap",
         "region_hint": "부산 울산 경남"
     },
     "output": {
@@ -323,10 +323,7 @@ def extract_place(text: str) -> str:
                 return place
     return ""
 
-
-
-
-KAKAO_PLACE_CACHE: Dict[str, str] = {}
+GEOCODER_PLACE_CACHE: Dict[str, str] = {}
 
 
 def looks_like_address(value: str) -> bool:
@@ -369,15 +366,34 @@ def is_weak_place_name(value: str) -> bool:
     if len(value) <= 2:
         return True
 
-    # 너무 긴 문장형 텍스트는 장소 검색 품질이 떨어짐.
-    # 단, 이미 주소처럼 보이면 그대로 사용한다.
+    # 너무 긴 문장 조각은 장소명 검색 대상에서 제외
     if len(value) > 40 and not looks_like_address(value):
+        return True
+
+    bad_fragments = [
+        "지역경제",
+        "지역사회",
+        "다문화 가정",
+        "복지위기가구",
+        "기업사랑 시민축제로 지역",
+        "손잡고 지역",
+        "찾아가는",
+        "발굴",
+        "협약",
+        "도움",
+        "나눔",
+        "대상",
+        "개최 알림",
+        "우수사례",
+    ]
+
+    if any(fragment in value for fragment in bad_fragments):
         return True
 
     return False
 
 
-def resolve_place_to_address(place_name: str, region_hint: str = "") -> str:
+def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str:
     place_name = clean_text(place_name)
 
     if is_weak_place_name(place_name):
@@ -386,60 +402,107 @@ def resolve_place_to_address(place_name: str, region_hint: str = "") -> str:
     if looks_like_address(place_name):
         return place_name
 
-    kakao_key = os.getenv("KAKAO_REST_API_KEY", "").strip()
-    if not kakao_key:
-        print("KAKAO_REST_API_KEY 없음 -> 장소 주소 변환 생략")
+    app_key = os.getenv("TMAP_APP_KEY", "").strip()
+    if not app_key:
+        print("TMAP_APP_KEY 없음 -> 장소 주소 변환 생략")
         return ""
 
     query = clean_text(f"{region_hint} {place_name}")
 
-    if query in KAKAO_PLACE_CACHE:
-        return KAKAO_PLACE_CACHE[query]
+    if query in GEOCODER_PLACE_CACHE:
+        return GEOCODER_PLACE_CACHE[query]
 
-    url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+    url = "https://apis.openapi.sk.com/tmap/pois"
+
     headers = {
-        "Authorization": f"KakaoAK {kakao_key}"
+        "appKey": app_key,
+        "Accept": "application/json",
     }
+
     params = {
-        "query": query,
-        "size": 3,
+        "version": "1",
+        "format": "json",
+        "searchKeyword": query,
+        "count": "3",
+        "searchType": "all",
+        "resCoordType": "WGS84GEO",
+        "reqCoordType": "WGS84GEO",
     }
 
     try:
         response = SESSION.get(url, headers=headers, params=params, timeout=10)
+
         if response.status_code != 200:
-            print(f"카카오 API 상태코드: {response.status_code}")
-            print(f"카카오 API 응답: {response.text[:500]}")
-            
+            print(f"Tmap API 상태코드: {response.status_code}")
+            print(f"Tmap API 응답: {response.text[:500]}")
+
         response.raise_for_status()
         data = response.json()
 
-        documents = data.get("documents", [])
-        if not documents:
-            print(f"카카오 장소 검색 결과 없음: {query}")
-            KAKAO_PLACE_CACHE[query] = ""
+        pois = data.get("searchPoiInfo", {}).get("pois", {}).get("poi", [])
+        if not pois:
+            print(f"Tmap 장소 검색 결과 없음: {query}")
+            GEOCODER_PLACE_CACHE[query] = ""
             return ""
 
-        # 1순위: 도로명주소가 있는 결과
-        for doc in documents:
-            road_address = clean_text(doc.get("road_address_name", ""))
-            address = clean_text(doc.get("address_name", ""))
-            if road_address:
-                KAKAO_PLACE_CACHE[query] = road_address
-                return road_address
+        for poi in pois:
+            name = clean_text(poi.get("name", ""))
+
+            upper_addr = clean_text(poi.get("upperAddrName", ""))
+            middle_addr = clean_text(poi.get("middleAddrName", ""))
+            lower_addr = clean_text(poi.get("lowerAddrName", ""))
+            detail_addr = clean_text(poi.get("detailAddrName", ""))
+
+            road_name = clean_text(poi.get("roadName", ""))
+            first_build_no = clean_text(poi.get("firstBuildNo", ""))
+            second_build_no = clean_text(poi.get("secondBuildNo", ""))
+
+            build_no = first_build_no
+            if second_build_no and second_build_no != "0":
+                build_no = f"{first_build_no}-{second_build_no}"
+
+            road_address = clean_text(
+                " ".join(
+                    part for part in [
+                        upper_addr,
+                        middle_addr,
+                        road_name,
+                        build_no,
+                    ]
+                    if part
+                )
+            )
+
+            jibun_address = clean_text(
+                " ".join(
+                    part for part in [
+                        upper_addr,
+                        middle_addr,
+                        lower_addr,
+                        detail_addr,
+                    ]
+                    if part
+                )
+            )
+
+            address = road_address or jibun_address
+
             if address:
-                KAKAO_PLACE_CACHE[query] = address
+                if name and name not in address:
+                    address = f"{address} ({name})"
+
+                GEOCODER_PLACE_CACHE[query] = address
                 return address
 
-        KAKAO_PLACE_CACHE[query] = ""
+        GEOCODER_PLACE_CACHE[query] = ""
         return ""
 
     except Exception as e:
-        print(f"카카오 장소 주소 변환 실패: {query} / {e}")
+        print(f"Tmap 장소 주소 변환 실패: {query} / {e}")
         return ""
 
 
-def enrich_place_with_kakao(place: str, config: Dict[str, Any]) -> str:
+def enrich_place_with_geocoder(place: str, config: Dict[str, Any]) -> str:
     place = clean_text(place)
 
     if not place or place == "(자료 없음)":
@@ -452,18 +515,22 @@ def enrich_place_with_kakao(place: str, config: Dict[str, Any]) -> str:
     if not geocoding.get("enabled", False):
         return place
 
-    provider = clean_text(geocoding.get("provider", "kakao")).lower()
-    if provider != "kakao":
-        return place
-
+    provider = clean_text(geocoding.get("provider", "tmap")).lower()
     region_hint = clean_text(geocoding.get("region_hint", "부산 울산 경남"))
-    resolved = resolve_place_to_address(place, region_hint=region_hint)
+
+    resolved = ""
+
+    if provider == "tmap":
+        resolved = resolve_place_to_address_tmap(place, region_hint=region_hint)
+    else:
+        print(f"지원하지 않는 geocoding provider: {provider}")
 
     if resolved:
         print(f"장소 주소 변환: {place} -> {resolved}")
         return resolved
 
     return place
+
 
 
 def extract_crowd(text: str) -> Tuple[Optional[int], str]:
@@ -784,7 +851,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         return None
 
     raw_place = clean_text(raw.get("place")) or extract_place(text) or "(자료 없음)"
-    place = enrich_place_with_kakao(raw_place, config)
+    place = enrich_place_with_geocoder(raw_place, config)
     crowd_value, crowd_display = extract_crowd(text)
     event_type = classify_type(text)
     grade = grade_event(crowd_value, rules)
