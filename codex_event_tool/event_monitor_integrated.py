@@ -432,12 +432,23 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
     try:
         response = SESSION.get(url, headers=headers, params=params, timeout=10)
 
+        if response.status_code == 204:
+            print(f"Tmap 장소 검색 결과 없음: {query}")
+            GEOCODER_PLACE_CACHE[query] = ""
+            return ""
+        
         if response.status_code != 200:
             print(f"Tmap API 상태코드: {response.status_code}")
             print(f"Tmap API 응답: {response.text[:500]}")
-
+        
         response.raise_for_status()
-        data = response.json()
+        
+        try:
+            data = response.json()
+        except Exception as e:
+            print(f"Tmap JSON 파싱 실패: {query} / {e}")
+            GEOCODER_PLACE_CACHE[query] = ""
+            return ""
 
         pois = data.get("searchPoiInfo", {}).get("pois", {}).get("poi", [])
         if not pois:
