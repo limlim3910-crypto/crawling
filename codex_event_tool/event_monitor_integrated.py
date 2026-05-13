@@ -407,10 +407,13 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
         print("TMAP_APP_KEY 없음 -> 장소 주소 변환 생략")
         return ""
 
-    query = clean_text(f"{region_hint} {place_name}")
+    query_candidates = []
 
-    if query in GEOCODER_PLACE_CACHE:
-        return GEOCODER_PLACE_CACHE[query]
+    if region_hint:
+        for region in region_hint.split():
+            query_candidates.append(clean_text(f"{region} {place_name}"))
+
+    query_candidates.append(place_name)
 
     url = "https://apis.openapi.sk.com/tmap/pois"
 
@@ -419,98 +422,110 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
         "Accept": "application/json",
     }
 
-    params = {
-        "version": "1",
-        "format": "json",
-        "searchKeyword": query,
-        "count": "3",
-        "searchType": "all",
-        "resCoordType": "WGS84GEO",
-        "reqCoordType": "WGS84GEO",
-    }
+    for query in query_candidates:
+        if not query:
+            continue
 
-    try:
-        response = SESSION.get(url, headers=headers, params=params, timeout=10)
+        if query in GEOCODER_PLACE_CACHE:
+            cached = GEOCODER_PLACE_CACHE[query]
+            if cached:
+                return cached
+            continue
 
-        if response.status_code == 204:
-            print(f"Tmap 장소 검색 결과 없음: {query}")
-            GEOCODER_PLACE_CACHE[query] = ""
-            return ""
-        
-        if response.status_code != 200:
-            print(f"Tmap API 상태코드: {response.status_code}")
-            print(f"Tmap API 응답: {response.text[:500]}")
-        
-        response.raise_for_status()
-        
+        params = {
+            "version": "1",
+            "format": "json",
+            "searchKeyword": query,
+            "count": "3",
+            "searchType": "all",
+            "resCoordType": "WGS84GEO",
+            "reqCoordType": "WGS84GEO",
+        }
+
         try:
-            data = response.json()
+            response = SESSION.get(url, headers=headers, params=params, timeout=10)
+
+            if response.status_code == 204:
+                print(f"Tmap 장소 검색 결과 없음: {query}")
+                GEOCODER_PLACE_CACHE[query] = ""
+                continue
+
+            if response.status_code != 200:
+                print(f"Tmap API 상태코드: {response.status_code}")
+                print(f"Tmap API 응답: {response.text[:500]}")
+
+            response.raise_for_status()
+
+            try:
+                data = response.json()
+            except Exception as e:
+                print(f"Tmap JSON 파싱 실패: {query} / {e}")
+                GEOCODER_PLACE_CACHE[query] = ""
+                continue
+
+            pois = data.get("searchPoiInfo", {}).get("pois", {}).get("poi", [])
+            if not pois:
+                print(f"Tmap 장소 검색 결과 없음: {query}")
+                GEOCODER_PLACE_CACHE[query] = ""
+                continue
+
+            for poi in pois:
+                name = clean_text(poi.get("name", ""))
+
+                upper_addr = clean_text(poi.get("upperAddrName", ""))
+                middle_addr = clean_text(poi.get("middleAddrName", ""))
+                lower_addr = clean_text(poi.get("lowerAddrName", ""))
+                detail_addr = clean_text(poi.get("detailAddrName", ""))
+
+                road_name = clean_text(poi.get("roadName", ""))
+                first_build_no = clean_text(poi.get("firstBuildNo", ""))
+                second_build_no = clean_text(poi.get("secondBuildNo", ""))
+
+                build_no = first_build_no
+                if second_build_no and second_build_no != "0":
+                    build_no = f"{first_build_no}-{second_build_no}"
+
+                road_address = clean_text(
+                    " ".join(
+                        part for part in [
+                            upper_addr,
+                            middle_addr,
+                            road_name,
+                            build_no,
+                        ]
+                        if part
+                    )
+                )
+
+                jibun_address = clean_text(
+                    " ".join(
+                        part for part in [
+                            upper_addr,
+                            middle_addr,
+                            lower_addr,
+                            detail_addr,
+                        ]
+                        if part
+                    )
+                )
+
+                address = road_address or jibun_address
+
+                if address:
+                    if name and name not in address:
+                        address = f"{address} ({name})"
+
+                    GEOCODER_PLACE_CACHE[query] = address
+                    return address
+
+            GEOCODER_PLACE_CACHE[query] = ""
+
         except Exception as e:
-            print(f"Tmap JSON 파싱 실패: {query} / {e}")
+            print(f"Tmap 장소 주소 변환 실패: {query} / {e}")
             GEOCODER_PLACE_CACHE[query] = ""
-            return ""
+            continue
 
-        pois = data.get("searchPoiInfo", {}).get("pois", {}).get("poi", [])
-        if not pois:
-            print(f"Tmap 장소 검색 결과 없음: {query}")
-            GEOCODER_PLACE_CACHE[query] = ""
-            return ""
-
-        for poi in pois:
-            name = clean_text(poi.get("name", ""))
-
-            upper_addr = clean_text(poi.get("upperAddrName", ""))
-            middle_addr = clean_text(poi.get("middleAddrName", ""))
-            lower_addr = clean_text(poi.get("lowerAddrName", ""))
-            detail_addr = clean_text(poi.get("detailAddrName", ""))
-
-            road_name = clean_text(poi.get("roadName", ""))
-            first_build_no = clean_text(poi.get("firstBuildNo", ""))
-            second_build_no = clean_text(poi.get("secondBuildNo", ""))
-
-            build_no = first_build_no
-            if second_build_no and second_build_no != "0":
-                build_no = f"{first_build_no}-{second_build_no}"
-
-            road_address = clean_text(
-                " ".join(
-                    part for part in [
-                        upper_addr,
-                        middle_addr,
-                        road_name,
-                        build_no,
-                    ]
-                    if part
-                )
-            )
-
-            jibun_address = clean_text(
-                " ".join(
-                    part for part in [
-                        upper_addr,
-                        middle_addr,
-                        lower_addr,
-                        detail_addr,
-                    ]
-                    if part
-                )
-            )
-
-            address = road_address or jibun_address
-
-            if address:
-                if name and name not in address:
-                    address = f"{address} ({name})"
-
-                GEOCODER_PLACE_CACHE[query] = address
-                return address
-
-        GEOCODER_PLACE_CACHE[query] = ""
-        return ""
-
-    except Exception as e:
-        print(f"Tmap 장소 주소 변환 실패: {query} / {e}")
-        return ""
+    return ""
 
 
 def enrich_place_with_geocoder(place: str, config: Dict[str, Any]) -> str:
