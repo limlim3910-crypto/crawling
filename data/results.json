@@ -1,47 +1,80 @@
 [
   {
-    "id": "461b23e4e71122a5847ba1eab50f3ba1e9db0bd266c727aab2319d57ec469a03",
+    "id": "db404b96540cd54f697b1bafa9cf8b954d9afd5d85b9033d53bbe8b6628d7f24",
     "site_name": "부산시",
-    "title": "2026년 119시민수상구조대 자원봉사자 모집 공고문",
-    "link": "https://www.busan.go.kr/nbnews/1730874?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
-    "department": "구조구급과",
-    "published": "2026-05-13",
+    "title": "부산박물관 문화상품(굿즈)숍 공간 운영 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730995?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "교육홍보팀",
+    "published": "2026-05-14",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-13T09:18:57.873103+00:00"
+    "collected_at_utc": "2026-05-14T17:12:47.049759+00:00"
   },
   {
-    "id": "24251c5423faf5eaaa59b66e507805e4831d43c967c691bb439fa0aebe310412",
+    "id": "d97fb54303f8e364dbc05b72232b0f288a6a802ff7761e22312cc6c3574db0e8",
     "site_name": "부산시",
-    "title": "해운대수목원 장미축제 - 숲속의 장미 여행 (밤숲) 참가 신청 안내",
-    "link": "https://www.busan.go.kr/nbnews/1730751?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
-    "department": "해운대수목원팀",
-    "published": "2026-05-12",
+    "title": "2026 달려라부산 러닝크루 참여자 모집 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730968?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "생활체육과",
+    "published": "2026-05-14",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-13T09:18:57.873139+00:00"
+    "collected_at_utc": "2026-05-14T17:12:47.049799+00:00"
   },
   {
-    "id": "97181508ac44117e3878c70947698ae0288d0392d1866cefa4c78f0c1c9455e8",
+    "id": "6c12637a2dbed5445bd870bce9a9f374a65ee1e4ecc456b5c4f3b523c7a386db",
     "site_name": "부산시",
-    "title": "「제3회 위험물 안전관리 우수사례 경진대회」 개최 알림",
-    "link": "https://www.busan.go.kr/nbnews/1730743?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
-    "department": "예방안전과",
-    "published": "2026-05-12",
+    "title": "기획형 규제샌드박스 후보사업자 모집 안내(미연접 옥외 장소 영업 시범사업)",
+    "link": "https://www.busan.go.kr/nbnews/1730963?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "보건위생과",
+    "published": "2026-05-14",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-13T09:18:57.873156+00:00"
+    "collected_at_utc": "2026-05-14T17:12:47.049810+00:00"
   },
   {
-    "id": "449f915b0e710f6e9190ddca7509a1a018dcd63cdb9944a151509c3f2e87e7ca",
+    "id": "05ddff0a9488b39de4bc79bfe2e677e0bdab861983663eaa82d16f092f76e3c1",
     "site_name": "부산시",
-    "title": "「세계유산위원회 성공개최 응원 걸음기부 챌린지」 참여 안내",
-    "link": "https://www.busan.go.kr/nbnews/1730742?curPage=&srchBeginDt=2025-05-13&srchEndDt=2026-05-13&srchKey=&srchText=",
-    "department": "문화유산과",
-    "published": "2026-05-12",
+    "title": "제21회 세계시민축제(Global Citizen Festival 2026 in Busan) 개최 안내",
+    "link": "https://www.busan.go.kr/nbnews/1730957?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "인구정책담당관",
+    "published": "2026-05-14",
     "address": "",
     "source": "https://www.busan.go.kr/nbnews",
-    "collected_at_utc": "2026-05-13T09:18:57.873166+00:00"
+    "collected_at_utc": "2026-05-14T17:12:47.049824+00:00"
+  },
+  {
+    "id": "03367d64969cd8d4010d2046d494f69582c7eebfa64e878641f71a7464f2cae1",
+    "site_name": "부산시",
+    "title": "어린이신문 Big아이도란도란 5호 표지 그림 공모전 개최",
+    "link": "https://www.busan.go.kr/nbnews/1730954?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "미디어담당관",
+    "published": "2026-05-14",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-14T17:12:47.049834+00:00"
+  },
+  {
+    "id": "af2fb18246426fb049b80a5f61abb3962200370c3cc1cee0264826d194d72a53",
+    "site_name": "부산시",
+    "title": "제20회 부산가족축제 및 제13회 청소년 열린축제 통합 개최",
+    "link": "https://www.busan.go.kr/nbnews/1730941?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "여성가족과",
+    "published": "2026-05-14",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-14T17:12:47.049846+00:00"
+  },
+  {
+    "id": "3a9a175b5f2c8be7ad6737c9191e7ec079674936729298949d1dff3783753c29",
+    "site_name": "부산시",
+    "title": "2026년 부산시민대학 상반기 수강생 모집, 인공지능부터 부동산 재테크까지 내 삶을 바꾸는 배움",
+    "link": "https://www.busan.go.kr/nbnews/1730935?curPage=&srchBeginDt=2025-05-15&srchEndDt=2026-05-15&srchKey=&srchText=",
+    "department": "창조교육과",
+    "published": "2026-05-14",
+    "address": "",
+    "source": "https://www.busan.go.kr/nbnews",
+    "collected_at_utc": "2026-05-14T17:12:47.049859+00:00"
   },
   {
     "id": "a9b3ae535066e3f2d64e2a6d71ef8a52158054f4117b98e5283370c9464b8e3e",
@@ -52,7 +85,7 @@
     "published": "2026-05-14 ~ 2026-05-17",
     "address": "경남 거창군 남상면 창포원길 21-1 거창창포원 일원",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-13T09:28:23.656439+00:00"
+    "collected_at_utc": "2026-05-14T17:22:33.339256+00:00"
   },
   {
     "id": "c8a5860a76f551e410020267ff584e77959325fc0653fb0b662464718f383371",
@@ -63,6 +96,17 @@
     "published": "2026-08-28 ~ 2026-08-29",
     "address": "경남 고성군 고성읍 송학로113번길 50 고성박물관",
     "source": "https://festa.gyeongnam.go.kr/",
-    "collected_at_utc": "2026-05-13T09:28:23.657156+00:00"
+    "collected_at_utc": "2026-05-14T17:22:33.339976+00:00"
+  },
+  {
+    "id": "5cc3c872ca608af547928484b2ca541e2d206335e58dd345efdc8004ed040ec6",
+    "site_name": "경상남도",
+    "title": "남해마늘한우축제",
+    "link": "https://festa.gyeongnam.go.kr/cowcow",
+    "department": "경상남도",
+    "published": "2026-06-11 ~ 2026-06-14",
+    "address": "경남 남해군 남해읍 남해대로 2745",
+    "source": "https://festa.gyeongnam.go.kr/",
+    "collected_at_utc": "2026-05-14T17:22:33.340293+00:00"
   }
 ]
