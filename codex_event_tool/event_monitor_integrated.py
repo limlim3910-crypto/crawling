@@ -86,7 +86,29 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
             "인사", "입찰", "채용", "분양", "공고문", "선거", "정당", "성료",
             "교육생", "직업교육훈련", "창업경진대회", "공공데이터", "수업 공개", "수업혁신",
             "헌혈", "장기등 기증", "센터 개소", "봉사단", "홍보관"
-        ]
+        ],
+        "rss": {
+            "min_signal_score": 4,
+            "strong_keywords": [
+                "축제", "공연", "콘서트", "페스티벌", "박람회", "엑스포", "전시",
+                "에어쇼", "마라톤", "걷기", "대회", "체육대회", "로드쇼", "퍼레이드",
+                "야행", "개막", "집회", "시위", "기자회견", "행진", "규탄", "총궐기"
+            ],
+            "weak_keywords": [
+                "행사", "개최", "열다", "열린", "운영", "안내", "알림", "진행", "추진",
+                "홍보", "캠페인", "교육", "모집", "포상", "표창", "봉사", "나눔", "방문",
+                "점검", "취업지원", "공개모집", "서류심사", "기념식", "주간", "위촉",
+                "협약", "심사", "발대식", "해단식", "실천활동", "소통", "공감"
+            ],
+            "venue_keywords": [
+                "공원", "광장", "체육관", "경기장", "컨벤션", "전시장", "아트홀",
+                "문화회관", "시청", "구청", "군청", "박물관", "대학", "대운동장",
+                "역광장", "해변", "부두", "시장", "스타디움"
+            ],
+            "protest_keywords": [
+                "집회", "시위", "기자회견", "행진", "규탄", "총궐기", "반대집회", "촛불"
+            ]
+        }
     },
     "rules": {
         "default_network": "검토",
@@ -590,11 +612,11 @@ def extract_crowd(text: str) -> Tuple[Optional[int], str]:
 def classify_type(text: str) -> str:
     text = clean_text(text)
     rules = [
-        ("집회", ["집회", "시위", "기자회견"]),
+        ("집회", ["집회", "시위", "기자회견", "행진", "규탄", "총궐기"]),
         ("축제", ["축제", "페스티벌", "불꽃", "개막"]),
         ("공연", ["공연", "콘서트", "버스킹", "초대가수"]),
         ("전시", ["전시", "박람회", "엑스포"]),
-        ("스포츠", ["걷기", "마라톤", "대회", "리그", "투어"]),
+        ("스포츠", ["걷기", "마라톤", "대회", "리그", "투어", "에어쇼", "체육대회"]),
         ("체험", ["체험", "캠프", "교육"]),
     ]
     for label, keywords in rules:
@@ -650,17 +672,97 @@ def classify_feature(start: Optional[date], end: Optional[date], text: str) -> s
     return "(자료 없음)"
 
 
+def contains_any(text: str, keywords: Iterable[str]) -> bool:
+    return any(keyword in text for keyword in keywords if keyword)
+
+
+def keyword_hit_count(text: str, keywords: Iterable[str]) -> int:
+    return sum(1 for keyword in keywords if keyword and keyword in text)
+
+
+def normalize_rss_title(title: str) -> str:
+    title = clean_text(title)
+    if not title:
+        return title
+
+    # RSS 제목 뒤에 붙는 매체명/도메인 꼬리를 최대한 제거해 중복 노이즈를 줄인다.
+    parts = re.split(r"\s[-–—]\s", title)
+    if len(parts) < 2:
+        return title
+
+    left = clean_text(parts[0])
+    right = clean_text(parts[-1]).lower()
+    if not left or not right:
+        return title
+
+    source_suffix_markers = (
+        ".com", ".co.kr", ".net", ".kr", "뉴스", "일보", "신문", "경제",
+        "매거진", "미디어", "브리핑", "연합뉴스", "daum", "nate", "v.daum.net",
+    )
+    if len(right) <= 40 and (
+        any(marker in right for marker in source_suffix_markers) or re.fullmatch(r"[a-z0-9.&()/_-]+", right)
+    ):
+        return left
+
+    return title
+
+
+def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
+    rss_cfg = filters.get("rss", {})
+    title = clean_text(item.get("title", ""))
+    body = clean_text(item.get("body", ""))
+    text = f"{title} {body}"
+
+    strong_keywords = [clean_text(v) for v in rss_cfg.get("strong_keywords", []) if clean_text(v)]
+    weak_keywords = [clean_text(v) for v in rss_cfg.get("weak_keywords", []) if clean_text(v)]
+    venue_keywords = [clean_text(v) for v in rss_cfg.get("venue_keywords", []) if clean_text(v)]
+    protest_keywords = [clean_text(v) for v in rss_cfg.get("protest_keywords", []) if clean_text(v)]
+
+    score = 0
+
+    # 제목에 들어간 신호를 조금 더 강하게 반영한다.
+    if contains_any(title, strong_keywords):
+        score += 3
+    if contains_any(body, strong_keywords):
+        score += 2
+    if contains_any(text, protest_keywords):
+        score += 4
+    if contains_any(text, venue_keywords):
+        score += 1
+    if re.search(r"\d{1,3}(?:,\d{3})*\s*(?:명|여명)", text):
+        score += 2
+    if re.search(r"\d+(?:\.\d+)?\s*(?:만|천)\s*(?:명|여명)", text):
+        score += 2
+    if re.search(r"(20\d{2}|19\d{2})[.\-/]\d{1,2}[.\-/]\d{1,2}", text) or re.search(r"\d{1,2}\s*월\s*\d{1,2}\s*일", text):
+        score += 1
+    if contains_any(text, weak_keywords):
+        score -= min(6, keyword_hit_count(text, weak_keywords))
+
+    return score
+
+
 def passes_filters(item: Dict[str, Any], filters: Dict[str, Any]) -> bool:
+    source_type = clean_text(item.get("source_type")).lower()
     item_text = f"{item.get('title', '')} {item.get('body', '')} {item.get('place', '')}"
     text = f"{item.get('source_name', '')} {item_text}"
-    region_text = item_text if item.get("source_type") == "rss" else text
     include = [clean_text(v) for v in filters.get("include_keywords", []) if clean_text(v)]
     exclude = [clean_text(v) for v in filters.get("exclude_keywords", []) if clean_text(v)]
     regions = [clean_text(v) for v in filters.get("region_keywords", []) if clean_text(v)]
     if any(keyword in text for keyword in exclude):
         return False
+
+    if source_type == "rss":
+        rss_cfg = filters.get("rss", {})
+        min_score = int(rss_cfg.get("min_signal_score", 4))
+        score = rss_signal_score(item, filters)
+        if score < min_score:
+            return False
+        if filters.get("require_region", False) and regions and not any(keyword in item_text for keyword in regions):
+            return False
+        return True
+
     if filters.get("require_region", False) and regions:
-        if not any(keyword in region_text for keyword in regions):
+        if not any(keyword in text for keyword in regions):
             return False
     if filters.get("require_keyword", True) and include:
         return any(keyword in text for keyword in include)
@@ -693,7 +795,7 @@ def parse_rss_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
             if key == "link" and not fields.get("link"):
                 fields["link"] = clean_text(child.attrib.get("href", ""))
 
-        title = fields.get("title", "")
+        title = normalize_rss_title(fields.get("title", ""))
         body = fields.get("description") or fields.get("summary") or fields.get("content") or ""
         rows.append(
             {
