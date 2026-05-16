@@ -412,6 +412,7 @@ ARTICLE_DETAIL_STATS: Dict[str, int] = {
     "google_resolve_success": 0,
     "google_resolve_failed": 0,
 }
+ARTICLE_DETAIL_EMPTY_SAMPLES: List[Dict[str, Any]] = []
 AI_EXTRACTION_STATS: Dict[str, int] = {
     "attempted": 0,
     "success": 0,
@@ -1050,34 +1051,120 @@ def normalize_rss_title(title: str) -> str:
 def extract_article_text(html: str, max_chars: int = 6000) -> str:
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup.select("script, style, noscript, header, footer, nav, aside, form"):
+        if tag.name == "script" and tag.get("type") == "application/ld+json":
+            continue
         tag.decompose()
 
     chunks: List[str] = []
     for selector in (
         'meta[property="og:description"]',
         'meta[name="description"]',
+        'meta[name="twitter:description"]',
     ):
         meta = soup.select_one(selector)
         content = clean_text(meta.get("content", "") if meta else "")
         if content:
             chunks.append(content)
 
+    for script in soup.select('script[type="application/ld+json"]'):
+        raw_json = clean_text(script.string or script.get_text(" ", strip=True))
+        if not raw_json:
+            continue
+        try:
+            data = json.loads(raw_json)
+        except Exception:
+            continue
+        for item in find_json_objects(data):
+            for key in ("articleBody", "description"):
+                value = clean_text(item.get(key, "")) if isinstance(item, dict) else ""
+                if len(value) >= 30:
+                    chunks.append(value)
+
     candidates = soup.select(
         "article, [itemprop='articleBody'], #articleBody, #news_body_area, "
-        ".article_body, .article-body, .article-view, .news_view, .view_con, .content"
+        "#article-view-content-div, #articleBodyContents, #article_body, #newsContent, "
+        "#CmAdContent, #articleText, #contents, .article_body, .article-body, "
+        ".article_body_view, .article-view, .articleView, .article_txt, .article-text, "
+        ".article-content, .articleCont, .article_area, .article-wrap, .news_view, "
+        ".news_body, .news-content, .news-article, .view_con, .view_cont, .view_content, "
+        ".content, .contents, .cont_view, .article"
     )
     if not candidates:
-        candidates = soup.find_all("p")
+        candidates = soup.find_all(["p", "div"])
 
-    for candidate in candidates[:30]:
+    for candidate in candidates[:80]:
         text = clean_text(candidate.get_text(" ", strip=True))
-        if len(text) >= 30:
+        if len(text) >= 20:
             chunks.append(text)
 
     merged = clean_text(" ".join(chunks))
+    if len(merged) < 200:
+        body = soup.body or soup
+        body_text = body.get_text("\n", strip=True)
+        useful_lines = []
+        noise_patterns = [
+            "Comprehensive up-to-date news coverage",
+            "Google News",
+            "뉴스검색",
+            "무단전재",
+            "재배포 금지",
+            "저작권자",
+            "기사제보",
+            "로그인",
+            "회원가입",
+            "구독",
+            "광고",
+        ]
+        for line in body_text.splitlines():
+            line = clean_text(line)
+            if len(line) < 12:
+                continue
+            if any(noise in line for noise in noise_patterns):
+                continue
+            if line in useful_lines:
+                continue
+            useful_lines.append(line)
+            if len(" ".join(useful_lines)) >= max_chars:
+                break
+        if useful_lines:
+            merged = clean_text(f"{merged} {' '.join(useful_lines)}")
+
     if len(merged) > max_chars:
         return merged[:max_chars].rstrip()
     return merged
+
+
+def find_json_objects(data: Any) -> List[Dict[str, Any]]:
+    found: List[Dict[str, Any]] = []
+    if isinstance(data, dict):
+        found.append(data)
+        for value in data.values():
+            found.extend(find_json_objects(value))
+    elif isinstance(data, list):
+        for value in data:
+            found.extend(find_json_objects(value))
+    return found
+
+
+def record_empty_article_sample(link: str, response: requests.Response) -> None:
+    if len(ARTICLE_DETAIL_EMPTY_SAMPLES) >= 10:
+        return
+    try:
+        soup = BeautifulSoup(response.text, "html.parser")
+        title = clean_text(soup.title.get_text(" ", strip=True) if soup.title else "")
+        body_len = len(clean_text((soup.body or soup).get_text(" ", strip=True)))
+    except Exception:
+        title = ""
+        body_len = len(clean_text(response.text))
+    ARTICLE_DETAIL_EMPTY_SAMPLES.append(
+        {
+            "url": clean_text(response.url) or clean_text(link),
+            "status_code": response.status_code,
+            "content_type": response.headers.get("content-type", ""),
+            "title": title[:120],
+            "body_text_length": body_len,
+        }
+    )
 
 
 def is_google_news_url(url: str) -> bool:
@@ -1188,9 +1275,13 @@ def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
         ARTICLE_DETAIL_STATS["failed"] += 1
         return "", article_link
 
+    if not response.encoding or response.encoding.lower() in {"iso-8859-1", "ascii"}:
+        response.encoding = response.apparent_encoding or response.encoding
+
     content_type = response.headers.get("content-type", "").lower()
     if "html" not in content_type and "<html" not in response.text[:500].lower():
         ARTICLE_DETAIL_STATS["empty"] += 1
+        record_empty_article_sample(article_link, response)
         return "", clean_text(response.url)
 
     article_text = extract_article_text(response.text, max_chars=max_chars)
@@ -1198,6 +1289,7 @@ def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
         ARTICLE_DETAIL_STATS["success"] += 1
     else:
         ARTICLE_DETAIL_STATS["empty"] += 1
+        record_empty_article_sample(article_link, response)
     return article_text, clean_text(response.url) or article_link
 
 
@@ -2176,6 +2268,7 @@ def main() -> int:
             "xlsx_path": str(xlsx_path),
             "html_path": str(html_path),
             "article_detail_stats": ARTICLE_DETAIL_STATS,
+            "article_detail_empty_samples": ARTICLE_DETAIL_EMPTY_SAMPLES,
             "ai_extraction_stats": AI_EXTRACTION_STATS,
             "geocoder_stats": GEOCODER_STATS,
             "errors": errors,
