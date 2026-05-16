@@ -177,6 +177,7 @@ EVENT_HEADERS = [
     "원문링크",
     "요약",
     "수집일",
+    "추출방식",
     "상태/비고",
 ]
 
@@ -670,6 +671,39 @@ def extract_crowd(text: str) -> Tuple[Optional[int], str]:
             value = int(raw.replace(",", ""))
         return value, f"{value:,}"
     return None, "(자료 없음)"
+
+
+def extraction_label(source: str, value: str = "") -> str:
+    source = clean_text(source)
+    value = clean_text(value)
+    if source == "ai":
+        return "AI"
+    if source == "rule":
+        return "Rule 약함" if value and is_weak_place_name(value) else "Rule"
+    return "없음"
+
+
+def build_extraction_note(
+    ai_result: Dict[str, Any],
+    period_source: str,
+    place_source: str,
+    crowd_source: str,
+    place_value: str,
+) -> str:
+    overall = "AI보완" if ai_result else "Rule-Based"
+    confidence = ""
+    if ai_result and ai_result.get("confidence") not in {None, ""}:
+        try:
+            confidence = f" / 신뢰도:{float(ai_result.get('confidence')):.2f}"
+        except (TypeError, ValueError):
+            confidence = ""
+    parts = [
+        f"전체:{overall}{confidence}",
+        f"기간:{extraction_label(period_source)}",
+        f"장소:{extraction_label(place_source, place_value)}",
+        f"인원:{extraction_label(crowd_source)}",
+    ]
+    return " / ".join(parts)
 
 
 def parse_iso_date(value: str) -> Optional[date]:
@@ -1277,12 +1311,15 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         return None
 
     start, end = parse_date_range(raw.get("event_period", ""), text)
+    period_source = "rule" if start or end else "none"
     ai_start = parse_iso_date(clean_text(ai_result.get("start_date", ""))) if ai_result else None
     ai_end = parse_iso_date(clean_text(ai_result.get("end_date", ""))) if ai_result else None
     if ai_start and (start is None or float(ai_result.get("confidence") or 0) >= 0.6):
         start = ai_start
+        period_source = "ai"
     if ai_end and (end is None or float(ai_result.get("confidence") or 0) >= 0.6):
         end = ai_end
+        period_source = "ai"
     if start and end is None:
         end = start
 
@@ -1292,15 +1329,19 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     rule_place = clean_text(raw.get("place")) or extract_place(text)
     ai_place = clean_text(ai_result.get("place", "")) if ai_result else ""
     raw_place = rule_place
+    place_source = "rule" if raw_place else "none"
     if ai_place and (not raw_place or is_weak_place_name(raw_place)):
         raw_place = ai_place
+        place_source = "ai"
     raw_place = raw_place or "(자료 없음)"
     place = enrich_place_with_geocoder(raw_place, config)
     crowd_value, crowd_display = extract_crowd(text)
+    crowd_source = "rule" if crowd_value is not None else "none"
     ai_crowd = ai_result.get("expected_crowd") if ai_result else None
     if crowd_value is None and isinstance(ai_crowd, int):
         crowd_value = ai_crowd
         crowd_display = f"{ai_crowd:,}"
+        crowd_source = "ai"
     event_type = classify_type(text)
     ai_type = clean_text(ai_result.get("event_type", "")) if ai_result else ""
     if ai_type in {"행사", "축제", "공연", "전시", "스포츠", "체험", "집회"}:
@@ -1315,6 +1356,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     ai_title = clean_text(ai_result.get("event_name", "")) if ai_result else ""
     title = ai_title if ai_title and float(ai_result.get("confidence") or 0) >= 0.6 else original_title
     status = "신규(AI보완)" if ai_result else "신규"
+    extraction_note = build_extraction_note(ai_result, period_source, place_source, crowd_source, raw_place)
 
     return {
         "id": make_item_id(title, link),
@@ -1334,6 +1376,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         "link": link,
         "summary": summarize(text),
         "collected_at": generated_at,
+        "extraction_method": extraction_note,
         "status": status,
         "sort_dt": parse_datetime_value(raw.get("published", "")),
         "event_start_ord": start.toordinal() if start else 99999999,
@@ -1542,7 +1585,7 @@ def doc_props_xml(generated_at: str) -> Tuple[str, str]:
 
 
 def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
-    cols = [8, 24, 34, 24, 11, 12, 12, 12, 17, 16, 19, 16, 18, 38, 45, 20, 15]
+    cols = [8, 24, 34, 24, 11, 12, 12, 12, 17, 16, 19, 16, 18, 38, 45, 20, 34, 15]
     col_xml = "".join(f'<col min="{idx}" max="{idx}" width="{width}" customWidth="1"/>' for idx, width in enumerate(cols, 1))
     rows: List[str] = []
     last_col = col_name(len(EVENT_HEADERS))
@@ -1574,6 +1617,7 @@ def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
             (item.get("link", ""), 9, False),
             (item.get("summary", ""), 7, False),
             (item.get("collected_at", ""), 6, False),
+            (item.get("extraction_method", ""), 7, False),
             (item.get("status", ""), 6, False),
         ]
         rows.append(row_xml(row_idx, values, 58))
@@ -1676,6 +1720,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
             item.get("link", ""),
             item.get("summary", ""),
             item.get("collected_at", ""),
+            item.get("extraction_method", ""),
             item.get("status", ""),
         ]
 
@@ -1685,7 +1730,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
             cell.font = normal_font
             cell.border = border
 
-            if col_idx in [3, 4, 14, 15]:
+            if col_idx in [3, 4, 14, 15, 17]:
                 cell.alignment = left
             else:
                 cell.alignment = center
@@ -1700,7 +1745,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
         ws.row_dimensions[row_idx].height = 58
 
     # Column widths
-    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 15]
+    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 36, 15]
     for idx, width in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(idx)].width = width
 
@@ -1726,11 +1771,12 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
               <td>{escape(item.get('place', ''))}</td>
               <td>{escape(item.get('type', ''))}</td>
               <td>{escape(str(item.get('crowd', '')))}</td>
+              <td>{escape(item.get('extraction_method', ''))}</td>
               <td><a href="{escape(item.get('link', ''))}">원문</a></td>
             </tr>
             """
         )
-    body = "".join(rows) if rows else '<tr><td colspan="7">새 게시물이 없습니다.</td></tr>'
+    body = "".join(rows) if rows else '<tr><td colspan="8">새 게시물이 없습니다.</td></tr>'
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -1753,7 +1799,7 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
   <table>
     <thead>
       <tr>
-        <th>등급</th><th>Event명/요약</th><th>기간</th><th>장소</th><th>Type</th><th>예상운집</th><th>링크</th>
+        <th>등급</th><th>Event명/요약</th><th>기간</th><th>장소</th><th>Type</th><th>예상운집</th><th>추출방식</th><th>링크</th>
       </tr>
     </thead>
     <tbody>{body}</tbody>
