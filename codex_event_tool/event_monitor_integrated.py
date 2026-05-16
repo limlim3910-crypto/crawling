@@ -1176,8 +1176,20 @@ def clean_candidate_url(value: str) -> str:
     value = clean_text(unquote(value)).strip(" \t\r\n\"'<>),.;")
     if not value.startswith(("http://", "https://")):
         return ""
-    host = urlparse(value).netloc.lower()
-    if not host or host.endswith("google.com") or host.endswith("google.co.kr"):
+    parsed = urlparse(value)
+    host = parsed.netloc.lower()
+    path = parsed.path.lower()
+    blocked_hosts = (
+        "google.com",
+        "google.co.kr",
+        "googleusercontent.com",
+        "gstatic.com",
+        "ggpht.com",
+    )
+    blocked_extensions = (".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".ico", ".css", ".js")
+    if not host or any(host == blocked or host.endswith(f".{blocked}") for blocked in blocked_hosts):
+        return ""
+    if path.endswith(blocked_extensions):
         return ""
     return value
 
@@ -1388,10 +1400,14 @@ def parse_rss_source(source: Dict[str, Any], rss_cfg: Optional[Dict[str, Any]] =
                 fields[key] = clean_text(child.text)
             if key == "link" and not fields.get("link"):
                 fields["link"] = clean_text(child.attrib.get("href", ""))
+            if key == "source":
+                source_link = clean_candidate_url(child.attrib.get("url", ""))
+                if source_link:
+                    fields["source_link"] = source_link
 
         title = normalize_rss_title(fields.get("title", ""))
         body = fields.get("description") or fields.get("summary") or fields.get("content") or ""
-        link = fields.get("link", source["url"])
+        link = fields.get("source_link") or fields.get("link", source["url"])
         detail_text = ""
         resolved_link = ""
         if fetch_detail and fetched_count < max_fetch:
