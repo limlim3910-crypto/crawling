@@ -180,7 +180,7 @@
     }
   },
   "ai_extraction": {
-    "enabled": false,
+    "enabled": true,
     "provider": "openai",
     "model": "gpt-4o-mini",
     "only_for_rss": true,
