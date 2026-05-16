@@ -119,6 +119,7 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
         "provider": "openai",
         "model": "gpt-4o-mini",
         "only_for_rss": True,
+        "fallback_on_missing": True,
         "min_body_chars": 200,
         "drop_non_events": False
     },
@@ -414,6 +415,7 @@ AI_EXTRACTION_STATS: Dict[str, int] = {
     "skipped_not_rss": 0,
     "skipped_short_body": 0,
     "skipped_no_key": 0,
+    "fallback_for_missing": 0,
     "non_event": 0,
 }
 
@@ -424,13 +426,27 @@ def looks_like_address(value: str) -> bool:
         return False
 
     patterns = [
-        r"(?:부산|울산|경남|경상남도|부산광역시|울산광역시)",
-        r"(?:시|도)\s+.+(?:시|군|구)",
-        r"(?:읍|면|동)\s+",
-        r"(?:로|길|대로|번길)\s*\d+",
+        r"(?:로|길|대로|번길)\s*\d+(?:-\d+)?",
+        r"(?:읍|면|동|리)\s*\d+(?:-\d+)?",
+        r"(?:시|군|구)\s+.+(?:로|길|대로|번길)\s*\d+(?:-\d+)?",
     ]
 
     return any(re.search(pattern, value) for pattern in patterns)
+
+
+def looks_like_admin_area_only(value: str) -> bool:
+    value = clean_text(value).strip(" ,.|:：")
+    if not value:
+        return False
+    if looks_like_address(value):
+        return False
+    if re.fullmatch(r"(?:부산|울산|경남|경상남도|부산광역시|울산광역시)(?:시|도)?", value):
+        return True
+    if re.fullmatch(r"(?:부산|울산|경남|경상남도|부산광역시|울산광역시)?\s*[가-힣]+(?:시|군|구|읍|면|동)", value):
+        return True
+    if re.fullmatch(r"(?:부산|울산|경남|경상남도|부산광역시|울산광역시)?\s*[가-힣]+(?:시|군|구)\s+[가-힣]+(?:읍|면|동)?", value):
+        return True
+    return False
 
 
 def is_weak_place_name(value: str) -> bool:
@@ -453,6 +469,9 @@ def is_weak_place_name(value: str) -> bool:
     }
 
     if value in weak_values:
+        return True
+
+    if looks_like_admin_area_only(value):
         return True
 
     if len(value) <= 2:
@@ -676,10 +695,12 @@ def extract_crowd(text: str) -> Tuple[Optional[int], str]:
 def extraction_label(source: str, value: str = "") -> str:
     source = clean_text(source)
     value = clean_text(value)
+    tmap_suffix = "+Tmap" if source.endswith("_tmap") else ""
+    source = source.replace("_tmap", "")
     if source == "ai":
-        return "AI"
+        return f"AI{tmap_suffix}"
     if source == "rule":
-        return "Rule 약함" if value and is_weak_place_name(value) else "Rule"
+        return f"Rule 약함{tmap_suffix}" if value and is_weak_place_name(value) else f"Rule{tmap_suffix}"
     return "없음"
 
 
@@ -732,7 +753,7 @@ def find_json_text(data: Any) -> str:
     return ""
 
 
-def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str) -> Dict[str, Any]:
+def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str, force: bool = False) -> Dict[str, Any]:
     global AI_EXTRACTION_WARNING_PRINTED
 
     ai_cfg = config.get("ai_extraction", {})
@@ -740,11 +761,11 @@ def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str
         AI_EXTRACTION_STATS["skipped_disabled"] += 1
         return {}
 
-    if ai_cfg.get("only_for_rss", True) and clean_text(raw.get("source_type")).lower() != "rss":
+    if not force and ai_cfg.get("only_for_rss", True) and clean_text(raw.get("source_type")).lower() != "rss":
         AI_EXTRACTION_STATS["skipped_not_rss"] += 1
         return {}
 
-    if len(clean_text(raw.get("body"))) < int(ai_cfg.get("min_body_chars", 200)):
+    if not force and len(clean_text(raw.get("body"))) < int(ai_cfg.get("min_body_chars", 200)):
         AI_EXTRACTION_STATS["skipped_short_body"] += 1
         return {}
 
@@ -756,7 +777,7 @@ def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str
             AI_EXTRACTION_WARNING_PRINTED = True
         return {}
 
-    cache_key = sha256_text(f"{raw.get('title', '')}|{raw.get('link', '')}|{text[:4000]}")
+    cache_key = sha256_text(f"{raw.get('title', '')}|{raw.get('link', '')}|{text[:4000]}|force:{force}")
     if cache_key in AI_EXTRACTION_CACHE:
         return AI_EXTRACTION_CACHE[cache_key]
 
@@ -1312,6 +1333,21 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
 
     start, end = parse_date_range(raw.get("event_period", ""), text)
     period_source = "rule" if start or end else "none"
+    rule_place = clean_text(raw.get("place")) or extract_place(text)
+    needs_ai_fallback = (
+        not ai_result
+        and config.get("ai_extraction", {}).get("fallback_on_missing", True)
+        and (
+            start is None
+            or end is None
+            or not rule_place
+            or is_weak_place_name(rule_place)
+        )
+    )
+    if needs_ai_fallback:
+        AI_EXTRACTION_STATS["fallback_for_missing"] += 1
+        ai_result = extract_event_with_ai(raw, config, text, force=True)
+
     ai_start = parse_iso_date(clean_text(ai_result.get("start_date", ""))) if ai_result else None
     ai_end = parse_iso_date(clean_text(ai_result.get("end_date", ""))) if ai_result else None
     if ai_start and (start is None or float(ai_result.get("confidence") or 0) >= 0.6):
@@ -1326,7 +1362,6 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     if is_expired(start, end, filters):
         return None
 
-    rule_place = clean_text(raw.get("place")) or extract_place(text)
     ai_place = clean_text(ai_result.get("place", "")) if ai_result else ""
     raw_place = rule_place
     place_source = "rule" if raw_place else "none"
@@ -1335,6 +1370,8 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         place_source = "ai"
     raw_place = raw_place or "(자료 없음)"
     place = enrich_place_with_geocoder(raw_place, config)
+    if place != raw_place and place_source in {"rule", "ai"}:
+        place_source = f"{place_source}_tmap"
     crowd_value, crowd_display = extract_crowd(text)
     crowd_source = "rule" if crowd_value is not None else "none"
     ai_crowd = ai_result.get("expected_crowd") if ai_result else None
