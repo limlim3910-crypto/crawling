@@ -114,6 +114,14 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
             ]
         }
     },
+    "ai_extraction": {
+        "enabled": False,
+        "provider": "openai",
+        "model": "gpt-4o-mini",
+        "only_for_rss": True,
+        "min_body_chars": 200,
+        "drop_non_events": False
+    },
     "rules": {
         "default_network": "검토",
         "unknown_crowd_grade": "검토",
@@ -282,6 +290,22 @@ def parse_date_range(*texts: str) -> Tuple[Optional[date], Optional[date]]:
     if len(parsed) == 1:
         return parsed[0], parsed[0]
 
+    from_to_match = re.search(
+        r"(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*(?:부터|~|-|∼)\s*"
+        r"(?:(\d{1,2})\s*월\s*)?(\d{1,2})\s*일?\s*(?:까지)?",
+        merged,
+    )
+    if from_to_match:
+        year = datetime.now(KST).year
+        start_month = int(from_to_match.group(1))
+        start_day = int(from_to_match.group(2))
+        end_month = int(from_to_match.group(3) or start_month)
+        end_day = int(from_to_match.group(4))
+        try:
+            return date(year, start_month, start_day), date(year, end_month, end_day)
+        except ValueError:
+            pass
+
     range_match = re.search(r"(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*[~\-∼]\s*(\d{1,2})\s*일", merged)
     if range_match:
         year = datetime.now(KST).year
@@ -350,19 +374,31 @@ def summarize(text: str, max_len: int = 180) -> str:
 
 def extract_place(text: str) -> str:
     text = clean_text(text)
+    venue_suffixes = (
+        "시청|구청|군청|문화회관|체육관|센터|공원|광장|호텔|역|마당|대학|"
+        "컨벤션|아트홀|전시장|복합문화공간|수목원|체험관|운동장|경기장|"
+        "해수욕장|해변|항|부두|시장|거리|로터리|스타디움|박물관|미술관|"
+        "예술회관|문화센터|체육센터|마을|들판|일원|광장|야외무대|특설무대"
+    )
     patterns = [
         r"(?:장소|위치|개최지|집결지|행사장)\s*[:：]?\s*([^\n\r,;|]+)",
-        r"([가-힣0-9\-\s]+(?:시청|구청|군청|문화회관|체육관|센터|공원|광장|호텔|역|마당|대학|컨벤션|아트홀|전시장|복합문화공간|수목원|체험관|운동장))",
+        rf"까지\s*([가-힣A-Za-z0-9·ㆍ\-\s]+?(?:{venue_suffixes}))\s*에서",
+        rf"([가-힣A-Za-z0-9·ㆍ\-\s]+?(?:{venue_suffixes}))\s*에서\s*[\"'‘“]?[가-힣A-Za-z0-9·ㆍ\-\s]*(?:축제|행사|집회|시위|공연|전시|박람회|콘서트|마라톤|대회)",
+        rf"([가-힣A-Za-z0-9·ㆍ\-\s]+?(?:{venue_suffixes}))",
     ]
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
             place = clean_text(match.group(1)).strip(" ,.|:：")
-            if len(place) >= 2:
+            place = re.sub(r"^\d{1,2}\s*일?\s*까지\s*", "", place).strip()
+            place = re.sub(r"^(?:오는|올해|내달|다음달|이번|오는\s+\d{1,2}\s*월)\s+", "", place).strip()
+            if len(place) >= 2 and not is_weak_place_name(place):
                 return place
     return ""
 
 GEOCODER_PLACE_CACHE: Dict[str, str] = {}
+AI_EXTRACTION_CACHE: Dict[str, Dict[str, Any]] = {}
+AI_EXTRACTION_WARNING_PRINTED = False
 
 
 def looks_like_address(value: str) -> bool:
@@ -618,6 +654,145 @@ def extract_crowd(text: str) -> Tuple[Optional[int], str]:
             value = int(raw.replace(",", ""))
         return value, f"{value:,}"
     return None, "(자료 없음)"
+
+
+def parse_iso_date(value: str) -> Optional[date]:
+    value = clean_text(value)
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def find_json_text(data: Any) -> str:
+    if isinstance(data, dict):
+        if isinstance(data.get("text"), str):
+            return data["text"]
+        for value in data.values():
+            found = find_json_text(value)
+            if found:
+                return found
+    if isinstance(data, list):
+        for value in data:
+            found = find_json_text(value)
+            if found:
+                return found
+    return ""
+
+
+def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str) -> Dict[str, Any]:
+    global AI_EXTRACTION_WARNING_PRINTED
+
+    ai_cfg = config.get("ai_extraction", {})
+    if not ai_cfg.get("enabled", False):
+        return {}
+
+    if ai_cfg.get("only_for_rss", True) and clean_text(raw.get("source_type")).lower() != "rss":
+        return {}
+
+    if len(clean_text(raw.get("body"))) < int(ai_cfg.get("min_body_chars", 200)):
+        return {}
+
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        if not AI_EXTRACTION_WARNING_PRINTED:
+            print("OPENAI_API_KEY 없음 -> AI 본문 추출 생략")
+            AI_EXTRACTION_WARNING_PRINTED = True
+        return {}
+
+    cache_key = sha256_text(f"{raw.get('title', '')}|{raw.get('link', '')}|{text[:4000]}")
+    if cache_key in AI_EXTRACTION_CACHE:
+        return AI_EXTRACTION_CACHE[cache_key]
+
+    today = datetime.now(KST).date().isoformat()
+    model = clean_text(ai_cfg.get("model", "gpt-4o-mini")) or "gpt-4o-mini"
+    prompt = f"""
+아래 기사를 읽고 사람이 실제로 모일 수 있는 행사/축제/공연/전시/집회/시위 정보를 JSON으로만 추출해 주세요.
+
+판단 기준:
+- 단순 봉사, 교육, 채용, 포상, 홍보, 기관 내부 기념식은 is_event=false에 가깝습니다.
+- 장소는 기사에 나온 실제 개최 장소를 가장 구체적으로 적습니다.
+- 날짜가 월/일만 있으면 오늘 날짜({today}) 기준의 연도로 보정합니다.
+- 모르면 빈 문자열 또는 null을 넣습니다.
+- expected_crowd는 기사에 명시된 인원만 숫자로 넣고, 추정하지 않습니다.
+
+제목: {clean_text(raw.get("title"))}
+게시일: {clean_text(raw.get("published"))}
+본문:
+{clean_text(text)[:6000]}
+""".strip()
+
+    schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "is_event": {"type": "boolean"},
+            "event_name": {"type": "string"},
+            "start_date": {"type": "string"},
+            "end_date": {"type": "string"},
+            "place": {"type": "string"},
+            "event_type": {
+                "type": "string",
+                "enum": ["행사", "축제", "공연", "전시", "스포츠", "체험", "집회", "기타"],
+            },
+            "expected_crowd": {"type": ["integer", "null"]},
+            "confidence": {"type": "number"},
+            "reason": {"type": "string"},
+        },
+        "required": [
+            "is_event",
+            "event_name",
+            "start_date",
+            "end_date",
+            "place",
+            "event_type",
+            "expected_crowd",
+            "confidence",
+            "reason",
+        ],
+    }
+
+    payload = {
+        "model": model,
+        "input": [
+            {
+                "role": "system",
+                "content": "당신은 이동통신 특별소통 대응을 위한 행사 정보 추출 도우미입니다. 반드시 JSON 스키마에 맞춰 답합니다.",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "event_extraction",
+                "strict": True,
+                "schema": schema,
+            }
+        },
+    }
+
+    try:
+        response = SESSION.post(
+            "https://api.openai.com/v1/responses",
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json=payload,
+            timeout=30,
+        )
+        response.raise_for_status()
+        data = response.json()
+        result_text = find_json_text(data)
+        result = json.loads(result_text) if result_text else {}
+        if isinstance(result, dict):
+            AI_EXTRACTION_CACHE[cache_key] = result
+            return result
+    except Exception as exc:
+        if not AI_EXTRACTION_WARNING_PRINTED:
+            print(f"AI 본문 추출 실패 -> 룰 기반 추출로 진행: {exc}")
+            AI_EXTRACTION_WARNING_PRINTED = True
+
+    return {}
 
 
 def classify_type(text: str) -> str:
@@ -1059,20 +1234,54 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
             clean_text(raw.get("event_period")),
         ]
     )
+    ai_result = extract_event_with_ai(raw, config, text)
+    if (
+        ai_result
+        and ai_result.get("is_event") is False
+        and config.get("ai_extraction", {}).get("drop_non_events", False)
+        and float(ai_result.get("confidence") or 0) >= 0.75
+    ):
+        return None
+
     start, end = parse_date_range(raw.get("event_period", ""), text)
+    ai_start = parse_iso_date(clean_text(ai_result.get("start_date", ""))) if ai_result else None
+    ai_end = parse_iso_date(clean_text(ai_result.get("end_date", ""))) if ai_result else None
+    if ai_start and (start is None or float(ai_result.get("confidence") or 0) >= 0.6):
+        start = ai_start
+    if ai_end and (end is None or float(ai_result.get("confidence") or 0) >= 0.6):
+        end = ai_end
+    if start and end is None:
+        end = start
+
     if is_expired(start, end, filters):
         return None
 
-    raw_place = clean_text(raw.get("place")) or extract_place(text) or "(자료 없음)"
+    rule_place = clean_text(raw.get("place")) or extract_place(text)
+    ai_place = clean_text(ai_result.get("place", "")) if ai_result else ""
+    raw_place = rule_place
+    if ai_place and (not raw_place or is_weak_place_name(raw_place)):
+        raw_place = ai_place
+    raw_place = raw_place or "(자료 없음)"
     place = enrich_place_with_geocoder(raw_place, config)
     crowd_value, crowd_display = extract_crowd(text)
+    ai_crowd = ai_result.get("expected_crowd") if ai_result else None
+    if crowd_value is None and isinstance(ai_crowd, int):
+        crowd_value = ai_crowd
+        crowd_display = f"{ai_crowd:,}"
     event_type = classify_type(text)
+    ai_type = clean_text(ai_result.get("event_type", "")) if ai_result else ""
+    if ai_type in {"행사", "축제", "공연", "전시", "스포츠", "체험", "집회"}:
+        if event_type == "행사" or float(ai_result.get("confidence") or 0) >= 0.6:
+            event_type = ai_type
     grade = grade_event(crowd_value, rules)
     source_type = clean_text(raw.get("source_type"))
     score = priority_score(start, place, crowd_value, event_type, source_type, grade)
     generated_at = datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
     link = clean_text(raw.get("link")) or clean_text(raw.get("source_url"))
-    title = clean_text(raw.get("title")) or "(제목 없음)"
+    original_title = clean_text(raw.get("title")) or "(제목 없음)"
+    ai_title = clean_text(ai_result.get("event_name", "")) if ai_result else ""
+    title = ai_title if ai_title and float(ai_result.get("confidence") or 0) >= 0.6 else original_title
+    status = "신규(AI보완)" if ai_result else "신규"
 
     return {
         "id": make_item_id(title, link),
@@ -1092,7 +1301,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         "link": link,
         "summary": summarize(text),
         "collected_at": generated_at,
-        "status": "신규",
+        "status": status,
         "sort_dt": parse_datetime_value(raw.get("published", "")),
         "event_start_ord": start.toordinal() if start else 99999999,
         "priority_score": score,
