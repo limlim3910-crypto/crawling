@@ -88,6 +88,10 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
             "헌혈", "장기등 기증", "센터 개소", "봉사단", "홍보관"
         ],
         "rss": {
+            "fetch_article_detail": True,
+            "max_article_fetch_per_source": 15,
+            "article_timeout_seconds": 8,
+            "article_max_chars": 6000,
             "min_signal_score": 4,
             "strong_keywords": [
                 "축제", "공연", "콘서트", "페스티벌", "박람회", "엑스포", "전시",
@@ -232,6 +236,13 @@ def fetch_url(url: str, timeout: int = 25) -> requests.Response:
     response = SESSION.get(url, timeout=timeout)
     response.raise_for_status()
     return response
+
+
+def fetch_url_optional(url: str, timeout: int = 25) -> Optional[requests.Response]:
+    try:
+        return fetch_url(url, timeout=timeout)
+    except Exception:
+        return None
 
 
 def first_text(data: Dict[str, Any], keys: Iterable[str]) -> str:
@@ -707,6 +718,57 @@ def normalize_rss_title(title: str) -> str:
     return title
 
 
+def extract_article_text(html: str, max_chars: int = 6000) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.select("script, style, noscript, header, footer, nav, aside, form"):
+        tag.decompose()
+
+    chunks: List[str] = []
+    for selector in (
+        'meta[property="og:description"]',
+        'meta[name="description"]',
+    ):
+        meta = soup.select_one(selector)
+        content = clean_text(meta.get("content", "") if meta else "")
+        if content:
+            chunks.append(content)
+
+    candidates = soup.select(
+        "article, [itemprop='articleBody'], #articleBody, #news_body_area, "
+        ".article_body, .article-body, .article-view, .news_view, .view_con, .content"
+    )
+    if not candidates:
+        candidates = soup.find_all("p")
+
+    for candidate in candidates[:30]:
+        text = clean_text(candidate.get_text(" ", strip=True))
+        if len(text) >= 30:
+            chunks.append(text)
+
+    merged = clean_text(" ".join(chunks))
+    if len(merged) > max_chars:
+        return merged[:max_chars].rstrip()
+    return merged
+
+
+def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
+    link = clean_text(link)
+    if not link:
+        return "", ""
+
+    timeout = int(rss_cfg.get("article_timeout_seconds", 8))
+    max_chars = int(rss_cfg.get("article_max_chars", 6000))
+    response = fetch_url_optional(link, timeout=timeout)
+    if response is None:
+        return "", ""
+
+    content_type = response.headers.get("content-type", "").lower()
+    if "html" not in content_type and "<html" not in response.text[:500].lower():
+        return "", clean_text(response.url)
+
+    return extract_article_text(response.text, max_chars=max_chars), clean_text(response.url)
+
+
 def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
     rss_cfg = filters.get("rss", {})
     title = clean_text(item.get("title", ""))
@@ -721,11 +783,15 @@ def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
     score = 0
 
     # 제목에 들어간 신호를 조금 더 강하게 반영한다.
-    if contains_any(title, strong_keywords):
+    has_title_strong = contains_any(title, strong_keywords)
+    has_body_strong = contains_any(body, strong_keywords)
+    has_protest_signal = contains_any(text, protest_keywords)
+
+    if has_title_strong:
         score += 3
-    if contains_any(body, strong_keywords):
+    if has_body_strong:
         score += 2
-    if contains_any(text, protest_keywords):
+    if has_protest_signal:
         score += 4
     if contains_any(text, venue_keywords):
         score += 1
@@ -735,7 +801,7 @@ def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
         score += 2
     if re.search(r"(20\d{2}|19\d{2})[.\-/]\d{1,2}[.\-/]\d{1,2}", text) or re.search(r"\d{1,2}\s*월\s*\d{1,2}\s*일", text):
         score += 1
-    if contains_any(text, weak_keywords):
+    if contains_any(text, weak_keywords) and not (has_title_strong or has_body_strong or has_protest_signal):
         score -= min(6, keyword_hit_count(text, weak_keywords))
 
     return score
@@ -777,10 +843,14 @@ def is_expired(start: Optional[date], end: Optional[date], filters: Dict[str, An
     return end < datetime.now(KST).date()
 
 
-def parse_rss_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+def parse_rss_source(source: Dict[str, Any], rss_cfg: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    rss_cfg = rss_cfg or {}
     response = fetch_url(source["url"])
     root = ET.fromstring(response.content)
     rows: List[Dict[str, Any]] = []
+    fetch_detail = bool(source.get("fetch_article_detail", rss_cfg.get("fetch_article_detail", True)))
+    max_fetch = int(source.get("max_article_fetch_per_source", rss_cfg.get("max_article_fetch_per_source", 15)))
+    fetched_count = 0
 
     for element in root.iter():
         local = element.tag.rsplit("}", 1)[-1].lower()
@@ -797,13 +867,21 @@ def parse_rss_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
 
         title = normalize_rss_title(fields.get("title", ""))
         body = fields.get("description") or fields.get("summary") or fields.get("content") or ""
+        link = fields.get("link", source["url"])
+        detail_text = ""
+        resolved_link = ""
+        if fetch_detail and fetched_count < max_fetch:
+            detail_text, resolved_link = fetch_article_detail(link, rss_cfg)
+            fetched_count += 1
+        if detail_text and detail_text not in body:
+            body = clean_text(f"{body} {detail_text}")
         rows.append(
             {
                 "source_name": source["name"],
                 "source_type": "rss",
                 "source_url": source["url"],
                 "title": title,
-                "link": fields.get("link", source["url"]),
+                "link": resolved_link or link,
                 "published": fields.get("pubdate") or fields.get("published") or fields.get("updated") or "",
                 "event_period": "",
                 "body": body,
@@ -953,10 +1031,11 @@ def parse_gyeongnam_festa(source: Dict[str, Any]) -> List[Dict[str, Any]]:
     return rows
 
 
-def parse_source(source: Dict[str, Any]) -> List[Dict[str, Any]]:
+def parse_source(source: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     source_type = clean_text(source.get("type", "rss")).lower()
     if source_type == "rss":
-        return parse_rss_source(source)
+        rss_cfg = ((config or {}).get("filters", {}) or {}).get("rss", {})
+        return parse_rss_source(source, rss_cfg)
     if source_type == "html":
         return parse_html_source(source)
     if source_type == "busan_notice":
@@ -1075,7 +1154,7 @@ def collect_items(config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[st
     errors: List[str] = []
 
     with ThreadPoolExecutor(max_workers=min(6, max(1, len(sources)))) as executor:
-        futures = {executor.submit(parse_source, source): source for source in sources}
+        futures = {executor.submit(parse_source, source, config): source for source in sources}
         for future in as_completed(futures):
             source = futures[future]
             try:
