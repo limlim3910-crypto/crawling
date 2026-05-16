@@ -182,7 +182,7 @@
   "ai_extraction": {
     "enabled": true,
     "provider": "openai",
-    "model": "gpt-4o-mini",
+    "model": "gpt-4o",
     "only_for_rss": true,
     "min_body_chars": 200,
     "drop_non_events": false
