@@ -179,6 +179,7 @@ EVENT_HEADERS = [
     "요약",
     "수집일",
     "추출방식",
+    "AI진단",
     "상태/비고",
 ]
 
@@ -754,6 +755,45 @@ def build_extraction_note(
         f"장소:{extraction_label(place_source, place_value)}",
         f"인원:{extraction_label(crowd_source)}",
     ]
+    return " / ".join(parts)
+
+
+def build_ai_diagnosis(
+    fallback_reasons: List[str],
+    fallback_attempted: bool,
+    ai_result: Dict[str, Any],
+    before_period_missing: bool,
+    before_place: str,
+    after_period_missing: bool,
+    after_place: str,
+) -> str:
+    if not fallback_reasons and not ai_result:
+        return "AI재확인 대상 아님"
+
+    parts = []
+    if fallback_reasons:
+        parts.append(f"대상:{','.join(fallback_reasons)}")
+    parts.append(f"재확인:{'실행' if fallback_attempted else '미실행'}")
+
+    if ai_result:
+        ai_period = "있음" if clean_text(ai_result.get("start_date", "")) or clean_text(ai_result.get("end_date", "")) else "없음"
+        ai_place = clean_text(ai_result.get("place", "")) or "없음"
+        confidence = ""
+        if ai_result.get("confidence") not in {None, ""}:
+            try:
+                confidence = f",신뢰도:{float(ai_result.get('confidence')):.2f}"
+            except (TypeError, ValueError):
+                confidence = ""
+        parts.append(f"AI결과:기간={ai_period},장소={ai_place}{confidence}")
+    else:
+        parts.append("AI결과:없음")
+
+    changed = []
+    if before_period_missing and not after_period_missing:
+        changed.append("기간")
+    if (not before_place or is_weak_place_name(before_place)) and after_place and not is_weak_place_name(after_place):
+        changed.append("장소")
+    parts.append(f"보완:{','.join(changed) if changed else '없음'}")
     return " / ".join(parts)
 
 
@@ -1364,17 +1404,23 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     start, end = parse_date_range(raw.get("event_period", ""), text)
     period_source = "rule" if start or end else "none"
     rule_place = clean_text(raw.get("place")) or extract_place(text)
+    before_period_missing = start is None or end is None
+    before_place = rule_place
+    fallback_reasons: List[str] = []
+    if start is None or end is None:
+        fallback_reasons.append("기간없음")
+    if not rule_place:
+        fallback_reasons.append("장소없음")
+    elif is_weak_place_name(rule_place):
+        fallback_reasons.append("장소약함")
     needs_ai_fallback = (
         not ai_result
         and config.get("ai_extraction", {}).get("fallback_on_missing", True)
-        and (
-            start is None
-            or end is None
-            or not rule_place
-            or is_weak_place_name(rule_place)
-        )
+        and bool(fallback_reasons)
     )
+    fallback_attempted = False
     if needs_ai_fallback:
+        fallback_attempted = True
         AI_EXTRACTION_STATS["fallback_for_missing"] += 1
         ai_result = extract_event_with_ai(raw, config, text, force=True)
 
@@ -1423,6 +1469,16 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     ai_title = clean_text(ai_result.get("event_name", "")) if ai_result else ""
     title = ai_title if ai_title and float(ai_result.get("confidence") or 0) >= 0.6 else original_title
     extraction_note = build_extraction_note(ai_result, period_source, place_source, crowd_source, raw_place)
+    after_period_missing = start is None or end is None
+    ai_diagnosis = build_ai_diagnosis(
+        fallback_reasons,
+        fallback_attempted,
+        ai_result,
+        before_period_missing,
+        before_place,
+        after_period_missing,
+        raw_place,
+    )
     ai_used = any(clean_text(source).startswith("ai") for source in [period_source, place_source, crowd_source])
     status = "신규(AI보완)" if ai_result and ai_used else "신규(AI확인)" if ai_result else "신규"
 
@@ -1445,6 +1501,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
         "summary": summarize(text),
         "collected_at": generated_at,
         "extraction_method": extraction_note,
+        "ai_diagnosis": ai_diagnosis,
         "status": status,
         "sort_dt": parse_datetime_value(raw.get("published", "")),
         "event_start_ord": start.toordinal() if start else 99999999,
@@ -1653,7 +1710,7 @@ def doc_props_xml(generated_at: str) -> Tuple[str, str]:
 
 
 def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
-    cols = [8, 24, 34, 24, 11, 12, 12, 12, 17, 16, 19, 16, 18, 38, 45, 20, 34, 15]
+    cols = [8, 24, 34, 24, 11, 12, 12, 12, 17, 16, 19, 16, 18, 38, 45, 20, 34, 46, 15]
     col_xml = "".join(f'<col min="{idx}" max="{idx}" width="{width}" customWidth="1"/>' for idx, width in enumerate(cols, 1))
     rows: List[str] = []
     last_col = col_name(len(EVENT_HEADERS))
@@ -1686,6 +1743,7 @@ def sheet_xml(items: List[Dict[str, Any]], generated_at: str) -> str:
             (item.get("summary", ""), 7, False),
             (item.get("collected_at", ""), 6, False),
             (item.get("extraction_method", ""), 7, False),
+            (item.get("ai_diagnosis", ""), 7, False),
             (item.get("status", ""), 6, False),
         ]
         rows.append(row_xml(row_idx, values, 58))
@@ -1789,6 +1847,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
             item.get("summary", ""),
             item.get("collected_at", ""),
             item.get("extraction_method", ""),
+            item.get("ai_diagnosis", ""),
             item.get("status", ""),
         ]
 
@@ -1798,7 +1857,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
             cell.font = normal_font
             cell.border = border
 
-            if col_idx in [3, 4, 14, 15, 17]:
+            if col_idx in [3, 4, 14, 15, 17, 18]:
                 cell.alignment = left
             else:
                 cell.alignment = center
@@ -1813,7 +1872,7 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
         ws.row_dimensions[row_idx].height = 58
 
     # Column widths
-    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 36, 15]
+    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 36, 48, 15]
     for idx, width in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(idx)].width = width
 
@@ -1840,11 +1899,12 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
               <td>{escape(item.get('type', ''))}</td>
               <td>{escape(str(item.get('crowd', '')))}</td>
               <td>{escape(item.get('extraction_method', ''))}</td>
+              <td>{escape(item.get('ai_diagnosis', ''))}</td>
               <td><a href="{escape(item.get('link', ''))}">원문</a></td>
             </tr>
             """
         )
-    body = "".join(rows) if rows else '<tr><td colspan="8">새 게시물이 없습니다.</td></tr>'
+    body = "".join(rows) if rows else '<tr><td colspan="9">새 게시물이 없습니다.</td></tr>'
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -1867,7 +1927,7 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
   <table>
     <thead>
       <tr>
-        <th>등급</th><th>Event명/요약</th><th>기간</th><th>장소</th><th>Type</th><th>예상운집</th><th>추출방식</th><th>링크</th>
+        <th>등급</th><th>Event명/요약</th><th>기간</th><th>장소</th><th>Type</th><th>예상운집</th><th>추출방식</th><th>AI진단</th><th>링크</th>
       </tr>
     </thead>
     <tbody>{body}</tbody>
