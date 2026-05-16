@@ -1,4 +1,5 @@
 from __future__ import annotations
+import base64
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -19,7 +20,7 @@ from email.utils import parsedate_to_datetime
 from html import escape
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
-from urllib.parse import urljoin
+from urllib.parse import unquote, urljoin, urlparse
 from xml.etree import ElementTree as ET
 from xml.sax.saxutils import escape as xml_escape
 
@@ -407,6 +408,9 @@ ARTICLE_DETAIL_STATS: Dict[str, int] = {
     "success": 0,
     "failed": 0,
     "empty": 0,
+    "google_resolve_attempted": 0,
+    "google_resolve_success": 0,
+    "google_resolve_failed": 0,
 }
 AI_EXTRACTION_STATS: Dict[str, int] = {
     "attempted": 0,
@@ -1076,18 +1080,113 @@ def extract_article_text(html: str, max_chars: int = 6000) -> str:
     return merged
 
 
+def is_google_news_url(url: str) -> bool:
+    host = urlparse(clean_text(url)).netloc.lower()
+    return host.endswith("news.google.com")
+
+
+def clean_candidate_url(value: str) -> str:
+    value = clean_text(unquote(value)).strip(" \t\r\n\"'<>),.;")
+    if not value.startswith(("http://", "https://")):
+        return ""
+    host = urlparse(value).netloc.lower()
+    if not host or host.endswith("google.com") or host.endswith("google.co.kr"):
+        return ""
+    return value
+
+
+def find_external_urls(value: str) -> List[str]:
+    urls: List[str] = []
+    for candidate in re.findall(r"https?://[^\s\"'<>\\]+", value or ""):
+        cleaned = clean_candidate_url(candidate)
+        if cleaned and cleaned not in urls:
+            urls.append(cleaned)
+    return urls
+
+
+def decode_google_news_url(link: str) -> str:
+    parsed = urlparse(clean_text(link))
+    parts = [part for part in parsed.path.split("/") if part]
+    if not parts:
+        return ""
+
+    token = parts[-1]
+    if not token or token in {"articles", "read"}:
+        return ""
+
+    padding = "=" * (-len(token) % 4)
+    try:
+        decoded = base64.urlsafe_b64decode((token + padding).encode("ascii", "ignore"))
+    except Exception:
+        return ""
+
+    decoded_text = decoded.decode("latin1", errors="ignore")
+    urls = find_external_urls(decoded_text)
+    return urls[0] if urls else ""
+
+
+def resolve_google_news_link(link: str) -> str:
+    link = clean_text(link)
+    if not link or not is_google_news_url(link):
+        return link
+
+    ARTICLE_DETAIL_STATS["google_resolve_attempted"] += 1
+
+    decoded = decode_google_news_url(link)
+    if decoded:
+        ARTICLE_DETAIL_STATS["google_resolve_success"] += 1
+        return decoded
+
+    response = fetch_url_optional(link, timeout=8)
+    if response is not None:
+        if response.url and not is_google_news_url(response.url):
+            ARTICLE_DETAIL_STATS["google_resolve_success"] += 1
+            return clean_text(response.url)
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        refresh = soup.select_one("meta[http-equiv='refresh' i]")
+        if refresh:
+            match = re.search(r"url=([^;]+)", refresh.get("content", ""), re.IGNORECASE)
+            if match:
+                cleaned = clean_candidate_url(match.group(1))
+                if cleaned:
+                    ARTICLE_DETAIL_STATS["google_resolve_success"] += 1
+                    return cleaned
+
+        for attr in ("href", "data-url"):
+            for tag in soup.find_all(attrs={attr: True}):
+                cleaned = clean_candidate_url(tag.get(attr, ""))
+                if cleaned:
+                    ARTICLE_DETAIL_STATS["google_resolve_success"] += 1
+                    return cleaned
+
+        urls = find_external_urls(response.text)
+        if urls:
+            ARTICLE_DETAIL_STATS["google_resolve_success"] += 1
+            return urls[0]
+
+    ARTICLE_DETAIL_STATS["google_resolve_failed"] += 1
+    return ""
+
+
 def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
     link = clean_text(link)
     if not link:
         return "", ""
 
     ARTICLE_DETAIL_STATS["attempted"] += 1
+    resolved_link = resolve_google_news_link(link)
+    if is_google_news_url(link) and not resolved_link:
+        ARTICLE_DETAIL_STATS["failed"] += 1
+        return "", link
+
+    article_link = resolved_link or link
     timeout = int(rss_cfg.get("article_timeout_seconds", 8))
     max_chars = int(rss_cfg.get("article_max_chars", 6000))
-    response = fetch_url_optional(link, timeout=timeout)
+    response = fetch_url_optional(article_link, timeout=timeout)
     if response is None:
         ARTICLE_DETAIL_STATS["failed"] += 1
-        return "", ""
+        return "", article_link
 
     content_type = response.headers.get("content-type", "").lower()
     if "html" not in content_type and "<html" not in response.text[:500].lower():
@@ -1099,7 +1198,7 @@ def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
         ARTICLE_DETAIL_STATS["success"] += 1
     else:
         ARTICLE_DETAIL_STATS["empty"] += 1
-    return article_text, clean_text(response.url)
+    return article_text, clean_text(response.url) or article_link
 
 
 def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
