@@ -399,6 +399,22 @@ def extract_place(text: str) -> str:
 GEOCODER_PLACE_CACHE: Dict[str, str] = {}
 AI_EXTRACTION_CACHE: Dict[str, Dict[str, Any]] = {}
 AI_EXTRACTION_WARNING_PRINTED = False
+ARTICLE_DETAIL_STATS: Dict[str, int] = {
+    "attempted": 0,
+    "success": 0,
+    "failed": 0,
+    "empty": 0,
+}
+AI_EXTRACTION_STATS: Dict[str, int] = {
+    "attempted": 0,
+    "success": 0,
+    "failed": 0,
+    "skipped_disabled": 0,
+    "skipped_not_rss": 0,
+    "skipped_short_body": 0,
+    "skipped_no_key": 0,
+    "non_event": 0,
+}
 
 
 def looks_like_address(value: str) -> bool:
@@ -687,16 +703,20 @@ def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str
 
     ai_cfg = config.get("ai_extraction", {})
     if not ai_cfg.get("enabled", False):
+        AI_EXTRACTION_STATS["skipped_disabled"] += 1
         return {}
 
     if ai_cfg.get("only_for_rss", True) and clean_text(raw.get("source_type")).lower() != "rss":
+        AI_EXTRACTION_STATS["skipped_not_rss"] += 1
         return {}
 
     if len(clean_text(raw.get("body"))) < int(ai_cfg.get("min_body_chars", 200)):
+        AI_EXTRACTION_STATS["skipped_short_body"] += 1
         return {}
 
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
+        AI_EXTRACTION_STATS["skipped_no_key"] += 1
         if not AI_EXTRACTION_WARNING_PRINTED:
             print("OPENAI_API_KEY 없음 -> AI 본문 추출 생략")
             AI_EXTRACTION_WARNING_PRINTED = True
@@ -706,6 +726,7 @@ def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str
     if cache_key in AI_EXTRACTION_CACHE:
         return AI_EXTRACTION_CACHE[cache_key]
 
+    AI_EXTRACTION_STATS["attempted"] += 1
     today = datetime.now(KST).date().isoformat()
     model = clean_text(ai_cfg.get("model", "gpt-4o-mini")) or "gpt-4o-mini"
     prompt = f"""
@@ -786,8 +807,12 @@ def extract_event_with_ai(raw: Dict[str, Any], config: Dict[str, Any], text: str
         result = json.loads(result_text) if result_text else {}
         if isinstance(result, dict):
             AI_EXTRACTION_CACHE[cache_key] = result
+            AI_EXTRACTION_STATS["success"] += 1
+            if result.get("is_event") is False:
+                AI_EXTRACTION_STATS["non_event"] += 1
             return result
     except Exception as exc:
+        AI_EXTRACTION_STATS["failed"] += 1
         if not AI_EXTRACTION_WARNING_PRINTED:
             print(f"AI 본문 추출 실패 -> 룰 기반 추출로 진행: {exc}")
             AI_EXTRACTION_WARNING_PRINTED = True
@@ -931,17 +956,25 @@ def fetch_article_detail(link: str, rss_cfg: Dict[str, Any]) -> Tuple[str, str]:
     if not link:
         return "", ""
 
+    ARTICLE_DETAIL_STATS["attempted"] += 1
     timeout = int(rss_cfg.get("article_timeout_seconds", 8))
     max_chars = int(rss_cfg.get("article_max_chars", 6000))
     response = fetch_url_optional(link, timeout=timeout)
     if response is None:
+        ARTICLE_DETAIL_STATS["failed"] += 1
         return "", ""
 
     content_type = response.headers.get("content-type", "").lower()
     if "html" not in content_type and "<html" not in response.text[:500].lower():
+        ARTICLE_DETAIL_STATS["empty"] += 1
         return "", clean_text(response.url)
 
-    return extract_article_text(response.text, max_chars=max_chars), clean_text(response.url)
+    article_text = extract_article_text(response.text, max_chars=max_chars)
+    if article_text:
+        ARTICLE_DETAIL_STATS["success"] += 1
+    else:
+        ARTICLE_DETAIL_STATS["empty"] += 1
+    return article_text, clean_text(response.url)
 
 
 def rss_signal_score(item: Dict[str, Any], filters: Dict[str, Any]) -> int:
@@ -1869,6 +1902,8 @@ def main() -> int:
             "new_count": len(new_items),
             "xlsx_path": str(xlsx_path),
             "html_path": str(html_path),
+            "article_detail_stats": ARTICLE_DETAIL_STATS,
+            "ai_extraction_stats": AI_EXTRACTION_STATS,
             "errors": errors,
         },
     )
@@ -1877,6 +1912,8 @@ def main() -> int:
     print(f"신규/출력 대상: {len(new_items)}건")
     print(f"엑셀 저장: {xlsx_path}")
     print(f"요약 저장: {html_path}")
+    print(f"기사 본문 조회 통계: {ARTICLE_DETAIL_STATS}")
+    print(f"AI 추출 통계: {AI_EXTRACTION_STATS}")
     if errors:
         print("수집 오류:")
         for error in errors:
