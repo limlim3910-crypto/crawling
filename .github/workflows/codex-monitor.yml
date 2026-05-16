@@ -33,6 +33,7 @@ jobs:
         working-directory: codex_event_tool
         env:
           TMAP_APP_KEY: ${{ secrets.TMAP_APP_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
