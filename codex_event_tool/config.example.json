@@ -78,6 +78,10 @@
       "홍보관"
     ],
     "rss": {
+      "fetch_article_detail": true,
+      "max_article_fetch_per_source": 15,
+      "article_timeout_seconds": 8,
+      "article_max_chars": 6000,
       "min_signal_score": 4,
       "strong_keywords": [
         "축제",
