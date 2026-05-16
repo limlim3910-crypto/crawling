@@ -57,6 +57,7 @@ RSS에서 더미가 많이 섞이면 이 값부터 조정하면 됩니다.
 
 룰 기반 추출로 장소/기간이 자주 비면 `config.json`에서 `ai_extraction.enabled`를 `true`로 바꿀 수 있습니다.
 이 기능은 기사 본문을 AI가 읽고 행사명, 기간, 장소, 유형, 명시된 예상 인원을 JSON으로 보완합니다.
+`fallback_on_missing`이 `true`이면 룰 기반 결과에서 기간/장소가 비어 있거나 장소가 약할 때 AI로 한 번 더 확인합니다.
 
 사용하려면 GitHub Actions Secrets 또는 실행 환경에 `OPENAI_API_KEY`를 등록해야 합니다.
 키가 없으면 기존 룰 기반 추출만 사용합니다.
