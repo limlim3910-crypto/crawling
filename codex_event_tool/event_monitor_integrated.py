@@ -418,6 +418,15 @@ AI_EXTRACTION_STATS: Dict[str, int] = {
     "fallback_for_missing": 0,
     "non_event": 0,
 }
+GEOCODER_STATS: Dict[str, int] = {
+    "attempted": 0,
+    "success": 0,
+    "failed": 0,
+    "skipped_no_key": 0,
+    "skipped_address": 0,
+    "skipped_weak": 0,
+    "skipped_disabled": 0,
+}
 
 
 def looks_like_address(value: str) -> bool:
@@ -496,6 +505,14 @@ def is_weak_place_name(value: str) -> bool:
         "대상",
         "개최 알림",
         "우수사례",
+        "후보",
+        "시장 후보",
+        "도지사",
+        "개혁신당",
+        "국민의힘",
+        "더불어민주당",
+        "민주당",
+        "선거사무소",
     ]
 
     if any(fragment in value for fragment in bad_fragments):
@@ -508,16 +525,20 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
     place_name = clean_text(place_name)
 
     if is_weak_place_name(place_name):
+        GEOCODER_STATS["skipped_weak"] += 1
         return ""
 
     if looks_like_address(place_name):
+        GEOCODER_STATS["skipped_address"] += 1
         return place_name
 
     app_key = os.getenv("TMAP_APP_KEY", "").strip()
     if not app_key:
+        GEOCODER_STATS["skipped_no_key"] += 1
         print("TMAP_APP_KEY 없음 -> 장소 주소 변환 생략")
         return ""
 
+    GEOCODER_STATS["attempted"] += 1
     query_candidates = []
 
     if region_hint:
@@ -627,6 +648,7 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
                         address = f"{address} ({name})"
 
                     GEOCODER_PLACE_CACHE[query] = address
+                    GEOCODER_STATS["success"] += 1
                     return address
 
             GEOCODER_PLACE_CACHE[query] = ""
@@ -636,6 +658,7 @@ def resolve_place_to_address_tmap(place_name: str, region_hint: str = "") -> str
             GEOCODER_PLACE_CACHE[query] = ""
             continue
 
+    GEOCODER_STATS["failed"] += 1
     return ""
 
 
@@ -650,6 +673,7 @@ def enrich_place_with_geocoder(place: str, config: Dict[str, Any]) -> str:
 
     geocoding = config.get("geocoding", {})
     if not geocoding.get("enabled", False):
+        GEOCODER_STATS["skipped_disabled"] += 1
         return place
 
     provider = clean_text(geocoding.get("provider", "tmap")).lower()
@@ -711,7 +735,13 @@ def build_extraction_note(
     crowd_source: str,
     place_value: str,
 ) -> str:
-    overall = "AI보완" if ai_result else "Rule-Based"
+    ai_used = any(clean_text(source).startswith("ai") for source in [period_source, place_source, crowd_source])
+    if ai_result and ai_used:
+        overall = "AI보완"
+    elif ai_result:
+        overall = "AI확인(보완없음)"
+    else:
+        overall = "Rule-Based"
     confidence = ""
     if ai_result and ai_result.get("confidence") not in {None, ""}:
         try:
@@ -1365,7 +1395,7 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     ai_place = clean_text(ai_result.get("place", "")) if ai_result else ""
     raw_place = rule_place
     place_source = "rule" if raw_place else "none"
-    if ai_place and (not raw_place or is_weak_place_name(raw_place)):
+    if ai_place and not is_weak_place_name(ai_place) and (not raw_place or is_weak_place_name(raw_place)):
         raw_place = ai_place
         place_source = "ai"
     raw_place = raw_place or "(자료 없음)"
@@ -1392,8 +1422,9 @@ def normalize_item(raw: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict
     original_title = clean_text(raw.get("title")) or "(제목 없음)"
     ai_title = clean_text(ai_result.get("event_name", "")) if ai_result else ""
     title = ai_title if ai_title and float(ai_result.get("confidence") or 0) >= 0.6 else original_title
-    status = "신규(AI보완)" if ai_result else "신규"
     extraction_note = build_extraction_note(ai_result, period_source, place_source, crowd_source, raw_place)
+    ai_used = any(clean_text(source).startswith("ai") for source in [period_source, place_source, crowd_source])
+    status = "신규(AI보완)" if ai_result and ai_used else "신규(AI확인)" if ai_result else "신규"
 
     return {
         "id": make_item_id(title, link),
@@ -1987,6 +2018,7 @@ def main() -> int:
             "html_path": str(html_path),
             "article_detail_stats": ARTICLE_DETAIL_STATS,
             "ai_extraction_stats": AI_EXTRACTION_STATS,
+            "geocoder_stats": GEOCODER_STATS,
             "errors": errors,
         },
     )
@@ -1997,6 +2029,7 @@ def main() -> int:
     print(f"요약 저장: {html_path}")
     print(f"기사 본문 조회 통계: {ARTICLE_DETAIL_STATS}")
     print(f"AI 추출 통계: {AI_EXTRACTION_STATS}")
+    print(f"장소 주소 변환 통계: {GEOCODER_STATS}")
     if errors:
         print("수집 오류:")
         for error in errors:
