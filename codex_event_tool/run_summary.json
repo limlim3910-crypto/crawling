@@ -1,47 +1,43 @@
 {
-  "run_id": "20260517_225743",
-  "generated_at": "2026-05-17 22:57:43",
-  "candidate_count": 15,
-  "new_count": 4,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-17_2257_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-17_2257_부울경행사_요약.html",
+  "run_id": "20260518_011039",
+  "generated_at": "2026-05-18 01:10:39",
+  "candidate_count": 4,
+  "new_count": 1,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-18_0110_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-18_0110_부울경행사_요약.html",
   "article_detail_stats": {
-    "attempted": 45,
-    "success": 41,
-    "failed": 3,
-    "empty": 1,
+    "attempted": 0,
+    "success": 0,
+    "failed": 0,
+    "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
     "google_resolve_failed": 0
   },
-  "article_detail_empty_samples": [
-    {
-      "url": "https://bs.nocutnews.co.kr/",
-      "status_code": 200,
-      "content_type": "text/html; charset=utf-8",
-      "title": "부산노컷",
-      "body_text_length": 499
-    }
-  ],
+  "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 26,
-    "success": 26,
+    "attempted": 17,
+    "success": 17,
     "failed": 0,
     "skipped_disabled": 0,
     "skipped_not_rss": 234,
-    "skipped_short_body": 6,
+    "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 23,
+    "fallback_for_missing": 17,
     "non_event": 3
   },
   "geocoder_stats": {
-    "attempted": 6,
-    "success": 3,
-    "failed": 3,
+    "attempted": 1,
+    "success": 0,
+    "failed": 1,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
-  "errors": []
+  "errors": [
+    "경남 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EA%B2%BD%EB%82%A8%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko",
+    "부산 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EB%B6%80%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko",
+    "울산 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EC%9A%B8%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+  ]
 }
