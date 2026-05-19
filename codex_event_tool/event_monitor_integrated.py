@@ -2072,14 +2072,14 @@ def write_xlsx(items: List[Dict[str, Any]], output_path: Path, generated_at: str
             # 원문링크 컬럼
             if col_idx == 14 and value:
                 cell.hyperlink = str(value)
-                cell.value = "원문"
+                cell.value = str(value)
                 cell.font = link_font
-                cell.alignment = center
+                cell.alignment = left
 
         ws.row_dimensions[row_idx].height = 58
 
     # Column widths
-    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 18, 45, 20, 36, 48, 15]
+    widths = [8, 24, 34, 28, 11, 12, 12, 12, 17, 16, 19, 16, 18, 55, 45, 20, 36, 48, 15]
     for idx, width in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(idx)].width = width
 
@@ -2107,7 +2107,7 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
               <td>{escape(str(item.get('crowd', '')))}</td>
               <td>{escape(item.get('extraction_method', ''))}</td>
               <td>{escape(item.get('ai_diagnosis', ''))}</td>
-              <td><a href="{escape(item.get('link', ''))}">원문</a></td>
+              <td class="link-cell"><a href="{escape(item.get('link', ''))}">{escape(item.get('link', ''))}</a></td>
             </tr>
             """
         )
@@ -2124,6 +2124,7 @@ def build_html_report(items: List[Dict[str, Any]], generated_at: str) -> str:
     table {{ border-collapse: collapse; width: 100%; font-size: 13px; }}
     th {{ background: #0f3b57; color: white; padding: 9px; border: 1px solid #9aa7b0; }}
     td {{ padding: 9px; border: 1px solid #c7d0d8; vertical-align: top; }}
+    .link-cell {{ word-break: break-all; min-width: 220px; }}
     tr:nth-child(even) td {{ background: #f7fafc; }}
     span {{ color: #495762; }}
   </style>
