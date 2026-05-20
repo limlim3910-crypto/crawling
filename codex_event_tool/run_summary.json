@@ -1,14 +1,14 @@
 {
-  "run_id": "20260520_185631",
-  "generated_at": "2026-05-20 18:56:31",
-  "candidate_count": 39,
-  "new_count": 28,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-20_1856_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-20_1856_부울경행사_요약.html",
+  "run_id": "20260521_005742",
+  "generated_at": "2026-05-21 00:57:42",
+  "candidate_count": 11,
+  "new_count": 3,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-21_0057_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-21_0057_부울경행사_요약.html",
   "article_detail_stats": {
-    "attempted": 45,
-    "success": 41,
-    "failed": 4,
+    "attempted": 0,
+    "success": 0,
+    "failed": 0,
     "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -16,24 +16,28 @@
   },
   "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 48,
-    "success": 48,
+    "attempted": 19,
+    "success": 19,
     "failed": 0,
     "skipped_disabled": 0,
     "skipped_not_rss": 236,
-    "skipped_short_body": 23,
+    "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 42,
-    "non_event": 9
+    "fallback_for_missing": 19,
+    "non_event": 5
   },
   "geocoder_stats": {
-    "attempted": 18,
-    "success": 12,
-    "failed": 5,
+    "attempted": 4,
+    "success": 1,
+    "failed": 3,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
-  "errors": []
+  "errors": [
+    "경남 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EA%B2%BD%EB%82%A8%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko",
+    "부산 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EB%B6%80%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko",
+    "울산 행사 뉴스: 503 Server Error: Service Unavailable for url: https://news.google.com/rss/search?q=%EC%9A%B8%EC%82%B0%20%ED%96%89%EC%82%AC%20when:1d&hl=ko&gl=KR&ceid=KR:ko"
+  ]
 }
