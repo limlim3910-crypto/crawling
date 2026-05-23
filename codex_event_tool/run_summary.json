@@ -1,43 +1,35 @@
 {
-  "run_id": "20260523_194436",
-  "generated_at": "2026-05-23 19:44:36",
+  "run_id": "20260523_230342",
+  "generated_at": "2026-05-23 23:03:42",
   "candidate_count": 17,
   "new_count": 0,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-23_1944_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-23_1944_부울경행사_요약.html",
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-23_2303_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-23_2303_부울경행사_요약.html",
   "article_detail_stats": {
-    "attempted": 45,
-    "success": 38,
-    "failed": 6,
-    "empty": 1,
+    "attempted": 37,
+    "success": 30,
+    "failed": 7,
+    "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
     "google_resolve_failed": 0
   },
-  "article_detail_empty_samples": [
-    {
-      "url": "https://news.kbs.co.kr/",
-      "status_code": 200,
-      "content_type": "text/html;charset=UTF-8",
-      "title": "",
-      "body_text_length": 0
-    }
-  ],
+  "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 28,
-    "success": 28,
+    "attempted": 25,
+    "success": 25,
     "failed": 0,
     "skipped_disabled": 0,
     "skipped_not_rss": 238,
-    "skipped_short_body": 5,
+    "skipped_short_body": 3,
     "skipped_no_key": 0,
-    "fallback_for_missing": 26,
-    "non_event": 6
+    "fallback_for_missing": 24,
+    "non_event": 7
   },
   "geocoder_stats": {
-    "attempted": 6,
+    "attempted": 5,
     "success": 1,
-    "failed": 5,
+    "failed": 4,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
