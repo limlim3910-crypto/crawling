@@ -1,10 +1,10 @@
 [
   {
-    "id": "af5c9f53f290fee9e4d840aa0ddd1b671721c4cef731f64613a14e637088e9f9",
+    "id": "5ea56c7f0acc9e55ef4b5e8fa49f316c071cfa331d356d340fee9e951faaeadc",
     "period": "2026.05.25.(월)",
-    "title": "부산미래유산 부산다움 투어",
+    "title": "부산다움 투어",
     "place": "부산 중구 대청로 104 (부산근현대역사관 별관)",
-    "type": "공연",
+    "type": "전시",
     "start_short": "5.25(월)",
     "end_short": "5.25(월)",
     "grade": "검토",
@@ -16,7 +16,7 @@
     "published": "2026-05-22",
     "link": "https://www.busan.go.kr/nbnews/1731676?curPage=&srchBeginDt=2025-05-25&srchEndDt=2026-05-25&srchKey=&srchText=",
     "summary": "부산미래유산 부산다움 투어 참가자 모집, 근현대 역사의 흔적부터 찬란한 바다와 예술의 매력 속으로 문화유산과",
-    "collected_at": "2026-05-25 04:39:50",
+    "collected_at": "2026-05-25 07:09:28",
     "extraction_method": "전체:AI보완 / 신뢰도:0.80 / 기간:AI / 장소:Rule+Tmap / 인원:없음",
     "ai_diagnosis": "대상:기간없음 / 재확인:실행 / AI결과:기간=있음,장소=부산,신뢰도:0.80 / 보완:기간",
     "status": "신규(AI보완)",
