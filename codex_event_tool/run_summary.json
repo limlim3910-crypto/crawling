@@ -1,14 +1,14 @@
 {
-  "run_id": "20260525_071021",
-  "generated_at": "2026-05-25 07:10:21",
-  "candidate_count": 13,
-  "new_count": 1,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-25_0710_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-25_0710_부울경행사_요약.html",
+  "run_id": "20260525_135153",
+  "generated_at": "2026-05-25 13:51:53",
+  "candidate_count": 16,
+  "new_count": 5,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-25_1351_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-05-25_1351_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 33,
-    "failed": 9,
+    "success": 35,
+    "failed": 7,
     "empty": 3,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -23,11 +23,11 @@
       "body_text_length": 0
     },
     {
-      "url": "https://www.msn.com/",
+      "url": "https://bs.nocutnews.co.kr/",
       "status_code": 200,
       "content_type": "text/html; charset=utf-8",
-      "title": "MSN",
-      "body_text_length": 0
+      "title": "부산노컷",
+      "body_text_length": 499
     },
     {
       "url": "https://news.kbs.co.kr/",
@@ -38,20 +38,20 @@
     }
   ],
   "ai_extraction_stats": {
-    "attempted": 27,
-    "success": 27,
-    "failed": 0,
+    "attempted": 31,
+    "success": 30,
+    "failed": 1,
     "skipped_disabled": 0,
     "skipped_not_rss": 237,
-    "skipped_short_body": 6,
+    "skipped_short_body": 10,
     "skipped_no_key": 0,
-    "fallback_for_missing": 26,
-    "non_event": 6
+    "fallback_for_missing": 30,
+    "non_event": 4
   },
   "geocoder_stats": {
-    "attempted": 4,
-    "success": 1,
-    "failed": 3,
+    "attempted": 8,
+    "success": 3,
+    "failed": 5,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
