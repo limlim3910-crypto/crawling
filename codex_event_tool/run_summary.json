@@ -1,14 +1,14 @@
 {
-  "run_id": "20260604_063028",
-  "generated_at": "2026-06-04 06:30:28",
-  "candidate_count": 16,
-  "new_count": 2,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-04_0630_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-04_0630_부울경행사_요약.html",
+  "run_id": "20260604_140519",
+  "generated_at": "2026-06-04 14:05:19",
+  "candidate_count": 22,
+  "new_count": 12,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-04_1405_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-04_1405_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 38,
-    "failed": 7,
+    "success": 40,
+    "failed": 5,
     "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -16,26 +16,24 @@
   },
   "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 22,
-    "success": 22,
+    "attempted": 33,
+    "success": 33,
     "failed": 0,
     "skipped_disabled": 0,
-    "skipped_not_rss": 234,
-    "skipped_short_body": 3,
+    "skipped_not_rss": 236,
+    "skipped_short_body": 13,
     "skipped_no_key": 0,
-    "fallback_for_missing": 19,
-    "non_event": 3
+    "fallback_for_missing": 31,
+    "non_event": 4
   },
   "geocoder_stats": {
-    "attempted": 3,
-    "success": 1,
+    "attempted": 5,
+    "success": 3,
     "failed": 2,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
-  "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f2ad0236d10>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
-  ]
+  "errors": []
 }
