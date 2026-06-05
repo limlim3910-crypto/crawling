@@ -1,39 +1,49 @@
 {
-  "run_id": "20260606_002939",
-  "generated_at": "2026-06-06 00:29:39",
-  "candidate_count": 22,
-  "new_count": 6,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0029_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0029_부울경행사_요약.html",
+  "run_id": "20260606_051314",
+  "generated_at": "2026-06-06 05:13:14",
+  "candidate_count": 20,
+  "new_count": 3,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0513_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0513_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 43,
-    "failed": 2,
-    "empty": 0,
+    "success": 39,
+    "failed": 5,
+    "empty": 1,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
     "google_resolve_failed": 0
   },
-  "article_detail_empty_samples": [],
+  "article_detail_empty_samples": [
+    {
+      "url": "https://news.kbs.co.kr/",
+      "status_code": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "title": "",
+      "body_text_length": 0
+    }
+  ],
   "ai_extraction_stats": {
-    "attempted": 35,
-    "success": 34,
-    "failed": 1,
+    "attempted": 33,
+    "success": 33,
+    "failed": 0,
     "skipped_disabled": 0,
-    "skipped_not_rss": 237,
-    "skipped_short_body": 14,
+    "skipped_not_rss": 234,
+    "skipped_short_body": 15,
     "skipped_no_key": 0,
-    "fallback_for_missing": 33,
-    "non_event": 4
+    "fallback_for_missing": 31,
+    "non_event": 2
   },
   "geocoder_stats": {
-    "attempted": 8,
+    "attempted": 6,
     "success": 3,
-    "failed": 5,
+    "failed": 3,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
-  "errors": []
+  "errors": [
+    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7ff06c6cd950>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
+  ]
 }
