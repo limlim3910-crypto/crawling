@@ -1,13 +1,13 @@
 {
-  "run_id": "20260606_073554",
-  "generated_at": "2026-06-06 07:35:54",
-  "candidate_count": 8,
-  "new_count": 1,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0735_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_0735_부울경행사_요약.html",
+  "run_id": "20260606_132024",
+  "generated_at": "2026-06-06 13:20:24",
+  "candidate_count": 19,
+  "new_count": 3,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_1320_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-06_1320_부울경행사_요약.html",
   "article_detail_stats": {
-    "attempted": 45,
-    "success": 41,
+    "attempted": 41,
+    "success": 37,
     "failed": 3,
     "empty": 1,
     "google_resolve_attempted": 0,
@@ -24,27 +24,26 @@
     }
   ],
   "ai_extraction_stats": {
-    "attempted": 15,
-    "success": 15,
+    "attempted": 30,
+    "success": 30,
     "failed": 0,
     "skipped_disabled": 0,
-    "skipped_not_rss": 0,
-    "skipped_short_body": 13,
+    "skipped_not_rss": 234,
+    "skipped_short_body": 11,
     "skipped_no_key": 0,
-    "fallback_for_missing": 13,
-    "non_event": 0
+    "fallback_for_missing": 27,
+    "non_event": 2
   },
   "geocoder_stats": {
-    "attempted": 3,
-    "success": 2,
-    "failed": 1,
+    "attempted": 6,
+    "success": 3,
+    "failed": 3,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
   "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7fa9316225d0>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))",
-    "경남축제포털: HTTPSConnectionPool(host='festa.gyeongnam.go.kr', port=443): Max retries exceeded with url: /api/callFestivalList.do (Caused by ConnectTimeoutError(<HTTPSConnection(host='festa.gyeongnam.go.kr', port=443) at 0x7fa9316236d0>, 'Connection to festa.gyeongnam.go.kr timed out. (connect timeout=25)'))"
+    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7eff62178d50>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
   ]
 }
