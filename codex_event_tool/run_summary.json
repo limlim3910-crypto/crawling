@@ -1,14 +1,14 @@
 {
-  "run_id": "20260608_014526",
-  "generated_at": "2026-06-08 01:45:26",
-  "candidate_count": 13,
-  "new_count": 3,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-08_0145_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-08_0145_부울경행사_요약.html",
+  "run_id": "20260608_044640",
+  "generated_at": "2026-06-08 04:46:40",
+  "candidate_count": 16,
+  "new_count": 4,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-08_0446_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-08_0446_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 41,
-    "failed": 4,
+    "success": 42,
+    "failed": 3,
     "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -17,25 +17,25 @@
   "article_detail_empty_samples": [],
   "ai_extraction_stats": {
     "attempted": 29,
-    "success": 28,
-    "failed": 1,
+    "success": 29,
+    "failed": 0,
     "skipped_disabled": 0,
     "skipped_not_rss": 234,
     "skipped_short_body": 14,
     "skipped_no_key": 0,
     "fallback_for_missing": 30,
-    "non_event": 2
+    "non_event": 3
   },
   "geocoder_stats": {
     "attempted": 4,
-    "success": 1,
-    "failed": 1,
+    "success": 2,
+    "failed": 2,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
   "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f0161c74a50>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
+    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7fa73f06a190>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
   ]
 }
