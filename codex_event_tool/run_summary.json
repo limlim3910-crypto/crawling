@@ -1,14 +1,14 @@
 {
-  "run_id": "20260611_195950",
-  "generated_at": "2026-06-11 19:59:50",
-  "candidate_count": 38,
-  "new_count": 18,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-11_1959_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-11_1959_부울경행사_요약.html",
+  "run_id": "20260612_012231",
+  "generated_at": "2026-06-12 01:22:31",
+  "candidate_count": 33,
+  "new_count": 10,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-12_0122_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-12_0122_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 40,
-    "failed": 5,
+    "success": 41,
+    "failed": 4,
     "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -16,26 +16,26 @@
   },
   "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 46,
-    "success": 46,
-    "failed": 0,
+    "attempted": 43,
+    "success": 42,
+    "failed": 1,
     "skipped_disabled": 0,
     "skipped_not_rss": 234,
-    "skipped_short_body": 24,
+    "skipped_short_body": 21,
     "skipped_no_key": 0,
-    "fallback_for_missing": 40,
-    "non_event": 1
+    "fallback_for_missing": 37,
+    "non_event": 6
   },
   "geocoder_stats": {
-    "attempted": 16,
-    "success": 8,
-    "failed": 6,
+    "attempted": 12,
+    "success": 7,
+    "failed": 3,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
   "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f770f6d4ed0>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
+    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7fc5ed433450>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
   ]
 }
