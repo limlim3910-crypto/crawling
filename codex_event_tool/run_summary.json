@@ -1,14 +1,14 @@
 {
-  "run_id": "20260613_135100",
-  "generated_at": "2026-06-13 13:51:00",
-  "candidate_count": 15,
-  "new_count": 8,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-13_1351_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-13_1351_부울경행사_요약.html",
+  "run_id": "20260613_183544",
+  "generated_at": "2026-06-13 18:35:44",
+  "candidate_count": 38,
+  "new_count": 19,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-13_1835_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-13_1835_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
-    "success": 41,
-    "failed": 3,
+    "success": 21,
+    "failed": 23,
     "empty": 1,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
@@ -24,27 +24,24 @@
     }
   ],
   "ai_extraction_stats": {
-    "attempted": 23,
-    "success": 23,
+    "attempted": 45,
+    "success": 45,
     "failed": 0,
     "skipped_disabled": 0,
-    "skipped_not_rss": 0,
-    "skipped_short_body": 18,
+    "skipped_not_rss": 237,
+    "skipped_short_body": 27,
     "skipped_no_key": 0,
-    "fallback_for_missing": 18,
+    "fallback_for_missing": 45,
     "non_event": 5
   },
   "geocoder_stats": {
-    "attempted": 10,
-    "success": 6,
-    "failed": 4,
+    "attempted": 14,
+    "success": 5,
+    "failed": 7,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
-  "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f565020ccd0>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))",
-    "경남축제포털: HTTPSConnectionPool(host='festa.gyeongnam.go.kr', port=443): Max retries exceeded with url: /api/callFestivalList.do (Caused by ConnectTimeoutError(<HTTPSConnection(host='festa.gyeongnam.go.kr', port=443) at 0x7f565020f950>, 'Connection to festa.gyeongnam.go.kr timed out. (connect timeout=25)'))"
-  ]
+  "errors": []
 }
