@@ -1,49 +1,41 @@
 {
-  "run_id": "20260614_045508",
-  "generated_at": "2026-06-14 04:55:08",
-  "candidate_count": 24,
-  "new_count": 5,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-14_0455_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-14_0455_부울경행사_요약.html",
+  "run_id": "20260614_071942",
+  "generated_at": "2026-06-14 07:19:42",
+  "candidate_count": 23,
+  "new_count": 4,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-14_0719_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-14_0719_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 45,
     "success": 37,
-    "failed": 7,
-    "empty": 1,
+    "failed": 8,
+    "empty": 0,
     "google_resolve_attempted": 0,
     "google_resolve_success": 0,
     "google_resolve_failed": 0
   },
-  "article_detail_empty_samples": [
-    {
-      "url": "https://usmbc.co.kr/",
-      "status_code": 200,
-      "content_type": "text/html",
-      "title": "",
-      "body_text_length": 0
-    }
-  ],
+  "article_detail_empty_samples": [],
   "ai_extraction_stats": {
-    "attempted": 37,
-    "success": 37,
+    "attempted": 39,
+    "success": 39,
     "failed": 0,
     "skipped_disabled": 0,
     "skipped_not_rss": 234,
-    "skipped_short_body": 14,
+    "skipped_short_body": 17,
     "skipped_no_key": 0,
-    "fallback_for_missing": 30,
-    "non_event": 4
+    "fallback_for_missing": 33,
+    "non_event": 3
   },
   "geocoder_stats": {
-    "attempted": 11,
-    "success": 2,
-    "failed": 9,
+    "attempted": 9,
+    "success": 3,
+    "failed": 6,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0
   },
   "errors": [
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7ffb77c25850>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
+    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f2f74bbcd90>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))"
   ]
 }
