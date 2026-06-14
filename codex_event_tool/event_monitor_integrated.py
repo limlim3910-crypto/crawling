@@ -8,6 +8,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -218,6 +219,24 @@ def read_json(path: Path, default: Any) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return default
+
+
+def merge_defaults(default: Any, override: Any) -> Any:
+    if isinstance(default, dict) and isinstance(override, dict):
+        merged = copy.deepcopy(default)
+        for key, value in override.items():
+            merged[key] = merge_defaults(merged.get(key), value) if key in merged else copy.deepcopy(value)
+        return merged
+    if override is None:
+        return copy.deepcopy(default)
+    return copy.deepcopy(override)
+
+
+def read_config(path: Path) -> Dict[str, Any]:
+    loaded = read_json(path, {})
+    if not isinstance(loaded, dict):
+        loaded = {}
+    return merge_defaults(DEFAULT_CONFIG_DATA, loaded)
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -2362,7 +2381,7 @@ def main() -> int:
 
     ensure_runtime_files()
     config_path = Path(args.config)
-    config = read_json(config_path, DEFAULT_CONFIG_DATA)
+    config = read_config(config_path)
     state_path = Path(args.state)
     if args.reset_state and state_path.exists():
         state_path.unlink()
