@@ -2,6 +2,23 @@ name: Codex Event Monitor Test
 
 on:
   workflow_dispatch:
+    inputs:
+      include_seen:
+        description: "테스트용: 이미 본 항목도 결과에 포함"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      reset_state:
+        description: "테스트용: 중복 기록 초기화 후 실행"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
   schedule:
     - cron: "17 */3 * * *"
 
@@ -29,6 +46,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: 실행 설정 진단
+        working-directory: codex_event_tool
+        run: |
+          echo "GITHUB_SHA=${GITHUB_SHA}"
+          python - <<'PY'
+          from pathlib import Path
+          import event_monitor_integrated as monitor
+
+          config = monitor.read_config(Path("config.json"))
+          catalog_cfg = config.get("source_catalog", {})
+          catalog_path = Path(catalog_cfg.get("path", "data/official_sources.json"))
+          sources, errors = monitor.build_source_list(config)
+          print("merged_source_catalog:", catalog_cfg)
+          print("official_sources_exists:", catalog_path.exists(), catalog_path)
+          print("active_sources:", len(sources))
+          print("active_source_types:", monitor.SOURCE_RUNTIME_STATS.get("active_source_types"))
+          print("source_errors:", errors)
+          PY
+
       - name: Codex 행사 모니터링 Dry Run
         working-directory: codex_event_tool
         env:
@@ -44,7 +80,15 @@ jobs:
           SMTP_USE_TLS: ${{ secrets.SMTP_USE_TLS }}
           MAIL_SUBJECT_PREFIX: ${{ secrets.MAIL_SUBJECT_PREFIX }}
         run: |
-          python event_monitor_integrated.py
+          ARGS=""
+          if [ "${{ github.event.inputs.include_seen }}" = "true" ]; then
+            ARGS="$ARGS --include-seen"
+          fi
+          if [ "${{ github.event.inputs.reset_state }}" = "true" ]; then
+            ARGS="$ARGS --reset-state"
+          fi
+          echo "event_monitor_integrated.py args: ${ARGS:-'(none)'}"
+          python event_monitor_integrated.py $ARGS
 
       - name: 결과 업로드
         uses: actions/upload-artifact@v4
