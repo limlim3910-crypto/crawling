@@ -69,6 +69,11 @@ DEFAULT_CONFIG_DATA: Dict[str, Any] = {
         "max_items_per_source": 10,
         "open_after_run": True
     },
+    "source_catalog": {
+        "enabled": True,
+        "path": "data/official_sources.json",
+        "include_inline_sources": False
+    },
     "filters": {
         "require_keyword": True,
         "require_region": True,
@@ -257,6 +262,94 @@ def fetch_url_optional(url: str, timeout: int = 25) -> Optional[requests.Respons
         return None
 
 
+def resolve_local_path(value: str) -> Path:
+    path = Path(clean_text(value))
+    if path.is_absolute():
+        return path
+    return BASE_DIR / path
+
+
+def load_source_catalog(config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[str]]:
+    catalog_cfg = config.get("source_catalog", {}) or {}
+    catalog_path = resolve_local_path(catalog_cfg.get("path", "data/official_sources.json"))
+    SOURCE_RUNTIME_STATS["catalog_enabled"] = bool(catalog_cfg.get("enabled", False))
+    SOURCE_RUNTIME_STATS["catalog_path"] = str(catalog_path)
+    SOURCE_RUNTIME_STATS["catalog_exists"] = catalog_path.exists()
+    if not catalog_cfg.get("enabled", False):
+        return [], []
+
+    path = catalog_path
+    if not path.exists():
+        return [], [f"source_catalog 파일 없음: {path}"]
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [], [f"source_catalog 읽기 실패: {path} / {exc}"]
+
+    raw_sources = data.get("sources", data) if isinstance(data, dict) else data
+    if not isinstance(raw_sources, list):
+        return [], [f"source_catalog 형식 오류: sources 배열이 필요합니다. ({path})"]
+
+    sources: List[Dict[str, Any]] = []
+    for idx, source in enumerate(raw_sources, start=1):
+        if not isinstance(source, dict):
+            continue
+        if source.get("enabled", True) is False:
+            continue
+        if not source.get("name") or not source.get("type") or not source.get("url"):
+            return [], [f"source_catalog 필수값 누락: {path} #{idx}"]
+        item = dict(source)
+        item.pop("enabled", None)
+        sources.append(item)
+    return sources, []
+
+
+def build_source_list(config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[str]]:
+    catalog_cfg = config.get("source_catalog", {}) or {}
+    include_inline = catalog_cfg.get("include_inline_sources", True)
+    SOURCE_RUNTIME_STATS["include_inline_sources"] = bool(include_inline)
+
+    sources: List[Dict[str, Any]] = []
+    errors: List[str] = []
+    if include_inline:
+        sources.extend(config.get("sources", []))
+
+    catalog_sources, catalog_errors = load_source_catalog(config)
+    sources.extend(catalog_sources)
+    errors.extend(catalog_errors)
+
+    unique: List[Dict[str, Any]] = []
+    seen: set = set()
+    for source in sources:
+        if source.get("enabled", True) is False:
+            continue
+        key = (clean_text(source.get("type")).lower(), clean_text(source.get("name")), clean_text(source.get("url")))
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(source)
+
+    type_counts: Dict[str, int] = {}
+    active_sources: List[Dict[str, Any]] = []
+    for source in unique:
+        source_type = clean_text(source.get("type")).lower() or "(unknown)"
+        type_counts[source_type] = type_counts.get(source_type, 0) + 1
+        active_sources.append(
+            {
+                "name": clean_text(source.get("name")),
+                "type": source_type,
+                "url": clean_text(source.get("url")),
+                "region": clean_text(source.get("region")),
+                "area": clean_text(source.get("area")),
+            }
+        )
+    SOURCE_RUNTIME_STATS["active_source_count"] = len(unique)
+    SOURCE_RUNTIME_STATS["active_source_types"] = type_counts
+    SOURCE_RUNTIME_STATS["active_sources"] = active_sources
+    return unique, errors
+
+
 def first_text(data: Dict[str, Any], keys: Iterable[str]) -> str:
     for key in keys:
         value = clean_text(data.get(key, ""))
@@ -432,6 +525,17 @@ GEOCODER_STATS: Dict[str, int] = {
     "skipped_address": 0,
     "skipped_weak": 0,
     "skipped_disabled": 0,
+}
+SOURCE_RUNTIME_STATS: Dict[str, Any] = {
+    "catalog_enabled": False,
+    "catalog_path": "",
+    "catalog_exists": False,
+    "include_inline_sources": True,
+    "active_source_count": 0,
+    "active_source_types": {},
+    "active_sources": [],
+    "raw_counts": {},
+    "normalized_count": 0,
 }
 
 
@@ -1766,25 +1870,33 @@ def dedupe_new_items(items: List[Dict[str, Any]], state: Dict[str, Any], include
 
 
 def collect_items(config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[str]]:
-    sources = config.get("sources", [])
+    sources, errors = build_source_list(config)
     collected: List[Dict[str, Any]] = []
-    errors: List[str] = []
+
+    if not sources:
+        errors.append("활성화된 수집 소스가 없습니다.")
+        return [], errors
 
     with ThreadPoolExecutor(max_workers=min(6, max(1, len(sources)))) as executor:
         futures = {executor.submit(parse_source, source, config): source for source in sources}
         for future in as_completed(futures):
             source = futures[future]
+            source_name = clean_text(source.get("name")) or "(이름 없음)"
             try:
-                for raw in future.result():
+                raw_rows = future.result()
+                SOURCE_RUNTIME_STATS["raw_counts"][source_name] = len(raw_rows)
+                for raw in raw_rows:
                     item = normalize_item(raw, config)
                     if item:
                         collected.append(item)
             except Exception as exc:
-                errors.append(f"{source.get('name', '(이름 없음)')}: {exc}")
+                SOURCE_RUNTIME_STATS["raw_counts"][source_name] = "ERROR"
+                errors.append(f"{source_name}: {exc}")
 
     unique: Dict[str, Dict[str, Any]] = {}
     for item in collected:
         unique[item["id"]] = item
+    SOURCE_RUNTIME_STATS["normalized_count"] = len(unique)
     return list(unique.values()), errors
 
 
@@ -2288,6 +2400,7 @@ def main() -> int:
             "article_detail_empty_samples": ARTICLE_DETAIL_EMPTY_SAMPLES,
             "ai_extraction_stats": AI_EXTRACTION_STATS,
             "geocoder_stats": GEOCODER_STATS,
+            "source_runtime_stats": SOURCE_RUNTIME_STATS,
             "errors": errors,
         },
     )
@@ -2299,6 +2412,7 @@ def main() -> int:
     print(f"기사 본문 조회 통계: {ARTICLE_DETAIL_STATS}")
     print(f"AI 추출 통계: {AI_EXTRACTION_STATS}")
     print(f"장소 주소 변환 통계: {GEOCODER_STATS}")
+    print(f"소스 실행 통계: {SOURCE_RUNTIME_STATS}")
     if errors:
         print("수집 오류:")
         for error in errors:
