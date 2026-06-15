@@ -1,10 +1,10 @@
 {
-  "run_id": "20260616_040919",
-  "generated_at": "2026-06-16 04:09:19",
+  "run_id": "20260616_080849",
+  "generated_at": "2026-06-16 08:08:49",
   "candidate_count": 771,
-  "new_count": 14,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-16_0409_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-16_0409_부울경행사_요약.html",
+  "new_count": 10,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-16_0808_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-16_0808_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -154,21 +154,21 @@
       }
     ],
     "raw_counts": {
-      "울산문화관광재단 축제행사교육": "ERROR",
       "부산축제조직위원회": 40,
+      "울산문화관광재단 축제행사교육": "ERROR",
       "울산문화24 행사축제": 74,
       "부산시 보도자료": 11,
       "Visit Busan 축제행사": 119,
       "울산 중구 축제행사": 97,
       "울산 동구 문화관광 축제행사": 107,
-      "경남관광협회 축제행사소식": "ERROR",
       "부산문화포털 다봄 문화행사": 112,
+      "경남관광협회 축제행사소식": "ERROR",
       "울산 북구 축제": 653,
       "문화체육관광부 지역축제": 526,
       "의령군 문화관광 축제행사": 96,
       "경남축제다모아 월별축제": 40,
-      "경남관광재단 행사알림": 35,
-      "경남축제다모아": 239
+      "경남축제다모아": 239,
+      "경남관광재단 행사알림": 35
     },
     "normalized_count": 771
   },
