@@ -1,10 +1,10 @@
 {
-  "run_id": "20260622_015516",
-  "generated_at": "2026-06-22 01:55:16",
-  "candidate_count": 439,
-  "new_count": 5,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-22_0155_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-22_0155_부울경행사_요약.html",
+  "run_id": "20260622_050218",
+  "generated_at": "2026-06-22 05:02:18",
+  "candidate_count": 948,
+  "new_count": 17,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-22_0502_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-22_0502_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -19,17 +19,17 @@
     "attempted": 0,
     "success": 0,
     "failed": 0,
-    "skipped_disabled": 1480,
+    "skipped_disabled": 3400,
     "skipped_not_rss": 0,
     "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 628,
+    "fallback_for_missing": 1588,
     "non_event": 0
   },
   "geocoder_stats": {
-    "attempted": 57,
-    "success": 19,
-    "failed": 24,
+    "attempted": 141,
+    "success": 52,
+    "failed": 56,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
@@ -155,30 +155,24 @@
     ],
     "raw_counts": {
       "부산축제조직위원회": 40,
-      "울산문화관광재단 축제행사교육": 324,
       "울산문화24 행사축제": 74,
+      "울산문화관광재단 축제행사교육": 324,
+      "부산시 보도자료": 11,
+      "울산 중구 축제행사": 97,
+      "울산 동구 문화관광 축제행사": 107,
       "Visit Busan 축제행사": 120,
-      "경남축제다모아": 239,
-      "경남축제다모아 월별축제": 40,
-      "경남관광재단 행사알림": 35,
+      "부산문화포털 다봄 문화행사": 112,
       "경남관광협회 축제행사소식": "ERROR",
+      "울산 북구 축제": 653,
       "의령군 문화관광 축제행사": 96,
-      "부산문화포털 다봄 문화행사": "ERROR",
-      "부산시 보도자료": "ERROR",
-      "울산 중구 축제행사": "ERROR",
-      "울산 동구 문화관광 축제행사": "ERROR",
-      "울산 북구 축제": "ERROR",
-      "문화체육관광부 지역축제": "ERROR"
+      "경남축제다모아 월별축제": 40,
+      "문화체육관광부 지역축제": 526,
+      "경남축제다모아": 239,
+      "경남관광재단 행사알림": 35
     },
-    "normalized_count": 439
+    "normalized_count": 948
   },
   "errors": [
-    "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-    "부산문화포털 다봄 문화행사: HTTPSConnectionPool(host='busandabom.net', port=443): Max retries exceeded with url: /article/list.nm?menuCd=32 (Caused by ConnectTimeoutError(<HTTPSConnection(host='busandabom.net', port=443) at 0x7f7508a76710>, 'Connection to busandabom.net timed out. (connect timeout=25)'))",
-    "부산시 보도자료: HTTPSConnectionPool(host='www.busan.go.kr', port=443): Max retries exceeded with url: /nbnews (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.busan.go.kr', port=443) at 0x7f7508a76b10>, 'Connection to www.busan.go.kr timed out. (connect timeout=25)'))",
-    "울산 중구 축제행사: HTTPSConnectionPool(host='www.junggu.ulsan.kr', port=443): Max retries exceeded with url: /index.ulsan?menuCd=DOM_000000105009004000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.junggu.ulsan.kr', port=443) at 0x7f7508e00550>, 'Connection to www.junggu.ulsan.kr timed out. (connect timeout=25)'))",
-    "울산 동구 문화관광 축제행사: HTTPSConnectionPool(host='www.donggu.ulsan.kr', port=443): Max retries exceeded with url: /tour/tourBBS/CE/list.do (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.donggu.ulsan.kr', port=443) at 0x7f7508a76fd0>, 'Connection to www.donggu.ulsan.kr timed out. (connect timeout=25)'))",
-    "울산 북구 축제: HTTPSConnectionPool(host='www.bukgu.ulsan.kr', port=443): Max retries exceeded with url: /lay1/S1T199C198/contents.do (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bukgu.ulsan.kr', port=443) at 0x7f75048143d0>, 'Connection to www.bukgu.ulsan.kr timed out. (connect timeout=25)'))",
-    "문화체육관광부 지역축제: HTTPSConnectionPool(host='www.mcst.go.kr', port=443): Max retries exceeded with url: /site/s_culture/festival/festivalList.jsp (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.mcst.go.kr', port=443) at 0x7f750457b9d0>, 'Connection to www.mcst.go.kr timed out. (connect timeout=25)'))"
+    "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))"
   ]
 }
