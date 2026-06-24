@@ -1,10 +1,10 @@
 {
-  "run_id": "20260625_000728",
-  "generated_at": "2026-06-25 00:07:28",
-  "candidate_count": 956,
-  "new_count": 13,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-25_0007_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-25_0007_부울경행사_요약.html",
+  "run_id": "20260625_021755",
+  "generated_at": "2026-06-25 02:17:55",
+  "candidate_count": 903,
+  "new_count": 9,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-25_0217_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-06-25_0217_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -19,16 +19,16 @@
     "attempted": 0,
     "success": 0,
     "failed": 0,
-    "skipped_disabled": 3400,
+    "skipped_disabled": 3186,
     "skipped_not_rss": 0,
     "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 1587,
+    "fallback_for_missing": 1480,
     "non_event": 0
   },
   "geocoder_stats": {
-    "attempted": 141,
-    "success": 51,
+    "attempted": 139,
+    "success": 50,
     "failed": 57,
     "skipped_no_key": 0,
     "skipped_address": 0,
@@ -154,23 +154,23 @@
       }
     ],
     "raw_counts": {
+      "울산문화관광재단 축제행사교육": 324,
       "부산축제조직위원회": 40,
       "울산문화24 행사축제": 74,
-      "울산문화관광재단 축제행사교육": 324,
+      "울산 동구 문화관광 축제행사": 0,
       "부산시 보도자료": 11,
+      "부산문화포털 다봄 문화행사": 112,
       "울산 중구 축제행사": 97,
       "Visit Busan 축제행사": 116,
-      "울산 동구 문화관광 축제행사": 107,
-      "경남축제다모아 월별축제": 41,
-      "부산문화포털 다봄 문화행사": 112,
       "경남관광협회 축제행사소식": "ERROR",
-      "경남축제다모아": 241,
       "울산 북구 축제": 653,
       "의령군 문화관광 축제행사": 96,
-      "경남관광재단 행사알림": 35,
-      "문화체육관광부 지역축제": 526
+      "문화체육관광부 지역축제": 526,
+      "경남축제다모아 월별축제": 41,
+      "경남축제다모아": 241,
+      "경남관광재단 행사알림": 35
     },
-    "normalized_count": 956
+    "normalized_count": 903
   },
   "errors": [
     "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))"
