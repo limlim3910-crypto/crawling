@@ -1,10 +1,10 @@
 {
-  "run_id": "20260728_202803",
-  "generated_at": "2026-07-28 20:28:03",
+  "run_id": "20260728_233603",
+  "generated_at": "2026-07-28 23:36:03",
   "candidate_count": 909,
-  "new_count": 8,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-07-28_2028_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-07-28_2028_부울경행사_요약.html",
+  "new_count": 7,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-07-28_2336_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-07-28_2336_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -158,22 +158,22 @@
       "부산축제조직위원회": 40,
       "울산문화24 행사축제": 74,
       "부산시 보도자료": 11,
-      "울산 동구 문화관광 축제행사": 107,
       "울산 중구 축제행사": 97,
+      "울산 동구 문화관광 축제행사": 107,
       "Visit Busan 축제행사": 122,
       "부산문화포털 다봄 문화행사": 112,
       "경남관광협회 축제행사소식": "ERROR",
-      "의령군 문화관광 축제행사": 96,
-      "울산 북구 축제": 640,
+      "경남축제다모아": 240,
       "경남축제다모아 월별축제": 40,
       "문화체육관광부 지역축제": 532,
-      "경남축제다모아": 240,
+      "의령군 문화관광 축제행사": 96,
+      "울산 북구 축제": 640,
       "경남관광재단 행사알림": "ERROR"
     },
     "normalized_count": 909
   },
   "errors": [
     "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7f5450d57a10>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))"
+    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7f9e95fc2fd0>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))"
   ]
 }
