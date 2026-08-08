@@ -1,10 +1,10 @@
 {
-  "run_id": "20260808_161347",
-  "generated_at": "2026-08-08 16:13:47",
-  "candidate_count": 874,
+  "run_id": "20260808_185409",
+  "generated_at": "2026-08-08 18:54:09",
+  "candidate_count": 695,
   "new_count": 5,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-08_1613_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-08_1613_부울경행사_요약.html",
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-08_1854_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-08_1854_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -19,17 +19,17 @@
     "attempted": 0,
     "success": 0,
     "failed": 0,
-    "skipped_disabled": 3136,
+    "skipped_disabled": 2514,
     "skipped_not_rss": 0,
     "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 1457,
+    "fallback_for_missing": 1146,
     "non_event": 0
   },
   "geocoder_stats": {
-    "attempted": 134,
-    "success": 50,
-    "failed": 51,
+    "attempted": 101,
+    "success": 40,
+    "failed": 42,
     "skipped_no_key": 0,
     "skipped_address": 0,
     "skipped_weak": 0,
@@ -155,25 +155,26 @@
     ],
     "raw_counts": {
       "부산문화포털 다봄 문화행사": "ERROR",
-      "울산문화관광재단 축제행사교육": 324,
       "부산축제조직위원회": 40,
       "울산문화24 행사축제": 74,
       "부산시 보도자료": 12,
-      "울산 중구 축제행사": 97,
       "Visit Busan 축제행사": 122,
+      "울산 중구 축제행사": 97,
       "울산 동구 문화관광 축제행사": 107,
-      "경남축제다모아": 241,
-      "경남축제다모아 월별축제": 37,
-      "경남관광협회 축제행사소식": "ERROR",
       "울산 북구 축제": 640,
+      "경남관광재단 행사알림": 36,
       "의령군 문화관광 축제행사": 96,
+      "경남축제다모아 월별축제": 37,
+      "경남축제다모아": 241,
+      "경남관광협회 축제행사소식": "ERROR",
       "문화체육관광부 지역축제": 532,
-      "경남관광재단 행사알림": 36
+      "울산문화관광재단 축제행사교육": "ERROR"
     },
-    "normalized_count": 874
+    "normalized_count": 695
   },
   "errors": [
     "부산문화포털 다봄 문화행사: HTTPSConnectionPool(host='busandabom.net', port=443): Max retries exceeded with url: /article/list.nm?menuCd=32 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)')))",
-    "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))"
+    "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
+    "울산문화관광재단 축제행사교육: HTTPSConnectionPool(host='uctf.or.kr', port=443): Read timed out. (read timeout=25)"
   ]
 }
