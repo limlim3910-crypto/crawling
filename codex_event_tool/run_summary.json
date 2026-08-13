@@ -1,10 +1,10 @@
 {
-  "run_id": "20260813_165159",
-  "generated_at": "2026-08-13 16:51:59",
-  "candidate_count": 841,
-  "new_count": 8,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-13_1651_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-13_1651_부울경행사_요약.html",
+  "run_id": "20260813_192138",
+  "generated_at": "2026-08-13 19:21:38",
+  "candidate_count": 839,
+  "new_count": 7,
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-13_1921_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-08-13_1921_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -19,11 +19,11 @@
     "attempted": 0,
     "success": 0,
     "failed": 0,
-    "skipped_disabled": 3071,
+    "skipped_disabled": 3066,
     "skipped_not_rss": 0,
     "skipped_short_body": 0,
     "skipped_no_key": 0,
-    "fallback_for_missing": 1424,
+    "fallback_for_missing": 1422,
     "non_event": 0
   },
   "geocoder_stats": {
@@ -155,26 +155,26 @@
     ],
     "raw_counts": {
       "부산문화포털 다봄 문화행사": "ERROR",
-      "부산축제조직위원회": 40,
       "울산문화관광재단 축제행사교육": 324,
+      "부산축제조직위원회": 40,
       "울산문화24 행사축제": 74,
       "부산시 보도자료": 11,
-      "Visit Busan 축제행사": 122,
       "울산 중구 축제행사": 97,
       "울산 동구 문화관광 축제행사": 107,
+      "경남축제다모아 월별축제": 37,
       "경남관광협회 축제행사소식": "ERROR",
       "울산 북구 축제": 638,
+      "경남축제다모아": 240,
+      "Visit Busan 축제행사": 122,
       "의령군 문화관광 축제행사": 96,
       "문화체육관광부 지역축제": 534,
-      "경남축제다모아 월별축제": 37,
-      "경남축제다모아": 241,
       "경남관광재단 행사알림": "ERROR"
     },
-    "normalized_count": 841
+    "normalized_count": 839
   },
   "errors": [
     "부산문화포털 다봄 문화행사: HTTPSConnectionPool(host='busandabom.net', port=443): Max retries exceeded with url: /article/list.nm?menuCd=32 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)')))",
     "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7fb2d64de0d0>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))"
+    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7f4ea4ea4610>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))"
   ]
 }
