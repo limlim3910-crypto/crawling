@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "abfe5e5fc16766debf71b0a0622e79085c79bf4588c4179dc2011936f61e49b8",
+    "period": "(자료 없음)",
+    "title": "부산시여성문화회관 제4기(10월~12월) 문화교실 수강접수 알림",
+    "place": "부산 사상구 학감대로 95 (부산광역시여성문화회관)",
+    "type": "체험",
+    "start_short": "",
+    "end_short": "",
+    "grade": "검토",
+    "feature": "(자료 없음)",
+    "network": "검토",
+    "crowd": "(자료 없음)",
+    "crowd_value": null,
+    "source_name": "부산시 보도자료",
+    "published": "2026-08-26",
+    "link": "https://www.busan.go.kr/nbnews/1751125?curPage=&srchBeginDt=2025-08-26&srchEndDt=2026-08-26&srchKey=&srchText=",
+    "summary": "부산시여성문화회관 제4기(10월~12월) 문화교실 수강접수 알림 교육복지팀",
+    "collected_at": "2026-08-26 13:02:25",
+    "extraction_method": "전체:Rule-Based / 기간:없음 / 장소:Rule+Tmap / 인원:없음",
+    "ai_diagnosis": "대상:기간없음 / 재확인:실행 / AI결과:없음 / 보완:없음",
+    "status": "신규",
+    "priority_score": 35
+  }
+]
