@@ -1,10 +1,10 @@
 {
-  "run_id": "20260904_060132",
-  "generated_at": "2026-09-04 06:01:32",
+  "run_id": "20260904_081644",
+  "generated_at": "2026-09-04 08:16:44",
   "candidate_count": 741,
   "new_count": 0,
-  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-09-04_0601_부울경행사_신규관리대장.xlsx",
-  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-09-04_0601_부울경행사_요약.html",
+  "xlsx_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-09-04_0816_부울경행사_신규관리대장.xlsx",
+  "html_path": "/home/runner/work/crawling/crawling/codex_event_tool/reports/2026-09-04_0816_부울경행사_요약.html",
   "article_detail_stats": {
     "attempted": 0,
     "success": 0,
@@ -161,21 +161,21 @@
       "부산시 보도자료": 13,
       "울산 중구 축제행사": 97,
       "울산 동구 문화관광 축제행사": 107,
-      "경남축제다모아 월별축제": 34,
       "Visit Busan 축제행사": 120,
-      "울산 북구 축제": 642,
+      "경남축제다모아 월별축제": 34,
       "경남관광협회 축제행사소식": "ERROR",
       "경남축제다모아": 240,
+      "울산 북구 축제": 642,
       "문화체육관광부 지역축제": 532,
-      "경남관광재단 행사알림": "ERROR",
-      "의령군 문화관광 축제행사": "ERROR"
+      "의령군 문화관광 축제행사": "ERROR",
+      "경남관광재단 행사알림": "ERROR"
     },
     "normalized_count": 741
   },
   "errors": [
     "부산문화포털 다봄 문화행사: HTTPSConnectionPool(host='busandabom.net', port=443): Max retries exceeded with url: /article/list.nm?menuCd=32 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)')))",
     "경남관광협회 축제행사소식: HTTPSConnectionPool(host='www.tourgsnd.or.kr', port=443): Max retries exceeded with url: /sub03/01.php (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))",
-    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7f9834762c50>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))",
-    "의령군 문화관광 축제행사: HTTPSConnectionPool(host='www.uiryeong.go.kr', port=443): Max retries exceeded with url: /index.uiryeong?menuCd=DOM_000000304000000000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.uiryeong.go.kr', port=443) at 0x7f9830144210>, 'Connection to www.uiryeong.go.kr timed out. (connect timeout=25)'))"
+    "의령군 문화관광 축제행사: HTTPSConnectionPool(host='www.uiryeong.go.kr', port=443): Max retries exceeded with url: /index.uiryeong?menuCd=DOM_000000304000000000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.uiryeong.go.kr', port=443) at 0x7f98b0f89ed0>, 'Connection to www.uiryeong.go.kr timed out. (connect timeout=25)'))",
+    "경남관광재단 행사알림: HTTPSConnectionPool(host='www.gyeongnam.go.kr', port=443): Max retries exceeded with url: /index.gyeong?menuCd=DOM_000000145012003000 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gyeongnam.go.kr', port=443) at 0x7f98b1ff9c90>, 'Connection to www.gyeongnam.go.kr timed out. (connect timeout=25)'))"
   ]
 }
