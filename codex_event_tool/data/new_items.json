@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "f78470ba3876dab947fa2b68d2f0e81d3ee6d43395b27ea5faacc8c3b4c6ae82",
+    "period": "2026.10.02.(금)~2026.10.11.(일)",
+    "title": "산청한방약초축제",
+    "place": "경남 산청군 금서면 동의보감로555번길 45-6",
+    "type": "축제",
+    "start_short": "10.2(금)",
+    "end_short": "10.11(일)",
+    "grade": "검토",
+    "feature": "1일이상",
+    "network": "검토",
+    "crowd": "(자료 없음)",
+    "crowd_value": null,
+    "source_name": "경남축제다모아",
+    "published": "(자료 없음)",
+    "link": "https://festa.gyeongnam.go.kr/sancheongg",
+    "summary": "산청한방약초축제 #산청축제 #산청가을축제 #산청가볼만한곳 #동의보감촌 #산청약초축제 경남 산청군 금서면 동의보감로555번길 45-6 2026-10-02 ~ 2026-10-11",
+    "collected_at": "2026-09-23 20:33:07",
+    "extraction_method": "전체:Rule-Based / 기간:Rule / 장소:Rule / 인원:없음",
+    "ai_diagnosis": "AI재확인 대상 아님",
+    "status": "신규",
+    "priority_score": 95
+  }
+]
