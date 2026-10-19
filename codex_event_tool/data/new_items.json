@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "9305491c8438f6a7b83afbbf0563a5b3dc8943dbdb15cb0812034895afad827d",
+    "period": "(자료 없음)",
+    "title": "끝",
+    "place": "(자료 없음)",
+    "type": "행사",
+    "start_short": "",
+    "end_short": "",
+    "grade": "검토",
+    "feature": "(자료 없음)",
+    "network": "검토",
+    "crowd": "(자료 없음)",
+    "crowd_value": null,
+    "source_name": "울산문화24 행사축제",
+    "published": "(자료 없음)",
+    "link": "https://www.ulsanculture.kr/webuser/exhibit/all_list.html?page=24&sch_so_show_kind=4",
+    "summary": "끝",
+    "collected_at": "2026-10-19 22:09:41",
+    "extraction_method": "전체:Rule-Based / 기간:없음 / 장소:없음 / 인원:없음",
+    "ai_diagnosis": "대상:기간없음,장소없음 / 재확인:실행 / AI결과:없음 / 보완:없음",
+    "status": "신규",
+    "priority_score": 15
+  }
+]
