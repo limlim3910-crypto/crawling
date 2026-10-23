@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "f1a850c562aa425a133995820399987d8e9e8838144f738775011681a741d500",
+    "period": "(자료 없음)",
+    "title": "대회의실",
+    "place": "(자료 없음)",
+    "type": "스포츠",
+    "start_short": "",
+    "end_short": "",
+    "grade": "검토",
+    "feature": "(자료 없음)",
+    "network": "검토",
+    "crowd": "(자료 없음)",
+    "crowd_value": null,
+    "source_name": "울산 북구 축제",
+    "published": "(자료 없음)",
+    "link": "https://www.bukgu.ulsan.kr/lay1/S1T65C119/contents.do",
+    "summary": "대회의실",
+    "collected_at": "2026-10-23 20:35:51",
+    "extraction_method": "전체:Rule-Based / 기간:없음 / 장소:없음 / 인원:없음",
+    "ai_diagnosis": "대상:기간없음,장소없음 / 재확인:실행 / AI결과:없음 / 보완:없음",
+    "status": "신규",
+    "priority_score": 30
+  }
+]
